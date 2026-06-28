@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Broken Street | Arquivo Oficial</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-deep: #050208;
+      --neon-purple: #b026ff;
+      --neon-glow: rgba(176, 38, 255, 0.5);
+      --chrome-silver: linear-gradient(180deg, #fff 0%, #aaa 50%, #eee 100%);
+      --text-silver: #d1d1d1;
+      --text-dim: #777;
+      --border: rgba(176, 38, 255, 0.18);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: var(--bg-deep);
+      color: var(--text-silver);
+      font-family: 'Share Tech Mono', monospace;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: #050208; }
+    ::-webkit-scrollbar-thumb { background: var(--neon-purple); border-radius: 2px; }
+
+    /* SCANLINES */
+    .scanlines {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9998;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.025) 2px, rgba(0,0,0,0.025) 4px);
+    }
+
+    html::after {
+      content: '';
+      position: fixed;
+      inset: -200%;
+      width: 400%;
+      height: 400%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.4'/%3E%3C/svg%3E");
+      opacity: 0.08;
+      pointer-events: none;
+      z-index: 9999;
+      animation: grainMove 0.5s steps(2) infinite;
+    }
+
+    @keyframes grainMove {
+      0%   { transform: translate(0, 0); }
+      25%  { transform: translate(-2%, -1%); }
+      50%  { transform: translate(1%, 2%); }
+      75%  { transform: translate(-1px, 1%); }
+      100% { transform: translate(2%, -2%); }
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 13px 40px;
+      background: rgba(5,2,8,0.94);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav-logo {
+      font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 900;
+      background: var(--chrome-silver); -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; background-clip: text;
+      letter-spacing: 3px; text-decoration: none;
+    }
+
+    .nav-links { display: flex; gap: 26px; list-style: none; }
+
+    .nav-links a {
+      color: var(--text-dim); text-decoration: none;
+      font-family: 'Orbitron', sans-serif; font-size: 0.6rem; letter-spacing: 2px;
+      transition: color 0.25s, text-shadow 0.25s;
+    }
+
+    .nav-links a:hover { color: #fff; text-shadow: 0 0 8px var(--neon-purple); }
+    .nav-links a.active { color: var(--neon-purple); }
+
+    .nav-links a.nav-ext {
+      border: 1px solid var(--border); padding: 4px 12px;
+      transition: all 0.3s;
+    }
+    .nav-links a.nav-ext:hover { border-color: var(--neon-purple); background: rgba(176,38,255,0.08); color: #fff; }
+
+    /* ===== HERO ===== */
+    #hero {
+      min-height: 100vh; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      position: relative; overflow: hidden; padding: 80px 20px 60px;
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 75% 55% at 50% 45%, rgba(176,38,255,0.07) 0%, transparent 70%),
+        linear-gradient(180deg, #050208 0%, #09031a 45%, #050208 100%);
+    }
+
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(176,38,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(176,38,255,0.035) 1px, transparent 1px);
+      background-size: 55px 55px;
+      mask-image: radial-gradient(ellipse at center, black 25%, transparent 70%);
+    }
+
+    .hero-content { position: relative; z-index: 2; text-align: center; }
+
+    .hero-tag {
+      font-size: 0.6rem; letter-spacing: 6px; color: var(--neon-purple);
+      text-transform: uppercase; margin-bottom: 28px; opacity: 0.85;
+    }
+
+    .hero-logo {
+      width: min(500px, 88vw);
+      filter: drop-shadow(0 0 28px rgba(176,38,255,0.45));
+      margin-bottom: 24px;
+    }
+
+    .hero-subtitle {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(0.68rem, 1.8vw, 0.9rem);
+      letter-spacing: 5px; color: var(--text-dim); margin-bottom: 52px;
+    }
+
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+
+    .btn-primary {
+      font-family: 'Orbitron', sans-serif; font-size: 0.6rem; letter-spacing: 3px;
+      text-transform: uppercase; padding: 11px 30px;
+      border: 1px solid var(--neon-purple); background: rgba(176,38,255,0.1);
+      color: #fff; cursor: pointer; text-decoration: none; transition: all 0.3s;
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    }
+    .btn-primary:hover { background: rgba(176,38,255,0.28); box-shadow: 0 0 18px var(--neon-glow); }
+
+    .btn-secondary {
+      font-family: 'Orbitron', sans-serif; font-size: 0.6rem; letter-spacing: 3px;
+      text-transform: uppercase; padding: 11px 30px;
+      border: 1px solid rgba(255,255,255,0.12); background: transparent;
+      color: var(--text-dim); cursor: pointer; text-decoration: none; transition: all 0.3s;
+      clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    }
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.35); color: #fff; }
+
+    .hero-scroll {
+      position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: var(--text-dim); font-size: 0.55rem; letter-spacing: 3px;
+      animation: bounce 2.2s infinite;
+    }
+    .hero-scroll::after { content: ''; width: 1px; height: 36px; background: linear-gradient(to bottom, var(--neon-purple), transparent); }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ===== SECTION ===== */
+    section { padding: 100px 40px; max-width: 1200px; margin: 0 auto; }
+
+    .section-header { display: flex; align-items: center; gap: 18px; margin-bottom: 56px; }
+
+    .section-num {
+      font-family: 'Orbitron', sans-serif; font-size: 0.6rem;
+      color: var(--neon-purple); letter-spacing: 2px; white-space: nowrap;
+    }
+
+    .section-title {
+      font-family: 'Orbitron', sans-serif; font-size: clamp(1.1rem, 2.8vw, 1.7rem);
+      font-weight: 900; background: var(--chrome-silver);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; letter-spacing: 3px;
+    }
+
+    .section-line { flex: 1; height: 1px; background: linear-gradient(to right, rgba(176,38,255,0.35), transparent); }
+
+    /* ===== SINOPSE ===== */
+    .sinopse-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 420px); gap: 42px; align-items: start; }
+    .sinopse-text { display: flex; flex-direction: column; gap: 18px; }
+
+    .sinopse-text p { font-size: 0.9rem; line-height: 2; color: #999; margin-bottom: 0; }
+    .sinopse-text p strong { color: #ccc; }
+    .sinopse-text ul { margin-left: 0; list-style: none; margin: 0; }
+    .sinopse-text ul li { font-size: 0.85rem; color: #999; line-height: 1.9; padding-left: 14px; position: relative; margin-bottom: 10px; }
+    .sinopse-text ul li::before { content: '▸'; position: absolute; left: 0; color: var(--neon-purple); }
+
+    .sinopse-img-wrap { position: relative; max-width: 420px; margin: 0 auto; }
+    .sinopse-img-wrap img {
+      width: 100%; max-width: 420px; height: auto;
+      border: 1px solid var(--border); border-radius: 16px;
+      filter: saturate(0.75) brightness(0.82);
+      transition: filter 0.4s, transform 0.4s;
+    }
+    .sinopse-img-wrap:hover img { filter: saturate(1) brightness(0.95); transform: translateY(-1px); }
+    .sinopse-img-wrap::before {
+      content: ''; position: absolute; inset: -1px;
+      background: linear-gradient(135deg, rgba(176,38,255,0.22), transparent 55%, rgba(176,38,255,0.08));
+      pointer-events: none; z-index: 1;
+    }
+
+    .lore-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 36px; }
+
+    .lore-stat {
+      border: 1px solid var(--border); padding: 18px 14px; text-align: center;
+      background: rgba(176,38,255,0.03);
+      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+    }
+
+    .lore-stat-num {
+      font-family: 'Orbitron', sans-serif; font-size: 1.5rem; font-weight: 900;
+      color: var(--neon-purple); display: block;
+    }
+    .lore-stat-label { font-size: 0.58rem; letter-spacing: 2px; color: var(--text-dim); margin-top: 4px; }
+
+    /* ===== PERSONAGENS ===== */
+    #personagens { background: rgba(176,38,255,0.02); max-width: 100%; padding: 100px 40px; }
+    #personagens > .inner { max-width: 1200px; margin: 0 auto; }
+
+    .chars-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+
+    .char-card {
+      position: relative; border: 1px solid rgba(255,255,255,0.05);
+      background: rgba(255,255,255,0.02); overflow: hidden;
+      cursor: pointer; text-decoration: none; color: inherit;
+      display: block; transition: transform 0.3s, border-color 0.3s;
+      clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+    }
+
+    .char-card:hover { transform: translateY(-5px); }
+    .char-card.c-red:hover { border-color: rgba(255,23,68,0.4); }
+    .char-card.c-purple:hover { border-color: rgba(176,38,255,0.4); }
+    .char-card.c-pink:hover { border-color: rgba(255,20,147,0.4); }
+    .char-card.c-blue:hover { border-color: rgba(38,147,255,0.4); }
+
+    .char-img-wrap { position: relative; overflow: hidden; height: 380px; }
+    .char-img-wrap img {
+      width: 100%; height: 100%; object-fit: cover; object-position: top center;
+      transition: transform 0.5s, filter 0.4s; filter: brightness(0.82) saturate(0.75);
+    }
+    .char-card:hover .char-img-wrap img { transform: scale(1.04); filter: brightness(0.97) saturate(1); }
+
+    .char-img-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(5,2,8,0.96) 0%, rgba(5,2,8,0.25) 45%, transparent 100%);
+    }
+
+    .char-color-line {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .char-card.c-red .char-color-line { background: linear-gradient(to right, transparent, #ff1744, transparent); }
+    .char-card.c-purple .char-color-line { background: linear-gradient(to right, transparent, #b026ff, transparent); }
+    .char-card.c-pink .char-color-line { background: linear-gradient(to right, transparent, #ff1493, transparent); }
+    .char-card.c-blue .char-color-line { background: linear-gradient(to right, transparent, #2693ff, transparent); }
+    .char-card:hover .char-color-line { opacity: 1; }
+
+    .char-id {
+      position: absolute; top: 12px; left: 12px;
+      font-family: 'Orbitron', sans-serif; font-size: 0.55rem; letter-spacing: 2px;
+      background: rgba(5,2,8,0.7); padding: 3px 8px; border-left: 2px solid;
+    }
+    .char-card.c-red .char-id { color: #ff1744; border-color: #ff1744; }
+    .char-card.c-purple .char-id { color: #b026ff; border-color: #b026ff; }
+    .char-card.c-pink .char-id { color: #ff1493; border-color: #ff1493; }
+    .char-card.c-blue .char-id { color: #2693ff; border-color: #2693ff; }
+
+    .char-info { padding: 18px; }
+
+    .char-tag { font-size: 0.55rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 5px; }
+    .char-card.c-red .char-tag { color: #ff1744; }
+    .char-card.c-purple .char-tag { color: #b026ff; }
+    .char-card.c-pink .char-tag { color: #ff1493; }
+    .char-card.c-blue .char-tag { color: #2693ff; }
+
+    .char-name { font-family: 'Orbitron', sans-serif; font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 3px; }
+    .char-role { font-size: 0.7rem; color: var(--text-dim); margin-bottom: 12px; }
+    .char-desc { font-size: 0.73rem; line-height: 1.7; color: #666; }
+
+    .char-action {
+      display: flex; align-items: center; gap: 6px; margin-top: 14px;
+      font-family: 'Orbitron', sans-serif; font-size: 0.55rem; letter-spacing: 2px;
+    }
+    .char-card.c-red .char-action { color: #ff1744; }
+    .char-card.c-purple .char-action { color: #b026ff; }
+    .char-card.c-pink .char-action { color: #ff1493; }
+    .char-card.c-blue .char-action { color: #2693ff; }
+    .char-action::after { content: '→'; transition: transform 0.3s; }
+    .char-card:hover .char-action::after { transform: translateX(4px); }
+
+    /* ===== CYBER ENERGY ===== */
+    .ce-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+
+    .ce-text h3 { font-family: 'Orbitron', sans-serif; font-size: 0.8rem; color: var(--neon-purple); letter-spacing: 2px; margin-bottom: 14px; margin-top: 28px; }
+    .ce-text h3:first-child { margin-top: 0; }
+    .ce-text p { font-size: 0.87rem; line-height: 2; color: #999; margin-bottom: 14px; }
+    .ce-text p strong { color: #ccc; }
+
+    .patents-list { display: flex; flex-direction: column; gap: 10px; }
+
+    .patent-item {
+      display: flex; align-items: center; gap: 14px;
+      border: 1px solid rgba(255,255,255,0.04);
+      background: rgba(255,255,255,0.015); padding: 14px 18px;
+      transition: background 0.3s, border-color 0.3s;
+      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+    }
+    .patent-item:hover { background: rgba(176,38,255,0.04); border-color: var(--border); }
+
+    .patent-badge {
+      font-family: 'Orbitron', sans-serif; font-size: 0.9rem; font-weight: 900;
+      width: 36px; text-align: center; flex-shrink: 0;
+    }
+
+    .patent-info { flex: 1; }
+    .patent-name { font-family: 'Orbitron', sans-serif; font-size: 0.68rem; letter-spacing: 2px; color: #bbb; }
+    .patent-desc { font-size: 0.72rem; color: var(--text-dim); margin-top: 2px; line-height: 1.5; }
+
+    .patent-bar-bg { width: 80px; height: 3px; background: rgba(255,255,255,0.06); border-radius: 2px; flex-shrink: 0; }
+    .patent-bar-fill { height: 100%; border-radius: 2px; box-shadow: 0 0 5px currentColor; }
+
+    /* ===== MUSICAS ===== */
+    .music-list { display: flex; flex-direction: column; gap: 13px; }
+
+    .music-item {
+      border: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.018);
+      padding: 18px 22px; display: grid; grid-template-columns: auto 1fr auto;
+      align-items: center; gap: 18px; cursor: pointer;
+      transition: border-color 0.3s, background 0.3s;
+      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+    }
+    .music-item:hover { border-color: rgba(176,38,255,0.28); background: rgba(176,38,255,0.04); }
+    .music-item.playing { border-color: rgba(176,38,255,0.55); background: rgba(176,38,255,0.055); }
+
+    .music-num { font-family: 'Orbitron', sans-serif; font-size: 0.6rem; color: var(--neon-purple); width: 22px; text-align: center; }
+    .music-title { font-family: 'Rajdhani', sans-serif; font-size: 1rem; font-weight: 600; color: #ddd; margin-bottom: 3px; }
+    .music-meta { display: flex; gap: 14px; font-size: 0.65rem; color: var(--text-dim); align-items: center; }
+
+    .music-badge {
+      display: inline-flex; align-items: center; font-size: 0.58rem; letter-spacing: 1px;
+      padding: 2px 8px; border: 1px solid currentColor;
+    }
+    .badge-red { color: #ff1744; border-color: rgba(255,23,68,0.35); }
+    .badge-purple { color: #b026ff; border-color: rgba(176,38,255,0.35); }
+    .badge-pink { color: #ff1493; border-color: rgba(255,20,147,0.35); }
+    .badge-blue { color: #2693ff; border-color: rgba(38,147,255,0.35); }
+    .badge-geral { color: #888; border-color: rgba(136,136,136,0.3); }
+
+    .music-play-btn {
+      width: 38px; height: 38px; border: 1px solid rgba(176,38,255,0.28);
+      background: rgba(176,38,255,0.07); color: var(--neon-purple); font-size: 0.85rem;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.3s; border-radius: 50%;
+    }
+    .music-play-btn:hover { background: rgba(176,38,255,0.22); box-shadow: 0 0 12px rgba(176,38,255,0.4); }
+    .music-play-btn.active { background: rgba(176,38,255,0.28); border-color: var(--neon-purple); }
+
+    /* ===== PLAYER BAR ===== */
+    .player-bar {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 500;
+      background: rgba(5,2,8,0.97); border-top: 1px solid rgba(176,38,255,0.28);
+      backdrop-filter: blur(16px); padding: 11px 40px;
+      display: flex; align-items: center; gap: 18px;
+      transform: translateY(100%);
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+    .player-bar.visible { transform: translateY(0); }
+
+    .player-track-info { flex: 1; min-width: 0; }
+    .player-track-name { font-family: 'Rajdhani', sans-serif; font-size: 0.9rem; font-weight: 600; color: #ddd; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .player-track-char { font-size: 0.62rem; color: var(--text-dim); margin-top: 1px; }
+
+    .player-progress { flex: 2; display: flex; align-items: center; gap: 10px; }
+    .player-time { font-size: 0.62rem; color: var(--text-dim); white-space: nowrap; width: 36px; }
+
+    .progress-track {
+      flex: 1; height: 3px; background: rgba(255,255,255,0.08);
+      position: relative; cursor: pointer; border-radius: 2px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%; background: var(--neon-purple); border-radius: 2px;
+      width: 0%; transition: width 0.1s linear;
+      box-shadow: 0 0 5px rgba(176,38,255,0.55);
+      position: relative;
+    }
+    .progress-fill::after {
+      content: '';
+      position: absolute; right: 0; top: 50%;
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--neon-purple);
+      box-shadow: 0 0 10px rgba(176,38,255,0.65);
+      transform: translate(50%, -50%);
+      pointer-events: none;
+    }
+
+    .player-controls { display: flex; align-items: center; gap: 14px; }
+    .player-btn { background: none; border: none; color: var(--text-dim); font-size: 1rem; cursor: pointer; transition: color 0.2s; padding: 4px; }
+    .player-btn:hover { color: #fff; }
+    .player-btn.main { color: var(--neon-purple); font-size: 1.3rem; }
+    .player-close { background: none; border: none; color: var(--text-dim); font-size: 1rem; cursor: pointer; padding: 4px 8px; }
+
+    /* ===== BROKEN STREET ORG ===== */
+    .org-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+
+    .org-text h3 { font-family: 'Orbitron', sans-serif; font-size: 0.78rem; color: var(--neon-purple); letter-spacing: 2px; margin-bottom: 12px; margin-top: 26px; }
+    .org-text h3:first-child { margin-top: 0; }
+    .org-text p { font-size: 0.87rem; line-height: 2; color: #999; margin-bottom: 14px; }
+    .org-text p strong { color: #ccc; }
+    .org-text ul { list-style: none; margin-bottom: 14px; }
+    .org-text li { font-size: 0.83rem; color: #888; line-height: 1.9; padding-left: 14px; position: relative; }
+    .org-text li::before { content: '▸'; position: absolute; left: 0; color: var(--neon-purple); }
+
+    .info-card {
+      border: 1px solid var(--border); background: rgba(176,38,255,0.03);
+      padding: 24px; margin-top: 20px;
+      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+    }
+    .info-card-label { font-family: 'Orbitron', sans-serif; font-size: 0.58rem; color: var(--neon-purple); letter-spacing: 3px; margin-bottom: 10px; }
+    .info-card p { font-size: 0.82rem; color: #888; line-height: 1.8; margin: 0; }
+
+    /* ===== WORLDBOOK PREVIEW ===== */
+    #worldbook { max-width: 100%; background: rgba(176,38,255,0.018); padding: 100px 40px; }
+    #worldbook > .inner { max-width: 1200px; margin: 0 auto; }
+
+    .wb-preview {
+      border: 1px solid var(--border); padding: 36px;
+      background: rgba(5,2,8,0.6);
+      clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+      position: relative;
+    }
+    .wb-preview::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(to right, var(--neon-purple), transparent);
+    }
+
+    .wb-cats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 28px; }
+
+    .wb-cat {
+      border: 1px solid rgba(255,255,255,0.05); padding: 18px 14px; text-align: center;
+      background: rgba(255,255,255,0.015); transition: all 0.3s;
+      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+      cursor: pointer;
+    }
+    .wb-cat:hover { border-color: var(--border); background: rgba(176,38,255,0.045); }
+
+    .wb-cat-icon { font-size: 1.4rem; margin-bottom: 9px; display: block; }
+    .wb-cat-title { font-family: 'Orbitron', sans-serif; font-size: 0.65rem; color: #bbb; letter-spacing: 2px; }
+    .wb-cat-count { font-size: 0.6rem; color: var(--neon-purple); margin-top: 5px; }
+
+    .wb-cta { text-align: center; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.04); }
+    .wb-cta p { font-size: 0.78rem; color: var(--text-dim); margin-bottom: 18px; line-height: 1.9; }
+
+    /* ===== AMEAÇA ===== */
+    .ameaca-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+
+    .ameaca-text h3 { font-family: 'Orbitron', sans-serif; font-size: 0.78rem; color: #ff4444; letter-spacing: 2px; margin-bottom: 12px; margin-top: 26px; }
+    .ameaca-text h3:first-child { margin-top: 0; }
+    .ameaca-text p { font-size: 0.87rem; line-height: 2; color: #999; margin-bottom: 14px; }
+    .ameaca-text p strong { color: #ccc; }
+    .ameaca-text ul { list-style: none; margin-bottom: 14px; }
+    .ameaca-text li { font-size: 0.82rem; color: #888; line-height: 1.9; padding-left: 14px; position: relative; margin-bottom: 10px; }
+    .ameaca-text li::before { content: '▸'; position: absolute; left: 0; color: #ff4444; }
+    .ameaca-text li strong { color: #ddd; }
+
+    .fragment-list { display: flex; flex-direction: column; gap: 12px; }
+    .fragment-item {
+      border: 1px solid rgba(255,68,68,0.12); background: rgba(255,68,68,0.03);
+      padding: 16px 18px;
+      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .fragment-item:hover { border-color: rgba(255,68,68,0.25); background: rgba(255,68,68,0.05); }
+    .fragment-name { font-family: 'Orbitron', sans-serif; font-size: 0.7rem; color: #ff7070; letter-spacing: 2px; margin-bottom: 6px; }
+    .fragment-desc { font-size: 0.78rem; color: #888; line-height: 1.7; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      border-top: 1px solid var(--border); padding: 36px 40px; text-align: center;
+    }
+
+    .footer-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+    .footer-logo { font-family: 'Orbitron', sans-serif; font-size: 0.75rem; letter-spacing: 6px; background: var(--chrome-silver); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 0.6rem; color: var(--text-dim); letter-spacing: 2px; text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--neon-purple); }
+    .footer-sub { font-size: 0.6rem; color: var(--text-dim); letter-spacing: 2px; }
+
+    /* ===== ANIMATIONS ===== */
+    .fade-in { opacity: 0; transform: translateY(18px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1100px) {
+      .chars-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 900px) {
+      nav { padding: 13px 18px; }
+      .nav-links { gap: 14px; }
+      .nav-links a { font-size: 0.52rem; }
+      section { padding: 80px 20px; }
+      #personagens { padding: 80px 20px; }
+      #worldbook { padding: 80px 20px; }
+      .sinopse-grid, .ce-grid, .org-grid, .ameaca-grid { grid-template-columns: 1fr; }
+      .chars-grid { grid-template-columns: 1fr; }
+      .wb-cats { grid-template-columns: repeat(2, 1fr); }
+      .lore-stats { grid-template-columns: repeat(3, 1fr); }
+      .player-bar { padding: 11px 16px; gap: 12px; }
+      .player-progress { display: none; }
+      .footer-top { flex-direction: column; gap: 16px; }
+    }
+
+    .footer-archive {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      opacity: 0.9;
+    }
+
+    .footer-version {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      color: var(--text-dim);
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="scanlines"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">BROKEN STREET</a>
+  <ul class="nav-links">
+    <li><a href="#sinopse">SINOPSE</a></li>
+    <li><a href="#personagens">AGENTES</a></li>
+    <li><a href="#cyber-energy">CYBER ENERGY</a></li>
+    <li><a href="#musicas">TRILHA</a></li>
+    <li><a href="#ameaca">APOCALYPSE</a></li>
+    <li><a href="#worldbook">WORLDBOOK</a></li>
+    <li><a href="wordbook.html" class="nav-ext">↗ ARQUIVO</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero" style="max-width:100%; padding:0;">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <p class="hero-tag">// ARQUIVO OFICIAL — BROKEN STREET DATABASE</p>
+    <img src="C:\Users\phili\OneDrive\Documentos\Broken Street\SiteBS\arquivos\Imagenssite\logo.png" alt="Broken Street" class="hero-logo">
+    <p class="hero-subtitle">ネオンナイトメア — NEON NIGHTMARE // SYNTHCITY</p>
+    <div class="hero-btns">
+      <a href="#personagens" class="btn-primary">VER AGENTES</a>
+      <a href="#sinopse" class="btn-secondary">LER SINOPSE</a>
+    </div>
+  </div>
+  <div class="hero-scroll">SCROLL</div>
+</section>
+
+<!-- SINOPSE -->
+<section id="sinopse">
+  <div class="section-header fade-in">
+    <span class="section-num">// 001</span>
+    <h2 class="section-title">SINOPSE</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="sinopse-grid">
+    <div class="sinopse-text fade-in">
+      <p>
+        Há 700 anos, um meteorito trouxe ao mundo uma força impossível: a Cyber Energy. Metade da humanidade desapareceu, continentes foram remodelados e megacidades de neon surgiram sobre as ruínas da antiga civilização.
+      </p>
+      <p>
+        Em SynthCity, uma metrópole dominada por corporações, governo e vigilância constante, quatro adolescentes despertam poderes que jamais deveriam existir. Enquanto tentam sobreviver às sombras de um sistema corrupto, descobrem que uma ameaça esquecida está prestes a retornar.
+      </p>
+      <p>
+        Nas profundezas da realidade, Apocalypse — uma entidade banida desde a origem do universo — move seus Cavaleiros em busca dos Fragmentos Primordiais, artefatos capazes de romper as barreiras entre mundos.
+      </p>
+      <p> Agora, entre conspirações, monstros, guerras corporativas e segredos cósmicos, a organização Broken Street trava uma batalha silenciosa para impedir o fim de tudo.
+      </p>
+      <ul>
+        <li><strong>Philip Stills</strong> — PHANTOM BLAZE // <span style="color:#b026ff;">Ego</span></li>
+        <li><strong>Aidem Stewart</strong> — SHADOW ABYSS // <span style="color:#ff1744;">Angústia</span></li>
+        <li><strong>Anny Pewter</strong> — IGNIS // <span style="color:#ff1493;">Orgulho</span></li>
+        <li><strong>Scott Smith</strong> — BLACK RIOT // <span style="color:#2693ff;">Resiliência</span></li>
+      </ul>
+      <div class="lore-stats">
+        <div class="lore-stat">
+          <span class="lore-stat-num">04</span>
+          <span class="lore-stat-label">AGENTES ATIVOS</span>
+        </div>
+        <div class="lore-stat">
+          <span class="lore-stat-num">700</span>
+          <span class="lore-stat-label">ANOS DESDE O IMPACTO</span>
+        </div>
+        <div class="lore-stat">
+          <span class="lore-stat-num">05</span>
+          <span class="lore-stat-label">FRAGMENTOS PRIMORDIAIS</span>
+        </div>
+      </div>
+    </div>
+    <div class="sinopse-img-wrap fade-in">
+      <img src="c:\Users\phili\OneDrive\Documentos\Broken Street\SiteBS\arquivos\wordbook\Cenários\Synthcity 4.png" alt="SynthCity">
+    </div>
+  </div>
+</section>
+
+<!-- PERSONAGENS -->
+<section id="personagens" style="max-width:100%; background: rgba(176,38,255,0.02); padding:100px 40px;">
+  <div class="inner" style="max-width:1200px; margin:0 auto;">
+    <div class="section-header fade-in">
+      <span class="section-num">// 002</span>
+      <h2 class="section-title">AGENTES</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="chars-grid">
+
+      <!-- PHILIP -->
+      <a href="personagens/philip.html" class="char-card c-purple fade-in">
+        <div class="char-img-wrap">
+          <div class="char-id">001</div>
+          <img src="c:\Users\phili\OneDrive\Documentos\Broken Street\SiteBS\arquivos\wordbook\Personagens\Phficha.png" alt="Philip Stills">
+          <div class="char-img-overlay"></div>
+          <div class="char-color-line"></div>
+        </div>
+        <div class="char-info">
+          <p class="char-tag">// PHANTOM BLAZE · EGO</p>
+          <h3 class="char-name">PHILIP STILLS</h3>
+          <p class="char-role">17 anos · Apelido: Ph · Nível E→S · Astralis</p>
+          <p class="char-desc">Gentil e empático por natureza, carrega uma insegurança profunda sobre seu próprio valor. Manifesta Chamas Fantasmas roxas que queimam energia e matéria etérea. Equip.: Black Knuckles.</p>
+          <span class="char-action">VER FICHA COMPLETA</span>
+        </div>
+      </a>
+
+      <!-- AIDEM -->
+      <a href="personagens/aidem.html" class="char-card c-red fade-in">
+        <div class="char-img-wrap">
+          <div class="char-id">002</div>
+          <img src="c:\Users\phili\OneDrive\Documentos\Broken Street\SiteBS\arquivos\wordbook\Personagens\Aidemficha.png" alt="Aidem Stewart">
+          <div class="char-img-overlay"></div>
+          <div class="char-color-line"></div>
+        </div>
+        <div class="char-info">
+          <p class="char-tag">// SHADOW ABYSS · ANGÚSTIA</p>
+          <h3 class="char-name">AIDEM STEWART</h3>
+          <p class="char-role">16 anos · Apelido: Aidy · Nível D→S · Astralis</p>
+          <p class="char-desc">Silencioso, observador, profundamente introspectivo. Controla sombras vivas que consomem luz e percepção. O garoto silencioso que carrega o abismo dentro de si. Equip.: Stygian Thorns.</p>
+          <span class="char-action">VER FICHA COMPLETA</span>
+        </div>
+      </a>
+
+      <!-- ANNY -->
+      <a href="personagens/anny.html" class="char-card c-pink fade-in">
+        <div class="char-img-wrap">
+          <div class="char-id">003</div>
+          <img src="c:\Users\phili\OneDrive\Documentos\Broken Street\SiteBS\arquivos\wordbook\Personagens\Annyficha.png" alt="Anny Pewter">
+          <div class="char-img-overlay"></div>
+          <div class="char-color-line"></div>
+        </div>
+        <div class="char-info">
+          <p class="char-tag">// IGNIS · ORGULHO</p>
+          <h3 class="char-name">ANNY PEWTER</h3>
+          <p class="char-role">18 anos · Apelido: Any · Nível D→S · Astralis</p>
+          <p class="char-desc">Inteligente, organizada, consciente de sua imagem. A mente brilhante que transforma informação em vitória. Olhos rosas intensos e calculistas. Equip.: Ignis.</p>
+          <span class="char-action">VER FICHA COMPLETA</span>
+        </div>
+      </a>
+
+      <!-- SCOTT -->
+      <a href="personagens/scott.html" class="char-card c-blue fade-in">
+        <div class="char-img-wrap">
+          <div class="char-id">004</div>
+          <img src="c:\Users\phili\OneDrive\Documentos\Broken Street\SiteBS\arquivos\wordbook\Personagens\Scottficha.png" alt="Scott Smith">
+          <div class="char-img-overlay"></div>
+          <div class="char-color-line"></div>
+        </div>
+        <div class="char-info">
+          <p class="char-tag">// BLACK RIOT · RESILIÊNCIA</p>
+          <h3 class="char-name">SCOTT SMITH</h3>
+          <p class="char-role">19 anos · Nível B→S · SynthCity</p>
+          <p class="char-desc">Frio e distante, caminha entre herói e anti-herói. O sobrevivente que transformou cada cicatriz em força. Absorção de matéria e aço vivo. Equip.: Ironbound.</p>
+          <span class="char-action">VER FICHA COMPLETA</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- CYBER ENERGY -->
+<section id="cyber-energy">
+  <div class="section-header fade-in">
+    <span class="section-num">// 003</span>
+    <h2 class="section-title">CYBER ENERGY</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="ce-grid">
+    <div class="ce-text fade-in">
+      <h3>A FORÇA QUE TUDO MOVE</h3>
+      <p>
+        A Cyber Energy não pertence a este universo.
+
+Há 700 anos, um meteorito abriu uma ferida na realidade e espalhou sua energia pelo planeta.
+Hoje ela pulsa no solo, no oceano e no ar. Amplifica força, velocidade e percepção além dos limites humanos.
+Mas todo poder cobra um preço.
+Sem controle absoluto, a Cyber Energy consome corpo, mente e alma.
+ <strong>700 anos</strong> e nunca pertenceu a este universo.
+      </p>
+      <p>
+        <strong>Canalizadores naturais</strong> são a minoria que consegue absorver e dominar C.E. sem ser consumida.
+        Ganham força amplificada, velocidade impossível, reflexos instantâneos e percepção multidimensional.
+        O custo é brutal: sem controle absoluto, a energia corrói o corpo como ácido espiritual.
+      </p>
+      <h3>SENTIDO OCULTO & SENTIDO SUPREMO</h3>
+      <p>
+        O <strong>Sentido Oculto</strong> A primeira abertura perceptiva.
+
+Permite enxergar intenções, detectar distorções na realidade e antecipar movimentos antes que aconteçam.
+      </p>
+      <p>
+        O <strong>Sentido Supremo</strong> O estado transcendental.
+
+Quando a vontade supera os limites humanos, a própria realidade começa a se curvar ao usuário.
+
+Poucos despertam.
+
+Menos ainda sobrevivem.
+      </p>
+
+      <div class="info-card">
+        <div class="info-card-label">// Anomalias </div>
+        <p>Falhas na realidade surgem onde a Cyber Energy se torna instável.
+Algumas distorcem espaço e tempo.
+Outras transformam seres vivos em algo impossível de reconhecer.
+O Governo Galáctico as elimina.
+A Broken Street as investiga.</p>
+      </div>
+    </div>
+
+    <div class="fade-in">
+      <h3 style="font-family:'Orbitron',sans-serif;font-size:0.78rem;color:var(--neon-purple);letter-spacing:2px;margin-bottom:18px;">SISTEMA DE PATENTES</h3>
+      <div class="patents-list">
+        <div class="patent-item">
+          <span class="patent-badge" style="color:#9966aa;">E</span>
+          <div class="patent-info">
+            <div class="patent-name">DESPERTAR</div>
+            <div class="patent-desc">Primeiros sinais — reflexos aguçados e sensibilidade energética básica</div>
+          </div>
+          <div class="patent-bar-bg"><div class="patent-bar-fill" style="width:14%;background:#9966aa;color:#9966aa;"></div></div>
+        </div>
+        <div class="patent-item">
+          <span class="patent-badge" style="color:#aa77cc;">D</span>
+          <div class="patent-info">
+            <div class="patent-name">INICIADO</div>
+            <div class="patent-desc">Controle básico de C.E. com força e velocidade acima do comum</div>
+          </div>
+          <div class="patent-bar-bg"><div class="patent-bar-fill" style="width:28%;background:#aa77cc;color:#aa77cc;"></div></div>
+        </div>
+        <div class="patent-item">
+          <span class="patent-badge" style="color:#b94cf8;">C</span>
+          <div class="patent-info">
+            <div class="patent-name">ADEPTO</div>
+            <div class="patent-desc">Domínio sólido com respostas quase instantâneas de C.E.</div>
+          </div>
+          <div class="patent-bar-bg"><div class="patent-bar-fill" style="width:42%;background:#b94cf8;color:#b94cf8;"></div></div>
+        </div>
+        <div class="patent-item">
+          <span class="patent-badge" style="color:#c050ff;">B</span>
+          <div class="patent-info">
+            <div class="patent-name">AVANÇADO</div>
+            <div class="patent-desc">Habilidades sobrenaturais e manipulações complexas de energia</div>
+          </div>
+          <div class="patent-bar-bg"><div class="patent-bar-fill" style="width:57%;background:#c050ff;color:#c050ff;"></div></div>
+        </div>
+        <div class="patent-item">
+          <span class="patent-badge" style="color:#a820f0;">A</span>
+          <div class="patent-info">
+            <div class="patent-name">MESTRE</div>
+            <div class="patent-desc">Técnica refinada, ataques precisos e controle quase absoluto da energia</div>
+          </div>
+          <div class="patent-bar-bg"><div class="patent-bar-fill" style="width:71%;background:#a820f0;color:#a820f0;"></div></div>
+        </div>
+        <div class="patent-item">
+          <span class="patent-badge" style="color:#9910e8;">S</span>
+          <div class="patent-info">
+            <div class="patent-name">ELITE</div>
+            <div class="patent-desc">Poder monstruoso em forma humana — capaz de deixar crateras na terra</div>
+          </div>
+          <div class="patent-bar-bg"><div class="patent-bar-fill" style="width:85%;background:#9910e8;color:#9910e8;"></div></div>
+        </div>
+        <div class="patent-item">
+          <span class="patent-badge" style="color:#ffffff;text-shadow:0 0 10px #b026ff;">SS</span>
+          <div class="patent-info">
+            <div class="patent-name">DIVINO</div>
+            <div class="patent-desc">Domínio total da C.E. — capaz de distorcer espaço, tempo e realidade</div>
+          </div>
+          <div class="patent-bar-bg"><div class="patent-bar-fill" style="width:100%;background:linear-gradient(to right,#b026ff,#fff);"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BROKEN STREET ORGANIZAÇÃO -->
+<section id="broken-street" style="background: rgba(176,38,255,0.015); max-width: 100%; padding: 100px 40px;">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="section-header fade-in">
+      <span class="section-num">// 004</span>
+      <h2 class="section-title">BROKEN STREET</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="org-grid">
+      <div class="org-text fade-in">
+        <h3>A CORPORAÇÃO VIGILANTE</h3>
+        <p>Nas sombras de SynthCity existe uma organização que o governo insiste em negar.
+Investigadores. Hackers. Jornalistas silenciados. Soldados que se recusaram a obedecer.
+Todos unidos por um único objetivo:
+<strong>expor a verdade.</strong>
+        </p>
+        <p>
+          <strong>Modelo Operacional:</strong> Investigação profunda, coleta de evidência, ação direta calculada e disseminação de verdade.
+          Diferente de vigilantes típicos — não matam sem razão extrema, focam em exposição pública ao invés de vingança privada.
+        </p>
+        <h3>ESTRUTURA INTERNA</h3>
+        <ul>
+          <li>STATUS: ILEGAL</li>
+          <li>ATIVIDADE: VIGILÂNCIA E INVESTIGAÇÃO</li>
+          <li>ALVO: GOVERNO E CORPORAÇÕES</li>
+          <li>AMEAÇA: ALTA</li>
+        </ul>
+        <h3>GOVERNO GALÁCTICO</h3>
+        <p>
+          Acima das corporações existe algo pior.
+
+O Governo Galáctico controla informação, recursos e a distribuição de Cyber Energy.
+
+Seus três líderes jamais aparecem em público.
+
+Seus nomes não existem em nenhum registro.
+
+E mesmo assim, governam o mundo.
+        </p>
+        <div class="info-card" style="border-color:rgba(176,38,255,0.25);">
+          <div class="info-card-label">// OS TRÊS COMANDANTES</div>
+          <p>Identidades desconhecidas. Paradeiro desconhecido. Intenções desconhecidas. O que se sabe: quando o Governo Galáctico age, nenhuma corporação ou milícia ousa reagir.</p>
+        </div>
+      </div>
+      <div class="org-text fade-in">
+        <h3>SYNTHCITY</h3>
+        <p>Metrópole costeira onde a história se passa. Arranha-céus com fachadas digitais que mudam cor com o humor da cidade, trens suspensos que cruzam o skyline a 300 km/h, subúrbios onde a Cyber Energy vaza pelas paredes criando grafismos de luz.
+        </p>
+        <p>
+          É dividida em <strong>Zonas numeradas</strong> por nível de controle corporativo. As zonas mais ricas são governadas por corporações.
+          As zonas esquecidas — onde vivem os protagonistas — são controladas por milícias ou por ninguém.
+        </p>
+        <div class="info-card">
+          <div class="info-card-label">// SYNTHCITY — CLASSIFICAÇÃO</div>
+          <p>Capital econômica da era pós-meteorito. Centro global de inovação em C.E. e também epicentro de desigualdade extrema. Uma cidade que promete tudo — e cumpre só para quem pode pagar.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRILHA SONORA -->
+<section id="musicas">
+  <div class="section-header fade-in">
+    <span class="section-num">// 005</span>
+    <h2 class="section-title">ARQUIVOS DE ÁUDIO</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="music-list fade-in">
+
+    <div class="music-item" data-src="c:\Users\phili\OneDrive\Documentos\Broken Street\SiteBS\arquivos\videossite\Gravity’s_Edge.mp4" data-title="Gravity's Edge" data-char="Philip Stills">
+      <div class="music-num">01</div>
+      <div>
+        <div class="music-title">07</div>
+        <div class="music-meta">
+          <span class="music-badge badge-purple">PHILIP</span>
+          <span>Tema Principal</span>
+        </div>
+      </div>
+      <button class="music-play-btn" title="Reproduzir">▶</button>
+    </div>
+
+    <div class="music-item" data-src="c:\Users\phili\OneDrive\Documentos\Broken Street\SiteBS\arquivos\videossite\Gospel_of_Cold_Iron.mp4" data-title="Gospel of Cold Iron" data-char="Aidem Stewart">
+      <div class="music-num">02</div>
+      <div>
+        <div class="music-title">03</div>
+        <div class="music-meta">
+          <span class="music-badge badge-red">AIDEM</span>
+          <span>Tema Principal</span>
+        </div>
+      </div>
+      <button class="music-play-btn" title="Reproduzir">▶</button>
+    </div>
+
+    <div class="music-item" data-src="c:\Users\phili\OneDrive\Documentos\Broken Street\SiteBS\arquivos\videossite\The_Final_Route.mp4" data-title="The Final Route" data-char="Anny Pewter">
+      <div class="music-num">04</div>
+      <div>
+        <div class="music-title">06</div>
+        <div class="music-meta">
+          <span class="music-badge badge-pink">ANNY</span>
+          <span>Tema Principal</span>
+        </div>
+      </div>
+      <button class="music-play-btn" title="Reproduzir">▶</button>
+    </div>
+
+<div class="music-item" data-src="c:\Users\phili\OneDrive\Documentos\Broken Street\SiteBS\arquivos\videossite\Night_Reaper_Idling.mp4" data-title="Gospel of Cold Iron" data-char="Scott Smith">
+      <div class="music-num">05</div>
+      <div>
+        <div class="music-title">09</div>
+        <div class="music-meta">
+          <span class="music-badge badge-blue">SCOTT</span>
+          <span>Tema Principal</span>
+        </div>
+      </div>
+      <button class="music-play-btn" title="Reproduzir">▶</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- AMEAÇA SUPREMA -->
+<section id="ameaca" style="background: rgba(60,0,0,0.06); max-width: 100%; padding: 100px 40px;">
+  <div style="max-width:1200px; margin:0 auto;">
+    <div class="section-header fade-in">
+      <span class="section-num">// 006</span>
+      <h2 class="section-title" style="background: linear-gradient(180deg, #fff 0%, #f66 50%, #eee 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">AMEAÇA SUPREMA</h2>
+      <div class="section-line" style="background: linear-gradient(to right, rgba(255,60,60,0.35), transparent);"></div>
+    </div>
+    <div class="ameaca-grid">
+      <div class="ameaca-text fade-in">
+        <h3>APOCALYPSE — O ANJO CAÍDO</h3>
+        <p><strong>Apocalypse</strong> é o nome atribuído a uma entidade cuja existência atravessa diferentes épocas da história. Seu verdadeiro aspecto, origem e natureza permanecem desconhecidos, sendo registrados apenas em documentos fragmentados, lendas antigas e arquivos classificados.</p>
+        <p>Ao longo dos séculos, diversas civilizações desapareceram deixando referências ao mesmo nome, sempre associado a eventos de destruição em larga escala. Até hoje, nenhuma dessas ocorrências foi completamente explicada.</p>
+        <p>Embora existam poucas informações verificadas, algumas organizações consideram Apocalypse a maior ameaça já registrada. Por esse motivo, qualquer vestígio relacionado à entidade é tratado como informação de nível máximo de sigilo.</p>
+      </div>
+      <div class="fade-in">
+        <div class="info-card" style="border-color: rgba(255,60,60,0.2); background: rgba(255,40,40,0.03);">
+          <div class="info-card-label" style="color:#ff4444;">// STATUS</div>
+          <p><strong>Classificação:</strong> Desconhecida</p>
+          <p><strong>Origem:</strong> Desconhecida</p>
+          <p><strong>Localização:</strong> Desconhecida</p>
+          <p><strong>Existência:</strong> Não confirmada oficialmente</p>
+          <p><strong>Nível de ameaça:</strong> Máximo</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORLDBOOK -->
+<section id="worldbook" style="max-width:100%; background: rgba(176,38,255,0.018); padding:100px 40px;">
+  <div class="inner" style="max-width:1200px; margin:0 auto;">
+    <div class="section-header fade-in">
+      <span class="section-num">// 007</span>
+      <h2 class="section-title">WORLDBOOK</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="wb-preview fade-in">
+      <div class="wb-cats">
+        <div class="wb-cat" onclick="window.location='wordbook.html'">
+          <span class="wb-cat-icon">🏙</span>
+          <div class="wb-cat-title">MUNDO</div>
+          <div class="wb-cat-count">Cidades, regiões, dimensões e organizações.</div>
+        </div>
+        <div class="wb-cat" onclick="window.location='wordbook.html'">
+          <span class="wb-cat-icon">𖨆</span>
+          <div class="wb-cat-title">PERSONAGENS</div>
+          <div class="wb-cat-count">Protagonistas, aliados, antagonistas e entidades</div>
+        </div>
+        <div class="wb-cat" onclick="window.location='wordbook.html'">
+          <span class="wb-cat-icon">🗲</span>
+          <div class="wb-cat-title">CYBER ENERGY</div>
+          <div class="wb-cat-count">Sistema de poder, técnicas, sentidos e fenômenos relacionados.</div>
+        </div>
+        <div class="wb-cat" onclick="window.location='wordbook.html'">
+          <span class="wb-cat-icon">🕮</span>
+          <div class="wb-cat-title">LORE</div>
+          <div class="wb-cat-count">ronologia, eras, facções, conceitos, relíquias e registros históricos.</div>
+        </div>
+      </div>
+      <div class="wb-cta">
+        <p>Sistema de Arquivos da Broken Street. Todos os registros disponíveis foram catalogados pela organização. Novos documentos serão adicionados conforme a investigação avança.</p>
+        <a href="wordbook.html" class="btn-primary">ACESSAR WORLDBOOK COMPLETO</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-top">
+        <span class="footer-archive">OFFICIAL DATABASE</span>
+
+        <div class="footer-version">
+            // BUILD 1.0.0 
+        </div>
+    </div>
+
+  <p class="footer-sub">BROKEN STREET ORGANIZATION // SYNTHCITY · ネオンナイトメア · ARQUIVO OFICIAL</p>
+</footer>
+
+<!-- PLAYER BAR -->
+<div class="player-bar" id="playerBar">
+  <div class="player-track-info">
+    <div class="player-track-name" id="playerTrackName">—</div>
+    <div class="player-track-char" id="playerTrackChar">—</div>
+  </div>
+  <div class="player-progress">
+    <span class="player-time" id="playerCurrent">0:00</span>
+    <div class="progress-track" id="progressTrack">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <span class="player-time" id="playerDuration">0:00</span>
+  </div>
+  <div class="player-controls">
+    <button class="player-btn" id="playerPrevBtn">⏮</button>
+    <button class="player-btn main" id="playerPlayBtn">▶</button>
+    <button class="player-btn" id="playerNextBtn">⏭</button>
+  </div>
+  <button class="player-close" id="playerClose">✕</button>
+</div>
+
+<audio id="audioEl"></audio>
+
+<script>
+  // SCROLL ANIMATIONS
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // ACTIVE NAV
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 110) cur = s.id; });
+    navLinks.forEach(a => {
+      a.classList.remove('active');
+      if (a.getAttribute('href') === '#' + cur) a.classList.add('active');
+    });
+  });
+
+  // MUSIC PLAYER
+  const audio = document.getElementById('audioEl');
+  const playerBar = document.getElementById('playerBar');
+  const playerPlayBtn = document.getElementById('playerPlayBtn');
+  const playerPrevBtn = document.getElementById('playerPrevBtn');
+  const playerNextBtn = document.getElementById('playerNextBtn');
+  const playerClose = document.getElementById('playerClose');
+  const progressFill = document.getElementById('progressFill');
+  const progressTrack = document.getElementById('progressTrack');
+  const playerCurrent = document.getElementById('playerCurrent');
+  const playerDuration = document.getElementById('playerDuration');
+
+  const tracks = Array.from(document.querySelectorAll('.music-item'));
+  let currentIndex = -1;
+
+  function fmt(s) {
+    if (isNaN(s)) return '0:00';
+    return `${Math.floor(s/60)}:${Math.floor(s%60).toString().padStart(2,'0')}`;
+  }
+
+  function playTrack(i) {
+    if (i < 0 || i >= tracks.length) return;
+    currentIndex = i;
+    const item = tracks[i];
+    document.querySelectorAll('.music-item').forEach(x => x.classList.remove('playing'));
+    document.querySelectorAll('.music-play-btn').forEach(b => { b.textContent = '▶'; b.classList.remove('active'); });
+    item.classList.add('playing');
+    item.querySelector('.music-play-btn').textContent = '⏸';
+    item.querySelector('.music-play-btn').classList.add('active');
+    document.getElementById('playerTrackName').textContent = item.dataset.title;
+    document.getElementById('playerTrackChar').textContent = item.dataset.char;
+    audio.src = item.dataset.src;
+    audio.play().catch(()=>{});
+    playerBar.classList.add('visible');
+    playerPlayBtn.textContent = '⏸';
+  }
+
+  function pauseTrack() {
+    audio.pause();
+    playerPlayBtn.textContent = '▶';
+    document.querySelectorAll('.music-play-btn').forEach(b => {
+      b.textContent = '▶';
+      b.classList.remove('active');
+    });
+    document.querySelectorAll('.music-item').forEach(x => x.classList.remove('playing'));
+  }
+
+  tracks.forEach((item, i) => {
+    item.querySelector('.music-play-btn').addEventListener('click', e => {
+      e.stopPropagation();
+      currentIndex === i && !audio.paused ? pauseTrack() : playTrack(i);
+    });
+    item.addEventListener('click', e => {
+      if (e.target.closest('.music-play-btn')) return;
+      currentIndex === i && !audio.paused ? pauseTrack() : playTrack(i);
+    });
+  });
+
+  playerPlayBtn.addEventListener('click', () => {
+    if (audio.paused) {
+      if (currentIndex === -1) { playTrack(0); return; }
+      audio.play(); playerPlayBtn.textContent = '⏸';
+      if (currentIndex >= 0) tracks[currentIndex].querySelector('.music-play-btn').textContent = '⏸';
+    } else pauseTrack();
+  });
+
+  playerPrevBtn.addEventListener('click', () => playTrack(currentIndex > 0 ? currentIndex - 1 : tracks.length - 1));
+  playerNextBtn.addEventListener('click', () => playTrack(currentIndex < tracks.length - 1 ? currentIndex + 1 : 0));
+
+  playerClose.addEventListener('click', () => {
+    pauseTrack();
+    audio.src = '';
+    playerBar.classList.remove('visible');
+    currentIndex = -1;
+    document.querySelectorAll('.music-item').forEach(x => x.classList.remove('playing'));
+  });
+
+  audio.addEventListener('timeupdate', () => {
+    if (audio.duration) {
+      progressFill.style.width = (audio.currentTime / audio.duration * 100) + '%';
+      playerCurrent.textContent = fmt(audio.currentTime);
+    }
+  });
+  audio.addEventListener('loadedmetadata', () => { playerDuration.textContent = fmt(audio.duration); });
+  audio.addEventListener('ended', () => playTrack(currentIndex < tracks.length - 1 ? currentIndex + 1 : 0));
+
+  progressTrack.addEventListener('click', e => {
+    const r = progressTrack.getBoundingClientRect();
+    if (audio.duration) audio.currentTime = ((e.clientX - r.left) / r.width) * audio.duration;
+  });
+
+  // SMOOTH SCROLL
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+</script>
+</body>
+</html>
