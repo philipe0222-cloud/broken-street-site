@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Broken Street | Arquivo Oficial</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+  <link rel="shortcut icon" href="assets/images/favicon-32.png">
   <meta name="description" content="Broken Street — Arquivo oficial. SynthCity, Cyber Energy e os agentes que carregam o destino da cidade.">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
@@ -148,33 +152,58 @@
       100% { background-position: 80px 80px, 80px 80px; }
     }
 
-    /* Linhas de scan diagonais bem sutis atravessando a tela */
+    /* Linhas de scan synthwave — sweep contínuo e suave, sem "pisca-pisca" */
     .grid-lines {
       position: fixed;
       inset: 0;
       pointer-events: none;
       z-index: 0;
       overflow: hidden;
-      opacity: 0.5;
+      opacity: 0.65;
     }
     .grid-lines::before,
     .grid-lines::after {
       content: '';
       position: absolute;
-      left: -10%;
-      width: 120%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(176,38,255,0.35), transparent);
-      animation: lineSweep 14s ease-in-out infinite;
+      left: -30%;
+      width: 160%;
+      height: 2px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 20, 147, 0.55) 22%,
+        rgba(176, 38, 255, 0.85) 50%,
+        rgba(38, 147, 255, 0.55) 78%,
+        transparent
+      );
+      box-shadow: 0 0 10px rgba(176, 38, 255, 0.5), 0 0 22px rgba(255, 20, 147, 0.25);
+      filter: blur(0.4px);
+      will-change: transform;
+      animation: lineSweep 16s linear infinite;
     }
     .grid-lines::before { top: 22%; animation-delay: 0s; }
-    .grid-lines::after { top: 68%; animation-delay: 7s; }
+    .grid-lines::after  { top: 68%; animation-delay: -8s; }
     @keyframes lineSweep {
-      0%   { transform: translateX(-100%); opacity: 0; }
-      10%  { opacity: 0.6; }
-      50%  { transform: translateX(0%); opacity: 0.6; }
-      90%  { opacity: 0; }
-      100% { transform: translateX(100%); opacity: 0; }
+      0%   { transform: translateX(-40%); }
+      100% { transform: translateX(40%); }
+    }
+
+    /* Horizonte synthwave — glow lento e contínuo, sem flicker */
+    .synth-horizon {
+      position: fixed;
+      left: 50%;
+      bottom: -12%;
+      width: 140vw;
+      height: 45vh;
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 0;
+      background: radial-gradient(ellipse at center, rgba(255, 20, 147, 0.16) 0%, rgba(176, 38, 255, 0.1) 38%, transparent 70%);
+      animation: horizonPulse 10s ease-in-out infinite;
+    }
+    @keyframes horizonPulse {
+      0%, 100% { opacity: 0.7; }
+      50%      { opacity: 1; }
     }
 
     /* ── HERO ── */
@@ -1051,6 +1080,7 @@
 <div class="scanlines"></div>
 <div class="grid-bg"></div>
 <div class="grid-lines"></div>
+<div class="synth-horizon"></div>
 
 <!-- NAV -->
 <nav>
