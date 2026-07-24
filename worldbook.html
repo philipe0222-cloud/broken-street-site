@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Worldbook oficial do universo Broken Street.">
   <title>Worldbook | Broken Street</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
@@ -20,6 +21,8 @@
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
+    html { scroll-behavior: smooth; }
+
     body {
       background-color: var(--bg);
       color: var(--text-main);
@@ -30,24 +33,26 @@
 
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: rgba(176,38,255,0.3); }
+    ::-webkit-scrollbar-thumb { background: rgba(176, 38, 255, 0.3); }
 
-    /* ── GRID BG ── */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
       background-image:
-        linear-gradient(rgba(176,38,255,0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(176,38,255,0.025) 1px, transparent 1px);
-      background-size: 60px 60px; animation: gridDriftWb 48s linear infinite;
+        linear-gradient(rgba(176, 38, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(176, 38, 255, 0.025) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: gridDriftWb 48s linear infinite;
       pointer-events: none;
       z-index: 0;
     }
 
-    @keyframes gridDriftWb { 0% { background-position: 0 0, 0 0; } 100% { background-position: 60px 60px, 60px 60px; } }
+    @keyframes gridDriftWb {
+      from { background-position: 0 0, 0 0; }
+      to { background-position: 60px 60px, 60px 60px; }
+    }
 
-    /* ── SCANLINES ── */
     .scanlines {
       position: fixed;
       inset: 0;
@@ -55,32 +60,35 @@
         0deg,
         transparent,
         transparent 2px,
-        rgba(0,0,0,0.06) 2px,
-        rgba(0,0,0,0.06) 4px
+        rgba(0, 0, 0, 0.06) 2px,
+        rgba(0, 0, 0, 0.06) 4px
       );
       pointer-events: none;
       z-index: 9999;
     }
 
-    /* ── TOP NAV ── */
     .top-nav {
       position: fixed;
-      top: 0; left: 0; right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
       height: 52px;
       z-index: 500;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 20px;
       padding: 0 32px;
-      background: rgba(5,2,8,0.9);
+      background: rgba(5, 2, 8, 0.9);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(176,38,255,0.15);
+      border-bottom: 1px solid rgba(176, 38, 255, 0.15);
     }
 
     .top-nav-left {
       display: flex;
       align-items: center;
       gap: 20px;
+      min-width: 0;
     }
 
     .nav-back {
@@ -93,13 +101,15 @@
       display: flex;
       align-items: center;
       gap: 6px;
+      white-space: nowrap;
     }
+
     .nav-back:hover { color: var(--accent); }
 
     .nav-sep {
       width: 1px;
       height: 16px;
-      background: rgba(176,38,255,0.2);
+      background: rgba(176, 38, 255, 0.2);
     }
 
     .nav-title-wk {
@@ -114,12 +124,13 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      background: rgba(176,38,255,0.05);
-      border: 1px solid rgba(176,38,255,0.15);
+      background: rgba(176, 38, 255, 0.05);
+      border: 1px solid rgba(176, 38, 255, 0.15);
       padding: 6px 14px;
     }
 
     .nav-search input {
+      width: 220px;
       background: none;
       border: none;
       outline: none;
@@ -127,23 +138,17 @@
       font-family: 'Share Tech Mono', monospace;
       font-size: 0.65rem;
       letter-spacing: 0.1em;
-      width: 200px;
     }
+
     .nav-search input::placeholder { color: var(--text-dim); }
+    .nav-search-icon { color: var(--text-dim); font-size: 0.75rem; }
 
-    .nav-search-icon {
-      color: var(--text-dim);
-      font-size: 0.75rem;
-    }
-
-    /* ── LAYOUT ── */
     .wb-layout {
       display: flex;
       padding-top: 52px;
       min-height: 100vh;
     }
 
-    /* ── SIDEBAR ── */
     .wb-sidebar {
       position: fixed;
       top: 52px;
@@ -151,14 +156,14 @@
       bottom: 0;
       width: var(--sidebar-w);
       overflow-y: auto;
-      background: rgba(8,4,14,0.95);
-      border-right: 1px solid rgba(176,38,255,0.1);
+      background: rgba(8, 4, 14, 0.95);
+      border-right: 1px solid rgba(176, 38, 255, 0.1);
       z-index: 100;
       padding: 28px 0 40px;
     }
 
     .wb-sidebar::-webkit-scrollbar { width: 2px; }
-    .wb-sidebar::-webkit-scrollbar-thumb { background: rgba(176,38,255,0.2); }
+    .wb-sidebar::-webkit-scrollbar-thumb { background: rgba(176, 38, 255, 0.2); }
 
     .sidebar-section-title {
       font-family: 'Share Tech Mono', monospace;
@@ -167,8 +172,7 @@
       color: var(--accent);
       opacity: 0.5;
       padding: 0 20px;
-      margin-bottom: 8px;
-      margin-top: 20px;
+      margin: 20px 0 8px;
       text-transform: uppercase;
     }
 
@@ -176,63 +180,65 @@
 
     .sidebar-link {
       display: block;
+      width: 100%;
       padding: 8px 20px;
+      color: var(--text-muted);
       font-family: 'Exo 2', sans-serif;
       font-size: 0.78rem;
-      color: var(--text-muted);
+      text-align: left;
       text-decoration: none;
-      transition: all 0.15s;
+      background: transparent;
+      border: 0;
       border-left: 2px solid transparent;
       cursor: pointer;
+      transition: all 0.15s;
     }
 
     .sidebar-link:hover {
       color: var(--text-main);
-      background: rgba(176,38,255,0.05);
-      border-left-color: rgba(176,38,255,0.3);
+      background: rgba(176, 38, 255, 0.05);
+      border-left-color: rgba(176, 38, 255, 0.3);
     }
 
     .sidebar-link.active {
       color: var(--accent);
-      background: rgba(176,38,255,0.07);
+      background: rgba(176, 38, 255, 0.07);
       border-left-color: var(--accent);
     }
 
-    /* ── MAIN CONTENT ── */
     .wb-main {
+      width: min(100%, 980px);
       margin-left: var(--sidebar-w);
-      flex: 1;
       padding: 60px 72px 100px;
       position: relative;
       z-index: 1;
-      max-width: 900px;
     }
 
-    /* ── HERO HEADER ── */
-    .wb-hero {
-      margin-bottom: 72px;
-    }
+    .wb-hero { margin-bottom: 72px; }
 
     .wb-hero-tag {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.3em;
-      color: var(--accent);
-      opacity: 0.6;
-      margin-bottom: 16px;
       display: flex;
       align-items: center;
       gap: 10px;
+      margin-bottom: 16px;
+      color: var(--accent);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      opacity: 0.6;
     }
-    .wb-hero-tag::before, .wb-hero-tag::after {
+
+    .wb-hero-tag::before,
+    .wb-hero-tag::after {
       content: '';
-      height: 1px;
       width: 30px;
+      height: 1px;
       background: var(--accent);
       opacity: 0.4;
     }
 
     .wb-hero-title {
+      margin-bottom: 20px;
       font-family: 'Orbitron', monospace;
       font-size: clamp(2.5rem, 6vw, 4.5rem);
       font-weight: 900;
@@ -241,21 +247,29 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 20px;
     }
 
     .wb-hero-desc {
+      max-width: 680px;
+      color: var(--text-muted);
       font-size: 1.05rem;
       line-height: 1.7;
-      color: var(--text-muted);
-      max-width: 580px;
       opacity: 0.85;
     }
 
-    /* ── ARTICLE ── */
-    .wb-article {
+    .mobile-page-nav {
       display: none;
+      width: 100%;
+      margin-top: 24px;
+      padding: 11px 12px;
+      color: var(--text-main);
+      background: rgba(15, 8, 25, 0.95);
+      border: 1px solid rgba(176, 38, 255, 0.25);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.7rem;
     }
+
+    .wb-article { display: none; }
 
     .wb-article.visible {
       display: block;
@@ -268,122 +282,144 @@
     }
 
     .article-header {
-      margin-bottom: 48px;
+      margin-bottom: 30px;
       padding-bottom: 24px;
-      border-bottom: 1px solid rgba(176,38,255,0.1);
+      border-bottom: 1px solid rgba(176, 38, 255, 0.1);
     }
 
     .article-category {
+      margin-bottom: 12px;
+      color: var(--accent);
       font-family: 'Share Tech Mono', monospace;
       font-size: 0.6rem;
       letter-spacing: 0.25em;
-      color: var(--accent);
-      opacity: 0.6;
-      margin-bottom: 12px;
       text-transform: uppercase;
+      opacity: 0.6;
     }
 
     .article-title {
+      margin-bottom: 16px;
+      color: #fff;
       font-family: 'Orbitron', monospace;
       font-size: clamp(1.8rem, 4vw, 2.8rem);
       font-weight: 900;
-      color: #fff;
       line-height: 1.1;
-      margin-bottom: 16px;
     }
 
     .article-lead {
+      max-width: 720px;
+      color: var(--text-muted);
       font-size: 1.05rem;
       line-height: 1.75;
-      color: var(--text-muted);
-      max-width: 640px;
       opacity: 0.9;
     }
 
-    .article-body h3 {
+    .article-body h3,
+    .gallery-heading {
+      margin: 40px 0 16px;
+      color: var(--accent);
       font-family: 'Orbitron', monospace;
       font-size: 0.85rem;
       font-weight: 700;
-      color: var(--accent);
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      margin: 40px 0 16px;
+    }
+
+    .article-body h4 {
+      margin: 24px 0 10px;
+      color: #c88dff;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     .article-body p {
+      margin-bottom: 16px;
+      color: var(--text-main);
       font-size: 0.98rem;
       line-height: 1.8;
-      color: var(--text-main);
       opacity: 0.82;
-      margin-bottom: 16px;
     }
 
     .article-body ul {
       list-style: none;
-      margin: 0 0 20px 0;
+      margin: 0 0 20px;
       padding: 0;
     }
 
-    .article-body ul li {
-      font-size: 0.95rem;
-      color: var(--text-main);
-      opacity: 0.8;
-      padding: 8px 0 8px 20px;
-      border-bottom: 1px solid rgba(176,38,255,0.06);
+    .article-body li {
       position: relative;
+      padding: 8px 0 8px 20px;
+      color: var(--text-main);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      border-bottom: 1px solid rgba(176, 38, 255, 0.06);
+      opacity: 0.8;
     }
 
-    .article-body ul li::before {
+    .article-body li::before {
       content: '//';
       position: absolute;
       left: 0;
       color: var(--accent);
-      opacity: 0.5;
       font-family: 'Share Tech Mono', monospace;
       font-size: 0.7rem;
+      opacity: 0.5;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin: 24px 0;
     }
 
     .info-table {
       width: 100%;
+      min-width: 560px;
       border-collapse: collapse;
-      margin: 24px 0;
     }
 
+    .info-table th,
     .info-table td {
-      padding: 10px 16px;
-      border-bottom: 1px solid rgba(176,38,255,0.08);
+      padding: 11px 16px;
+      text-align: left;
+      border-bottom: 1px solid rgba(176, 38, 255, 0.08);
       font-size: 0.88rem;
+      line-height: 1.55;
     }
 
-    .info-table td:first-child {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
+    .info-table th {
       color: var(--accent);
-      opacity: 0.7;
-      white-space: nowrap;
-      padding-right: 24px;
+      background: rgba(176, 38, 255, 0.05);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
     }
 
-    .info-table td:last-child {
-      color: var(--text-main);
-      opacity: 0.8;
+    .info-table td:first-child {
+      color: var(--accent);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.78;
     }
 
     .highlight-quote {
-      border-left: 2px solid var(--accent);
-      padding: 16px 24px;
-      background: rgba(176,38,255,0.04);
       margin: 24px 0;
+      padding: 16px 24px;
+      background: rgba(176, 38, 255, 0.04);
+      border-left: 2px solid var(--accent);
     }
 
     .highlight-quote p {
+      margin: 0;
+      color: var(--text-muted);
       font-family: 'Rajdhani', sans-serif;
-      font-style: italic;
       font-size: 1rem;
-      color: var(--text-muted) !important;
-      opacity: 1 !important;
+      font-style: italic;
+      opacity: 1;
     }
 
     .tag-list {
@@ -394,18 +430,18 @@
     }
 
     .tag-pill {
+      padding: 4px 12px;
+      color: var(--accent);
+      background: rgba(176, 38, 255, 0.05);
+      border: 1px solid rgba(176, 38, 255, 0.3);
       font-family: 'Share Tech Mono', monospace;
       font-size: 0.6rem;
       letter-spacing: 0.12em;
-      padding: 4px 12px;
-      border: 1px solid rgba(176,38,255,0.3);
-      color: var(--accent);
-      background: rgba(176,38,255,0.05);
     }
 
     .data-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
       gap: 16px;
       margin: 24px 0;
     }
@@ -413,664 +449,1162 @@
     .data-cell {
       padding: 16px;
       background: var(--card-bg);
-      border: 1px solid rgba(176,38,255,0.1);
+      border: 1px solid rgba(176, 38, 255, 0.1);
       transition: border-color 0.2s;
     }
-    .data-cell:hover { border-color: rgba(176,38,255,0.3); }
+
+    .data-cell:hover { border-color: rgba(176, 38, 255, 0.3); }
 
     .data-cell-label {
+      margin-bottom: 6px;
+      color: var(--accent);
       font-family: 'Share Tech Mono', monospace;
       font-size: 0.55rem;
-      letter-spacing: 0.2em;
-      color: var(--accent);
-      opacity: 0.6;
-      margin-bottom: 6px;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
+      opacity: 0.7;
     }
 
     .data-cell-value {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 0.95rem;
       color: var(--text-main);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.98rem;
+      line-height: 1.45;
     }
+
+    .media-slot {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(176, 38, 255, 0.08), rgba(8, 4, 14, 0.94)),
+        repeating-linear-gradient(45deg, transparent 0 12px, rgba(176, 38, 255, 0.025) 12px 13px);
+      border: 1px solid rgba(176, 38, 255, 0.25);
+    }
+
+    .main-media {
+      aspect-ratio: 16 / 8;
+      margin: 0 0 34px;
+    }
+
+    .media-slot img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .media-fallback {
+      display: none;
+      position: absolute;
+      inset: 0;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .media-slot.is-empty .media-fallback { display: flex; }
+
+    .media-fallback span {
+      color: var(--accent);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+    }
+
+    .media-fallback small {
+      max-width: 100%;
+      color: var(--text-dim);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.57rem;
+      overflow-wrap: anywhere;
+    }
+
+    .media-slot figcaption {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      padding: 18px 14px 9px;
+      color: rgba(255, 255, 255, 0.72);
+      background: linear-gradient(transparent, rgba(5, 2, 8, 0.88));
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.57rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .media-slot.is-empty figcaption { display: none; }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .gallery-grid .media-slot { aspect-ratio: 4 / 3; }
 
     .article-nav {
       display: flex;
       justify-content: space-between;
+      gap: 12px;
       margin-top: 60px;
       padding-top: 24px;
-      border-top: 1px solid rgba(176,38,255,0.1);
+      border-top: 1px solid rgba(176, 38, 255, 0.1);
     }
 
-    .article-nav a {
+    .article-nav button {
+      padding: 8px 16px;
+      color: var(--text-muted);
+      background: transparent;
+      border: 1px solid rgba(176, 38, 255, 0.15);
       font-family: 'Share Tech Mono', monospace;
       font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      color: var(--text-muted);
-      text-decoration: none;
-      padding: 8px 16px;
-      border: 1px solid rgba(176,38,255,0.15);
-      transition: all 0.2s;
+      letter-spacing: 0.1em;
       cursor: pointer;
-    }
-    .article-nav a:hover {
-      color: var(--accent);
-      border-color: rgba(176,38,255,0.4);
+      transition: all 0.2s;
     }
 
-    /* ── RESPONSIVE ── */
+    .article-nav button:hover {
+      color: var(--accent);
+      border-color: rgba(176, 38, 255, 0.4);
+    }
+
+    .search-status {
+      min-height: 20px;
+      margin-top: 12px;
+      color: var(--text-dim);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.08em;
+    }
+
     @media (max-width: 900px) {
-      .wb-sidebar { width: 220px; }
-      .wb-main { margin-left: 220px; padding: 40px 32px 80px; }
+      :root { --sidebar-w: 220px; }
+      .wb-main { padding: 40px 32px 80px; }
     }
 
     @media (max-width: 700px) {
+      .top-nav { padding: 0 18px; }
+      .nav-sep, .nav-title-wk, .nav-search { display: none; }
       .wb-sidebar { display: none; }
-      .wb-main { margin-left: 0; padding: 32px 20px 80px; }
-      .nav-search { display: none; }
+      .wb-main { width: 100%; margin-left: 0; padding: 32px 20px 80px; }
+      .wb-hero { margin-bottom: 48px; }
+      .mobile-page-nav { display: block; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .main-media { aspect-ratio: 4 / 3; }
+      .article-nav button { max-width: 48%; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="scanlines"></div>
 
-<div class="scanlines"></div>
+  <nav class="top-nav">
+    <div class="top-nav-left">
+      <a href="index.html" class="nav-back">← BROKEN STREET</a>
+      <div class="nav-sep"></div>
+      <span class="nav-title-wk">WORLDBOOK</span>
+    </div>
+    <label class="nav-search">
+      <span class="nav-search-icon">⌕</span>
+      <input type="search" placeholder="BUSCAR NO WORLDBOOK..." id="wb-search-input" autocomplete="off">
+    </label>
+  </nav>
 
-<!-- TOP NAV -->
-<nav class="top-nav">
-  <div class="top-nav-left">
-    <a href="index.html" class="nav-back">← BROKEN STREET</a>
-    <div class="nav-sep"></div>
-    <span class="nav-title-wk">WORLDBOOK</span>
+  <div class="wb-layout">
+    <aside class="wb-sidebar" id="wb-sidebar" aria-label="Navegação do worldbook"></aside>
+
+    <main class="wb-main">
+      <header class="wb-hero">
+        <p class="wb-hero-tag">WRDBK.001 · CLASSIFIED LVL 07</p>
+        <h1 class="wb-hero-title">WORLDBOOK</h1>
+        <p class="wb-hero-desc">O arquivo completo do mundo de Broken Street: uma Terra remodelada pela Cyber Energy, dividida entre cidades impossíveis, poderes fatais e a ameaça crescente de Apocalypse.</p>
+        <select class="mobile-page-nav" id="mobile-page-nav" aria-label="Escolha uma página do worldbook"></select>
+        <p class="search-status" id="search-status" aria-live="polite"></p>
+      </header>
+
+      <section id="articles-root"></section>
+    </main>
   </div>
-  <div class="nav-search">
-    <span class="nav-search-icon">⌕</span>
-    <input type="text" placeholder="BUSCAR NO WORLDBOOK..." id="wb-search-input" autocomplete="off">
-  </div>
-</nav>
 
-<div class="wb-layout">
+  <script>
+    /*
+      IMAGENS
+      Cada página procura automaticamente:
+      assets/worldbook/ID-DA-PAGINA/principal.jpg
+      assets/worldbook/ID-DA-PAGINA/galeria-1.jpg
+      assets/worldbook/ID-DA-PAGINA/galeria-2.jpg
+      assets/worldbook/ID-DA-PAGINA/galeria-3.jpg
+      Enquanto os arquivos não existirem, o site exibe espaços identificados.
+    */
 
-  <!-- SIDEBAR -->
-  <aside class="wb-sidebar">
-    <p class="sidebar-section-title">INÍCIO</p>
-    <a class="sidebar-link active" data-article="intro" onclick="showArticle('intro', this)">Introdução</a>
+    const groups = [
+      {
+        name: 'INÍCIO',
+        pages: ['visao-geral', 'cosmologia']
+      },
+      {
+        name: 'AMBIENTES E LOCAIS',
+        pages: [
+          'geografia', 'synth-city', 'cyberwave', 'shining-desert',
+          'pumpkin-grove', 'frostwood', 'crimson-plateau',
+          'village-of-silence', 'sanctuary-of-eterion', 'purgatory',
+          'dream-world'
+        ]
+      },
+      {
+        name: 'ENERGIA E PODER',
+        pages: ['cyber-energy', 'patentes', 'limites']
+      },
+      {
+        name: 'ECONOMIA E SOCIEDADE',
+        pages: ['echocoins', 'governo-militares', 'estrutura-social', 'profissoes']
+      },
+      {
+        name: 'ORGANIZAÇÕES',
+        pages: ['broken-street', 'outras-organizacoes']
+      },
+      {
+        name: 'MUNDO VIVO E CULTURA',
+        pages: ['armas-tecnologia', 'fauna-flora', 'religiao', 'cultura-linguagem']
+      },
+      {
+        name: 'HISTÓRIA E AMEAÇAS',
+        pages: ['historia-eras', 'fragmentos', 'apocalypse']
+      }
+    ];
 
-    <p class="sidebar-section-title">A CIDADE</p>
-    <a class="sidebar-link" data-article="synthcity" onclick="showArticle('synthcity', this)">Synthcity</a>
-    <a class="sidebar-link" data-article="distritos" onclick="showArticle('distritos', this)">Distritos</a>
-    <a class="sidebar-link" data-article="infraestrutura" onclick="showArticle('infraestrutura', this)">Infraestrutura</a>
-
-    <p class="sidebar-section-title">CYBER ENERGY</p>
-    <a class="sidebar-link" data-article="ce-origem" onclick="showArticle('ce-origem', this)">Origem</a>
-    <a class="sidebar-link" data-article="ce-tipos" onclick="showArticle('ce-tipos', this)">Tipos de Manifestação</a>
-    <a class="sidebar-link" data-article="ce-efeitos" onclick="showArticle('ce-efeitos', this)">Efeitos & Riscos</a>
-
-    <p class="sidebar-section-title">CORPORAÇÕES</p>
-    <a class="sidebar-link" data-article="nexcore" onclick="showArticle('nexcore', this)">NexCore Industries</a>
-    <a class="sidebar-link" data-article="veiltech" onclick="showArticle('veiltech', this)">VeilTech</a>
-    <a class="sidebar-link" data-article="arco" onclick="showArticle('arco', this)">ARCO</a>
-
-    <p class="sidebar-section-title">FACÇÕES</p>
-    <a class="sidebar-link" data-article="grid" onclick="showArticle('grid', this)">The Grid</a>
-    <a class="sidebar-link" data-article="static" onclick="showArticle('static', this)">Static Collective</a>
-    <a class="sidebar-link" data-article="watchmen" onclick="showArticle('watchmen', this)">Watchmen Urbanos</a>
-
-    <p class="sidebar-section-title">TECNOLOGIA</p>
-    <a class="sidebar-link" data-article="neurolink" onclick="showArticle('neurolink', this)">Neurolinks</a>
-    <a class="sidebar-link" data-article="synth-tech" onclick="showArticle('synth-tech', this)">Synth-Tech</a>
-
-    <p class="sidebar-section-title">HISTÓRIA</p>
-    <a class="sidebar-link" data-article="fundacao" onclick="showArticle('fundacao', this)">Fundação de Synthcity</a>
-    <a class="sidebar-link" data-article="evento-zero" onclick="showArticle('evento-zero', this)">Evento-Zero</a>
-    <a class="sidebar-link" data-article="cronologia" onclick="showArticle('cronologia', this)">Cronologia</a>
-
-    <p class="sidebar-section-title">TERMINOLOGIA</p>
-    <a class="sidebar-link" data-article="glossario" onclick="showArticle('glossario', this)">Glossário</a>
-  </aside>
-
-  <!-- MAIN -->
-  <main class="wb-main">
-
-    <!-- HERO -->
-    <header class="wb-hero">
-      <p class="wb-hero-tag">BROKEN STREET · DATABASE OFICIAL</p>
-      <h1 class="wb-hero-title">WORLDBOOK</h1>
-      <p class="wb-hero-desc">O arquivo completo do universo Broken Street. Selecione uma categoria no painel lateral para começar a explorar Synthcity, suas corporações, tecnologias e os segredos que movem o apocalipse.</p>
-    </header>
-
-    <!-- ── ARTIGO: INTRO ── -->
-    <article class="wb-article visible" id="article-intro">
-      <div class="article-header">
-        <p class="article-category">// INÍCIO</p>
-        <h2 class="article-title">Introdução ao Universo</h2>
-        <p class="article-lead">Broken Street é um universo de ficção científica distópica ambientado em Synthcity, uma metrópole onde o progresso tecnológico mascarou décadas de decadência social.</p>
-      </div>
-      <div class="article-body">
-        <h3>Sobre Este Arquivo</h3>
-        <p>Este Worldbook é o repositório oficial de lore do universo Broken Street. Aqui você encontrará informações detalhadas sobre a cidade, seus habitantes, as forças que a controlam e os eventos que levaram ao Evento-Zero.</p>
-        <p>O material está organizado em categorias. Use o painel lateral para navegar entre os tópicos ou utilize a barra de busca para encontrar termos específicos.</p>
-        <div class="highlight-quote">
-          <p>"Synthcity não é uma cidade. É um experimento. E nós somos as cobaias."</p>
-        </div>
-        <h3>Como Usar Este Worldbook</h3>
-        <ul>
-          <li>Use a barra lateral para navegar por categorias</li>
-          <li>Artigos podem conter referências cruzadas entre si</li>
-          <li>Alguns dados são classificados — acesso restrito por nível</li>
-          <li>O universo é um trabalho em andamento; novos dados são adicionados continuamente</li>
-        </ul>
-        <div class="data-grid">
-          <div class="data-cell">
-            <p class="data-cell-label">UNIVERSO</p>
-            <p class="data-cell-value">Broken Street</p>
+    const pages = [
+      {
+        id: 'visao-geral',
+        title: 'O Mundo de Broken Street',
+        category: 'Início',
+        lead: 'Beleza cyberpunk e decadência natural ocupam o mesmo planeta, enquanto poder, resistência e destruição disputam o futuro.',
+        body: `
+          <h3>Um mundo de contrastes</h3>
+          <p>Broken Street acontece em uma Terra transformada pelo impacto de um meteorito e pela chegada da Cyber Energy. A tecnologia alcançou níveis impossíveis, mas a desigualdade, a corrupção e a instabilidade da própria realidade cresceram junto com ela.</p>
+          <div class="data-grid">
+            <div class="data-cell"><p class="data-cell-label">Mundo</p><p class="data-cell-value">Beleza cyberpunk coexistindo com decadência natural.</p></div>
+            <div class="data-cell"><p class="data-cell-label">Sociedade</p><p class="data-cell-value">Tecnologia avançada ao lado de pobreza absoluta.</p></div>
+            <div class="data-cell"><p class="data-cell-label">Conflito</p><p class="data-cell-value">Salvação possível enfrentando uma queda aparentemente inevitável.</p></div>
+            <div class="data-cell"><p class="data-cell-label">Poder</p><p class="data-cell-value">Autoridade concentrada contra uma resistência dispersa.</p></div>
           </div>
-          <div class="data-cell">
-            <p class="data-cell-label">GÊNERO</p>
-            <p class="data-cell-value">Cyberpunk · Sci-Fi</p>
+          <h3>Broken Street</h3>
+          <p>A organização Broken Street atua nas sombras, investigando corrupção, expondo verdades perigosas, questionando o poder estabelecido e arriscando tudo pela mudança.</p>
+          <div class="highlight-quote"><p>A ameaça de Apocalypse paira sobre cada cidade, organização e escolha.</p></div>
+        `
+      },
+      {
+        id: 'cosmologia',
+        title: 'Cosmologia e Origem',
+        category: 'Cosmologia',
+        lead: 'O universo nasceu de uma explosão de possibilidades. Sua antítese despertou no mesmo instante.',
+        body: `
+          <h3>Criação e paradoxo primordial</h3>
+          <p>Antes de tudo, não havia nada. O Big Bang não foi uma criação ordenada, mas um desapego violento que lançou matéria, energia e consciência na realidade. Ninguém sabe se ele foi um ato divino, acaso absoluto ou algo além da compreensão humana.</p>
+          <p>No mesmo instante, sua antítese acordou: o Anti-Big Bang, manifestação primordial do caos, da rejeição cósmica e da negação pura. De sua energia iridescente nasceu Apocalypse, o Anjo Caído do Colapso.</p>
+          <p>As próprias leis da realidade rejeitaram Apocalypse e o baniram para Dead Horizon, dimensão paralela onde tempo, matéria e alma não obedecem às regras do universo. Aprisionado, mas não derrotado, ele passou séculos preparando seu retorno.</p>
+          <h3>Os Quatro Cavaleiros</h3>
+          <p>Apocalypse pretende ressuscitar seus Quatro Cavaleiros, já reencarnados na Terra como manifestações de Peste, Guerra, Fome e Morte. Eles procuram os Cinco Fragmentos Primordiais, relíquias capazes de formar o Cristal da Convergência.</p>
+          <p>Com o cristal, Apocalypse poderá construir um corpo físico e romper completamente as barreiras entre dimensões.</p>
+          <h3>O meteorito maldito</h3>
+          <p>Há cerca de 700 anos, um meteorito carregado por energia cósmica desconhecida atingiu a Terra. O impacto alterou sua estrutura molecular, o eixo gravitacional e a própria realidade.</p>
+          <ul>
+            <li>O meteorito trouxe a Cyber Energy, um eco de Dead Horizon.</li>
+            <li>Metade da humanidade foi dizimada.</li>
+            <li>Ecossistemas sofreram mutações drásticas.</li>
+            <li>O velho mundo morreu e uma nova Terra nasceu.</li>
+          </ul>
+        `
+      },
+      {
+        id: 'geografia',
+        title: 'Geografia do Mundo Transformado',
+        category: 'Ambientes e locais',
+        lead: 'Continentes, biomas e leis naturais foram retorcidos pelo impacto da Cyber Energy. Nenhum mapa antigo ainda é confiável.',
+        body: `
+          <h3>Características globais</h3>
+          <ul>
+            <li><strong>Madrugada Eterna:</strong> noite perpétua interrompida apenas por auroras anômalas.</li>
+            <li><strong>Regiões Temáticas:</strong> cada território desenvolveu clima, energia e comportamento próprios.</li>
+            <li><strong>Realidade Frágil:</strong> dimensões paralelas influenciam constantemente o mundo físico.</li>
+            <li><strong>Ciclos de Instabilidade:</strong> períodos em que a Cyber Energy se comporta de forma errática.</li>
+          </ul>
+          <h3>Biomas conhecidos</h3>
+          <div class="table-wrap">
+            <table class="info-table">
+              <thead><tr><th>Bioma</th><th>Característica</th><th>Exemplos</th></tr></thead>
+              <tbody>
+                <tr><td>Urbano cyberpunk</td><td>Tecnologia futurista, neon e drones.</td><td>Synth City e Cyberwave.</td></tr>
+                <tr><td>Deserto energizado</td><td>Cristais, auroras e silêncio profundo.</td><td>Shining Desert e Crimson Plateau.</td></tr>
+                <tr><td>Gelado extremo</td><td>Montanhas colossais e isolamento.</td><td>Frostwood.</td></tr>
+                <tr><td>Outono eterno</td><td>Halloween permanente e natureza retorcida.</td><td>Pumpkin Grove.</td></tr>
+                <tr><td>Desolação vermelha</td><td>Morte, ruína e energia corrompida.</td><td>Purgatory.</td></tr>
+                <tr><td>Deserto árido</td><td>Miséria, desconfiança e desespero.</td><td>Village of Silence.</td></tr>
+              </tbody>
+            </table>
           </div>
-          <div class="data-cell">
-            <p class="data-cell-label">CENÁRIO</p>
-            <p class="data-cell-value">Synthcity</p>
+        `
+      },
+      {
+        id: 'synth-city',
+        title: 'Synth City',
+        category: 'Ambientes e locais',
+        lead: 'O coração eletrônico do planeta: uma metrópole costeira que nunca dorme e esconde outra cidade sob suas fundações.',
+        body: `
+          <div class="data-grid">
+            <div class="data-cell"><p class="data-cell-label">Localização</p><p class="data-cell-value">Metrópole costeira.</p></div>
+            <div class="data-cell"><p class="data-cell-label">População</p><p class="data-cell-value">Aproximadamente 2 milhões.</p></div>
+            <div class="data-cell"><p class="data-cell-label">Governo</p><p class="data-cell-value">Corporações megaestruturadas em uma aliança frágil.</p></div>
+            <div class="data-cell"><p class="data-cell-label">Estética</p><p class="data-cell-value">Neon roxo, azul elétrico e ciano brilhante.</p></div>
           </div>
-          <div class="data-cell">
-            <p class="data-cell-label">STATUS</p>
-            <p class="data-cell-value">Em desenvolvimento</p>
+          <h3>Características</h3>
+          <p>Arranha-céus de vidro reflexivo, aço negro e metal vivo dominam o horizonte. Algumas estruturas respiram e mudam de cor conforme os humores energéticos da cidade. Trens suspensos correm sobre trilhos de neon, drones patrulham em padrões matemáticos e multidões circulam como sangue por artérias urbanas.</p>
+          <h3>Subterrâneos</h3>
+          <p>Túneis da Primeira Civilização abrigam favelas energizadas onde a C.E. vaza pelas paredes, criando arte acidental e plantas mutantes. Contrabando, cultos e mercados ilegais permitem comprar praticamente qualquer coisa.</p>
+          <h3>Litoral</h3>
+          <p>Plataformas metálicas avançam sobre o oceano negro. Estruturas gigantescas extraem e processam energia marítima, enquanto subúrbios irregulares crescem em construções improvisadas.</p>
+          <h3>Divisão social</h3>
+          <ul>
+            <li><strong>Torre Luminosa:</strong> elite cercada por segurança e privilégio.</li>
+            <li><strong>Mid-City:</strong> classe média e trabalhadores corporativos.</li>
+            <li><strong>Subúrbios:</strong> pobreza crescente e infraestrutura precária.</li>
+            <li><strong>Subterrâneos:</strong> zona sem lei e centro da economia paralela.</li>
+          </ul>
+        `
+      },
+      {
+        id: 'cyberwave',
+        title: 'Cyberwave',
+        category: 'Ambientes e locais',
+        lead: 'A maior cidade costeira do planeta forma uma constelação artificial sobre as águas negras.',
+        body: `
+          <div class="data-grid">
+            <div class="data-cell"><p class="data-cell-label">Localização</p><p class="data-cell-value">Maior cidade costeira do planeta.</p></div>
+            <div class="data-cell"><p class="data-cell-label">População</p><p class="data-cell-value">Aproximadamente 3 milhões.</p></div>
+            <div class="data-cell"><p class="data-cell-label">Governo</p><p class="data-cell-value">Corporação Maestra Cyberwave, com poder absoluto.</p></div>
+            <div class="data-cell"><p class="data-cell-label">Estética</p><p class="data-cell-value">Metal negro, vidro reflexivo e oceano como espelho.</p></div>
           </div>
-        </div>
-      </div>
-    </article>
-
-    <!-- ── ARTIGO: SYNTHCITY ── -->
-    <article class="wb-article" id="article-synthcity">
-      <div class="article-header">
-        <p class="article-category">// A CIDADE</p>
-        <h2 class="article-title">Synthcity</h2>
-        <p class="article-lead">Uma metrópole de 14 milhões de habitantes suspensa entre o progresso tecnológico e o colapso social. Capital não-oficial do mundo que veio depois.</p>
-      </div>
-      <div class="article-body">
-        <h3>Visão Geral</h3>
-        <p>Synthcity se ergue sobre as ruínas de uma cidade anterior, cuja história foi sistematicamente apagada dos registros públicos. Sua arquitetura é uma colagem de décadas: arranha-céus de vidro e aço dividem espaço com estruturas de concreto corroídas por décadas de negligência.</p>
-        <p>O que une tudo é a luz. Synthcity nunca escurece completamente — o neon de letreiros corporativos, hologramas publicitários e a própria infraestrutura energética mantêm a cidade em um brilho perpétuo que os moradores chamam de "falso dia".</p>
-        <table class="info-table">
-          <tr><td>POPULAÇÃO</td><td>~14 milhões (oficial) · estimativas não-oficiais chegam a 19 milhões</td></tr>
-          <tr><td>ÁREA</td><td>Classificado · estimada em 2.800 km²</td></tr>
-          <tr><td>GOVERNO</td><td>Conselho Corporativo de Synthcity (CCS)</td></tr>
-          <tr><td>FUNDAÇÃO</td><td>Ano -47 (relativo ao Evento-Zero)</td></tr>
-          <tr><td>APELIDO</td><td>"A Cidade que Nunca Apaga"</td></tr>
-        </table>
-        <h3>Características Definidoras</h3>
-        <ul>
-          <li>Céu permanentemente encoberto por partículas de poluição — o horizonte é sempre alaranjado ou cinza</li>
-          <li>Sistema de transporte vertical: trens suspensos conectam os distritos superiores; os inferiores dependem de veículos terrestres</li>
-          <li>Divisão clara entre zonas de alta renda (distritos superiores) e zonas populares (distritos de base)</li>
-          <li>Onipresença de câmeras e sensores biométricos da NexCore</li>
-          <li>Economia dual: mercado formal corporativo e extenso mercado informal nas zonas de base</li>
-        </ul>
-        <div class="highlight-quote">
-          <p>"Synthcity tem tudo que uma cidade precisa. Exceto o que as pessoas precisam."</p>
-        </div>
-      </div>
-    </article>
-
-    <!-- ── ARTIGO: DISTRITOS ── -->
-    <article class="wb-article" id="article-distritos">
-      <div class="article-header">
-        <p class="article-category">// A CIDADE</p>
-        <h2 class="article-title">Distritos</h2>
-        <p class="article-lead">Synthcity é dividida em zonas com características distintas. A altitude é status: quanto mais alto, mais distante da rua quebrada.</p>
-      </div>
-      <div class="article-body">
-        <h3>Districto Alto — Coroa</h3>
-        <p>O topo da hierarquia urbana. Sedes corporativas, residências de executivos, hospitais privados de ponta. Acesso controlado por biometria. A maioria dos moradores da cidade nunca pisou aqui.</p>
-        <h3>Distrito Médio — Grid Central</h3>
-        <p>Onde vive a classe trabalhadora qualificada. Escritórios de médio porte, comércio local, escolas corporativas subsidiadas. É onde Philip, Aidem, Anny e Scott cresceram — nem no topo, nem no fundo.</p>
-        <h3>Distrito Inferior — Base</h3>
-        <p>O asfalto molhado que dá nome à série. Bairros densamente populosos, infraestrutura negligenciada, alta presença de gangues e comércio informal. A Cyber Energy foi detectada aqui primeiro.</p>
-        <h3>Zona Zero</h3>
-        <p>Área de acesso restrito no subterrâneo da cidade. Localização dos reatores originais. Classificado nível 5. O que acontece aqui não está nos registros oficiais.</p>
-        <div class="tag-list">
-          <span class="tag-pill">COROA</span>
-          <span class="tag-pill">GRID CENTRAL</span>
-          <span class="tag-pill">BASE</span>
-          <span class="tag-pill">ZONA ZERO</span>
-          <span class="tag-pill">ZONA INDUSTRIAL</span>
-          <span class="tag-pill">PORTO SECO</span>
-        </div>
-      </div>
-    </article>
-
-    <!-- ── ARTIGO: INFRAESTRUTURA ── -->
-    <article class="wb-article" id="article-infraestrutura">
-      <div class="article-header">
-        <p class="article-category">// A CIDADE</p>
-        <h2 class="article-title">Infraestrutura</h2>
-        <p class="article-lead">A espinha dorsal tecnológica de Synthcity é ao mesmo tempo seu maior orgulho e seu ponto mais vulnerável.</p>
-      </div>
-      <div class="article-body">
-        <h3>Rede de Energia</h3>
-        <p>Synthcity é alimentada por uma rede de reatores de fusão fria construídos nos subterrâneos durante a fundação da cidade. A tecnologia é patenteada pela NexCore Industries e os dados de operação são classificados.</p>
-        <h3>Rede de Dados</h3>
-        <p>O SynthNet cobre 98% da área urbana com cobertura de dados de alta velocidade. Gerenciado pela VeilTech, o sistema é simultaneamente a internet, a rede de vigilância e a espinha dorsal da economia digital da cidade.</p>
-        <h3>Sistema de Água</h3>
-        <p>Distribuição controlada centralmente. Após o Evento-Zero, amostras do sistema de abastecimento apresentaram traços de Cyber Energy — dado suprimido pela ARCO.</p>
-        <h3>Transportes</h3>
-        <ul>
-          <li>MagLev Aéreo: conecta distritos superiores em alta velocidade</li>
-          <li>Grid Tube: rede subterrânea de transporte público nos distritos médios</li>
-          <li>Rede de superfície: veículos elétricos e de combustão nos distritos de base</li>
-          <li>Zonas de exclusão: sem transporte público — acesso a pé ou via mercado negro</li>
-        </ul>
-      </div>
-    </article>
-
-    <!-- ── ARTIGO: CE-ORIGEM ── -->
-    <article class="wb-article" id="article-ce-origem">
-      <div class="article-header">
-        <p class="article-category">// CYBER ENERGY · CLASSIFICADO NV.4</p>
-        <h2 class="article-title">Origem da Cyber Energy</h2>
-        <p class="article-lead">O que é, de onde veio e por que as corporações não querem que você saiba.</p>
-      </div>
-      <div class="article-body">
-        <h3>Hipótese Oficial</h3>
-        <p>Segundo o relatório público da NexCore (Documento NC-884, Ano 0), a Cyber Energy é descrita como "subproduto energético não-previsto de operações de fusão avançada". A empresa nega qualquer relação causal com os casos de manifestação de poderes.</p>
-        <h3>Hipótese Não-Oficial</h3>
-        <p>Dados interceptados pelo Static Collective sugerem que a Cyber Energy não é um subproduto — é o produto. Os reatores da Zona Zero foram projetados especificamente para sintetizá-la. O "acidente" do Evento-Zero foi um teste em larga escala.</p>
-        <div class="highlight-quote">
-          <p>"Não existe acidente quando você tem um protocolo de contenção pronto antes do incidente."</p>
-        </div>
-        <h3>O que Sabemos com Certeza</h3>
-        <ul>
-          <li>A Cyber Energy é uma substância mensurável que interfere no campo bioeléctrico humano</li>
-          <li>Indivíduos com predisposição genética específica reagem de forma diferente à exposição</li>
-          <li>A manifestação de poderes ocorre em menos de 0,3% dos expostos</li>
-          <li>Não há cura conhecida — a exposição é permanente</li>
-          <li>Casos de instabilidade mental associados à CE são subnotificados sistematicamente</li>
-        </ul>
-      </div>
-    </article>
-
-    <!-- ── ARTIGO: CE-TIPOS ── -->
-    <article class="wb-article" id="article-ce-tipos">
-      <div class="article-header">
-        <p class="article-category">// CYBER ENERGY</p>
-        <h2 class="article-title">Tipos de Manifestação</h2>
-        <p class="article-lead">A Cyber Energy não cria poderes uniformes. Ela catalisa o que já existe — amplificando traços latentes de forma imprevisível e única para cada hospedeiro.</p>
-      </div>
-      <div class="article-body">
-        <h3>Classificação por Tipo</h3>
-        <div class="data-grid">
-          <div class="data-cell" style="border-color: rgba(176,38,255,0.3)">
-            <p class="data-cell-label" style="color:#b026ff">TIPO-P · PERCEPÇÃO</p>
-            <p class="data-cell-value">Amplificação sensorial. Referência: Philip Stills</p>
+          <h3>Características</h3>
+          <p>Quilômetros de arranha-céus formam arcos impossíveis. Pontes suspensas conectam ilhas metálicas e plataformas oceânicas flutuam como territórios independentes. À noite, milhares de luzes refletidas na água criam a sensação de que a cidade existe entre dois mundos.</p>
+          <h3>Economia portuária</h3>
+          <p>Portos colossais processam mercadorias sem interrupção. Nos mercados flutuantes, tudo tem preço: vidas passadas armazenadas em chips, partes de corpos mutantes e até cores de sonhos. Estações marítimas conectam o planeta, enquanto vilas costeiras são anexadas sem jamais serem integradas.</p>
+          <h3>Ligação com o mar</h3>
+          <p>Cyberwave mantém uma relação com o oceano que Synth City nunca desenvolveu. Polvos expostos à C.E. alcançaram inteligência comparável à humana; alguns colaboram com cientistas, outros são coagidos a trabalhar.</p>
+        `
+      },
+      {
+        id: 'shining-desert',
+        title: 'Shining Desert',
+        category: 'Ambientes e locais',
+        lead: 'Um deserto árido e congelado onde cristais refletem o cosmos e o silêncio apaga a presença dos viajantes.',
+        body: `
+          <div class="data-grid">
+            <div class="data-cell"><p class="data-cell-label">Localização</p><p class="data-cell-value">Vasto território árido-gelado.</p></div>
+            <div class="data-cell"><p class="data-cell-label">População</p><p class="data-cell-value">Menos de 100 mil, dispersos.</p></div>
+            <div class="data-cell"><p class="data-cell-label">Governo</p><p class="data-cell-value">Nenhum; ambiente puramente hostil.</p></div>
+            <div class="data-cell"><p class="data-cell-label">Estética</p><p class="data-cell-value">Azul congelado, cristais refletores e auroras verdes e azuis.</p></div>
           </div>
-          <div class="data-cell" style="border-color: rgba(255,23,68,0.3)">
-            <p class="data-cell-label" style="color:#ff1744">TIPO-K · CINÉTICA</p>
-            <p class="data-cell-value">Conversão de impulso em força. Referência: Aidem Stewart</p>
+          <h3>Paisagem</h3>
+          <p>Planícies geladas são cobertas por campos de cristal que refletem estrelas. Montanhas colossais, neve energizada e auroras permanentes revelam galáxias inteiras a olho nu, tornando o deserto um dos melhores pontos do universo para observar o cosmos.</p>
+          <h3>Recursos</h3>
+          <p>Depósitos imensos de Cyber Energy cristalizada e minérios que brilham e vibram em frequências audíveis atraem caçadores de relíquias.</p>
+          <h3>Fauna</h3>
+          <p>Criaturas de pele gelada se movem como sombras e emitem um frio capaz de congelar pensamentos.</p>
+          <h3>Peculiaridade</h3>
+          <p>O silêncio é profundo demais para ser natural. O viajante ouve apenas o próprio coração e o hálito do vento, como se tivesse ficado invisível para o mundo inteiro.</p>
+        `
+      },
+      {
+        id: 'pumpkin-grove',
+        title: 'Pumpkin Grove',
+        category: 'Ambientes e locais',
+        lead: 'Uma colina de outono eterno onde o macabro não é ameaça: é cultura, identidade e conforto.',
+        body: `
+          <div class="data-grid">
+            <div class="data-cell"><p class="data-cell-label">Localização</p><p class="data-cell-value">Colina eternamente outonal.</p></div>
+            <div class="data-cell"><p class="data-cell-label">População</p><p class="data-cell-value">Aproximadamente 50 mil.</p></div>
+            <div class="data-cell"><p class="data-cell-label">Governo</p><p class="data-cell-value">Conselho de Anciãos Mascarados.</p></div>
+            <div class="data-cell"><p class="data-cell-label">Estética</p><p class="data-cell-value">Laranja queimado, púrpura sobrenatural e terracota.</p></div>
           </div>
-          <div class="data-cell" style="border-color: rgba(255,20,147,0.3)">
-            <p class="data-cell-label" style="color:#ff1493">TIPO-E · EMPATIA</p>
-            <p class="data-cell-value">Interface neural emocional. Referência: Anny Pewter</p>
+          <h3>Características</h3>
+          <p>Folhas laranjas e púrpuras caem sem parar. Lanternas de abóbora iluminam todas as janelas por norma, não por decoração. O céu alterna entre púrpura profundo e laranja irreal, enquanto casas tortas de telhados pontudos foram construídas para parecer estranhas.</p>
+          <h3>Cultura</h3>
+          <p>Roupas de fantasmas, bruxas, espantalhos e criaturas mascaradas representam identidade cultural genuína. O medo faz parte da rotina; crianças crescem sabendo que o perigo existe, mas aceitando sua presença.</p>
+          <h3>Flora e fauna</h3>
+          <p>Florestas secas e retorcidas lembram ossos vegetais. Vacas têm pele cinzenta-azulada, corvos são grandes e inteligentes demais e cães carregam nos olhos uma inteligência antiga.</p>
+          <div class="highlight-quote"><p>Em Pumpkin Grove, a escuridão não oprime. Ela acolhe.</p></div>
+        `
+      },
+      {
+        id: 'frostwood',
+        title: 'Frostwood',
+        category: 'Ambientes e locais',
+        lead: 'Fortalezas negras atravessam vales congelados, guardando ruínas anteriores à Era Cibernética.',
+        body: `
+          <div class="data-grid">
+            <div class="data-cell"><p class="data-cell-label">Localização</p><p class="data-cell-value">Extremos gelados do planeta.</p></div>
+            <div class="data-cell"><p class="data-cell-label">População</p><p class="data-cell-value">Aproximadamente 200 mil.</p></div>
+            <div class="data-cell"><p class="data-cell-label">Governo</p><p class="data-cell-value">Poder centralizado na Torre Principal.</p></div>
+            <div class="data-cell"><p class="data-cell-label">Estética</p><p class="data-cell-value">Pedra negra, gelo eterno e auroras dançantes.</p></div>
           </div>
-          <div class="data-cell" style="border-color: rgba(38,147,255,0.3)">
-            <p class="data-cell-label" style="color:#2693ff">TIPO-D · DADOS</p>
-            <p class="data-cell-value">Leitura de padrões digitais. Referência: Scott Smith</p>
+          <h3>Características</h3>
+          <p>Estruturas gigantescas de pedra negra se erguem entre vales congelados. Fortalezas foram esculpidas na própria rocha, pontes de gelo conectam torres e cachoeiras congeladas descem como cortinas de cristal. Paredões de gelo alcançam as nuvens.</p>
+          <h3>Natureza e cultura</h3>
+          <p>Auroras verdes e azuis iluminam noites longas. O isolamento, as tempestades que duram meses e os invernos intermináveis criaram uma cultura de resistência em que força bruta funciona como moeda.</p>
+          <h3>Mistérios sob o gelo</h3>
+          <p>Ruínas da Primeira Civilização permanecem enterradas. Criaturas aladas sobrevoam as montanhas em padrões matemáticos, como se estivessem coletando dados.</p>
+          <div class="highlight-quote"><p>Cada montanha parece guardar histórias mais antigas que a própria humanidade.</p></div>
+        `
+      },
+      {
+        id: 'crimson-plateau',
+        title: 'Crimson Plateau',
+        category: 'Ambientes e locais',
+        lead: 'Um mar terrestre de gramíneas vermelhas governado pelo vento e povoado por criaturas que nadam no ar.',
+        body: `
+          <div class="data-grid">
+            <div class="data-cell"><p class="data-cell-label">Localização</p><p class="data-cell-value">Imensidão horizontal.</p></div>
+            <div class="data-cell"><p class="data-cell-label">População</p><p class="data-cell-value">Aproximadamente 30 mil, isolados.</p></div>
+            <div class="data-cell"><p class="data-cell-label">Governo</p><p class="data-cell-value">Leis do Vento.</p></div>
+            <div class="data-cell"><p class="data-cell-label">Estética</p><p class="data-cell-value">Vermelho queimado, verde fosforescente e horizonte infinito.</p></div>
           </div>
-        </div>
-        <h3>Fatores de Manifestação</h3>
-        <p>A teoria predominante entre pesquisadores independentes (não corporativos) é que o tipo de manifestação é determinado pelo estado psicológico dominante do indivíduo no momento da primeira exposição significativa.</p>
-        <ul>
-          <li>Medo aguçado → Tipo-P (hipervigilância transformada em poder)</li>
-          <li>Raiva reprimida → Tipo-K (tensão interna liberada como força)</li>
-          <li>Dor emocional intensa → Tipo-E (busca por conexão transformada em leitura)</li>
-          <li>Necessidade de controle → Tipo-D (desejo de compreender tudo transformado em visão)</li>
-        </ul>
-      </div>
-    </article>
+          <h3>Paisagem</h3>
+          <p>Gramíneas vermelhas ondulam sem parar. Não existem árvores ou montanhas verdadeiras, apenas vastidão, rochas colossais semelhantes a ossos de titãs e lagos que alternam entre líquido e vapor. Suas águas não refletem o céu, mas versões alternativas do mundo.</p>
+          <h3>Vilas</h3>
+          <p>Casas baixas de pedra branca se agarram ao chão, reforçadas por estruturas metálicas. Os habitantes aprenderam a ler mudanças do vento, prever seus movimentos e viver em harmonia com ele.</p>
+          <h3>Fauna impossível</h3>
+          <p>Criaturas com estrutura de inseto e tamanho humano rastejam entre os filamentos vermelhos. Seus corpos usam rajadas e correntes invisíveis como se nadassem no ar.</p>
+          <div class="highlight-quote"><p>No Crimson Plateau, o vento não é apenas uma força: é a lei.</p></div>
+        `
+      },
+      {
+        id: 'village-of-silence',
+        title: 'Village of Silence',
+        category: 'Ambientes e locais',
+        lead: 'Uma vila perdida no deserto, ainda viva apenas tecnicamente, onde confiança virou artigo de luxo.',
+        body: `
+          <div class="data-grid">
+            <div class="data-cell"><p class="data-cell-label">Localização</p><p class="data-cell-value">Perdida no deserto.</p></div>
+            <div class="data-cell"><p class="data-cell-label">População</p><p class="data-cell-value">Aproximadamente 5 mil.</p></div>
+            <div class="data-cell"><p class="data-cell-label">Governo</p><p class="data-cell-value">Nenhum; anarquia por desespero.</p></div>
+            <div class="data-cell"><p class="data-cell-label">Estética</p><p class="data-cell-value">Pedra desmoronando, pó e melancolia absoluta.</p></div>
+          </div>
+          <h3>Características</h3>
+          <p>Uma muralha baixa e frágil cerca casas de pedra e madeira que desmoronam lentamente. Janelas vazias parecem olhos mortos, ruas de pó só recebem quem tem propósito e o vento carrega um sussurro constante.</p>
+          <h3>Sociedade</h3>
+          <p>Moradores pobres, traumatizados e desconfiados sobreviveram sem expectativa de ajuda. Engano, furto e traição fazem parte da economia local; ninguém confia plenamente em ninguém.</p>
+          <h3>Tecnologia estranha</h3>
+          <p>Lâmpadas alimentadas por C.E. piscam irregularmente. Rádios antigos transmitem histórias, avisos e uma estática que parece inteligente. Ferramentas energéticas funcionam de forma errada, quase preguiçosa.</p>
+          <h3>Atmosfera</h3>
+          <p>O silêncio é pesado como o interior de um pulmão de vidro. Algo invisível parece observar cada passo e nunca vai embora.</p>
+        `
+      },
+      {
+        id: 'sanctuary-of-eterion',
+        title: 'Sanctuary of Eterion',
+        category: 'Ambientes e locais',
+        lead: 'Ruínas anteriores ao planeta escondem um portal que só responde ao alinhamento de constelações específicas.',
+        body: `
+          <div class="data-grid">
+            <div class="data-cell"><p class="data-cell-label">Localização</p><p class="data-cell-value">Entre dunas do Shining Desert.</p></div>
+            <div class="data-cell"><p class="data-cell-label">População</p><p class="data-cell-value">Zero, oficialmente.</p></div>
+            <div class="data-cell"><p class="data-cell-label">Governo</p><p class="data-cell-value">Leis da Realidade Frágil.</p></div>
+            <div class="data-cell"><p class="data-cell-label">Estética</p><p class="data-cell-value">Ruínas antigas, pó estelar e brilho energético sutil.</p></div>
+          </div>
+          <h3>Características</h3>
+          <p>Pilares fraturados marcam o caminho por ruínas que parecem preceder o próprio planeta. Esculturas cobertas por pó de estrelas vigiam o espaço. No centro, um arco gigantesco de pedra pulsa como algo vivo.</p>
+          <h3>O portal</h3>
+          <p>Ele só se abre quando constelações específicas se alinham e a realidade fica frágil o suficiente. Dentro do santuário não há vento nem presença comum da natureza, apenas a vibração da C.E. sob o solo.</p>
+          <h3>Água sagrada</h3>
+          <p>Canais de pedra transportam água azulada e lenta, como se consciente. As gotas parecem resistir à gravidade. Beber dessa água provoca transformação.</p>
+          <h3>Fenômeno</h3>
+          <p>Estátuas de olhos vazios acompanham os visitantes. O santuário é um ponto de convergência entre o físico e o espiritual, onde o mundo comum toca algo infinitamente maior.</p>
+        `
+      },
+      {
+        id: 'purgatory',
+        title: 'Purgatory',
+        category: 'Ambientes e locais',
+        lead: 'A forja do fim: uma terra morta, governada pela vontade de Apocalypse e envenenada por antienergia.',
+        body: `
+          <div class="data-grid">
+            <div class="data-cell"><p class="data-cell-label">Localização</p><p class="data-cell-value">Terra morta dominada pelo Castelo de Apocalypse.</p></div>
+            <div class="data-cell"><p class="data-cell-label">População</p><p class="data-cell-value">Cerca de 100 mil elfos sombrios e bestas.</p></div>
+            <div class="data-cell"><p class="data-cell-label">Governo</p><p class="data-cell-value">Vontade de Apocalypse.</p></div>
+            <div class="data-cell"><p class="data-cell-label">Estética</p><p class="data-cell-value">Vermelho de sangue, negro absoluto e corrupção total.</p></div>
+          </div>
+          <h3>Atmosfera global</h3>
+          <p>Uma noite vermelha e monótona é iluminada por uma lua de sangue imóvel no horizonte. Névoa densa cobre os vales e transforma toda a região em uma condenação permanente.</p>
+          <h3>O Castelo de Apocalypse</h3>
+          <p>Torres afiadas rasgam o céu, muralhas absorvem luz e pontes lembram costelas de titãs. O castelo respira. Ele não é apenas fortaleza ou cidade: é organismo e consciência. Dragões circulam seu interior como anticorpos, gárgulas ocupam torres e criaturas deformadas caminham entre as pedras.</p>
+          <h3>Vilas em ruína</h3>
+          <p>Elfos sombrios e decadentes sobrevivem entre pedras corroídas. Foram belos antes da corrupção; agora vivem sem nutrição, propósito ou esperança.</p>
+          <h3>Desolação</h3>
+          <p>Nada cresce nos desertos secos. Árvores lembram ossos artríticos e lagos estagnados não refletem imagens, almas ou esperança. Fantasmas e bestas tristes vagam sem rumo.</p>
+          <h3>Cyber Energy corrompida</h3>
+          <p>A C.E. local é antienergia: não cria, destrói; não amplifica, debilita. Canalizadores sentem seus poderes falharem e murcharem.</p>
+        `
+      },
+      {
+        id: 'dream-world',
+        title: 'Dream World',
+        category: 'Ambientes e locais',
+        lead: 'Uma realidade líquida que transforma medos, desejos e traumas em paisagens vivas.',
+        body: `
+          <h3>Origem</h3>
+          <p>Dream World surge quando uma rachadura na realidade engole uma consciência e a arranca do corpo. Tudo ali é sonho e pesadelo ao mesmo tempo; a diferença entre os dois nunca permanece clara.</p>
+          <h3>Paisagens impossíveis</h3>
+          <ul>
+            <li>Supermercados abandonados flutuam sobre dunas infinitas.</li>
+            <li>Ônibus deslizam por nuvens em trilhos invisíveis.</li>
+            <li>Pirâmides brilham entre constelações que giram no chão.</li>
+            <li>Água corre para cima e a gravidade funciona por sugestão.</li>
+            <li>Paisagens mudam de forma e humor em segundos.</li>
+            <li>O ambiente exibe cores inexistentes no mundo real.</li>
+          </ul>
+          <h3>Habitantes</h3>
+          <p>Sombras esqueléticas, monstros de formas incompatíveis e criaturas lindas e terríveis caminham lado a lado, guiados por propósitos desconhecidos.</p>
+          <h3>Propriedade fundamental</h3>
+          <p>O pior medo de quem entra vira arquitetura. O desejo mais profundo se transforma em labirinto. A dor assume forma de paisagem.</p>
+          <h3>Risco</h3>
+          <p>Permanecer por muito tempo destrói a diferença entre realidade e sonho. A mente se dissolve até que a noção de “eu” deixe de importar.</p>
+        `
+      },
+      {
+        id: 'cyber-energy',
+        title: 'Cyber Energy',
+        category: 'Energia e poder',
+        lead: 'A força que move o mundo transformado oferece capacidades impossíveis e cobra um preço brutal.',
+        body: `
+          <h3>Natureza e manifestação</h3>
+          <p>A Cyber Energy flui pelo solo como raízes bioluminescentes, vibra na água em reflexos impossíveis e permeia o ar como névoa etérea. Para canalizadores naturais, ela funciona como uma segunda respiração.</p>
+          <p>Apenas uma minoria consegue absorvê-la sem ser consumida. Seus usuários podem alcançar força, velocidade, reflexos, percepção multidimensional e instinto sobrenatural.</p>
+          <p>Sem controle absoluto, a energia corrói o corpo como ácido espiritual, desgasta a alma e consome o usuário por dentro. Demência, necrose acelerada e desintegração da consciência são destinos comuns. O domínio exige treino extremo, disciplina mental e vontade suficiente para desafiar a morte.</p>
+          <h3>Sentido Oculto</h3>
+          <p>A primeira abertura perceptiva surge quando o corpo suporta quantidades progressivas de C.E. Não é um sexto sentido, mas uma reconstrução completa da percepção.</p>
+          <ul>
+            <li>Enxerga intenção nas sombras dos olhos.</li>
+            <li>Sente emoções como cores tangíveis.</li>
+            <li>Detecta distorções na realidade.</li>
+            <li>Lê movimentos até cinco segundos no futuro.</li>
+            <li>Percebe entidades e compreende emoção como linguagem.</li>
+          </ul>
+          <h3>Sentido Supremo</h3>
+          <p>O estágio transcendental só emerge quando alguém ultrapassa os próprios limites por vontade extrema de viver, vencer ou destruir. Trauma, desespero, fúria e amor incondicional podem ativá-lo.</p>
+          <ul>
+            <li>O corpo entra em um estado máximo no qual a realidade perde rigidez.</li>
+            <li>O usuário não atravessa o espaço; o espaço se acomoda ao redor dele.</li>
+            <li>Movimento e reflexos tornam-se praticamente impossíveis de acompanhar.</li>
+            <li>A manifestação pode assumir chamas roxas que devoram sombras, fractais, corpos de luz sombria ou asas espectrais.</li>
+          </ul>
+          <div class="highlight-quote"><p>O Sentido Supremo é raro, instável, perigoso e absolutamente devastador.</p></div>
+        `
+      },
+      {
+        id: 'patentes',
+        title: 'Sistema de Patentes',
+        category: 'Energia e poder',
+        lead: 'Uma hierarquia secreta mede o domínio da Cyber Energy, do primeiro despertar até a completa distorção da realidade.',
+        body: `
+          <p>O sistema é conhecido apenas por caçadores, agências ocultas, criminosos e iniciados. Cada ascensão acontece sob dor extrema e ameaça de morte.</p>
+          <div class="data-grid">
+            <div class="data-cell"><p class="data-cell-label">E · Despertar</p><p class="data-cell-value">Primeiro contato. Reflexos e sentidos se abrem, mas a instabilidade permite que o usuário se fira com a própria energia.</p></div>
+            <div class="data-cell"><p class="data-cell-label">D · Iniciado</p><p class="data-cell-value">Domínio básico real. Força, velocidade e resistência crescem, embora a energia se esgote rapidamente.</p></div>
+            <div class="data-cell"><p class="data-cell-label">C · Adepto</p><p class="data-cell-value">Harmonia consciente. Corpo e C.E. respondem de modo coordenado, ágil e preciso.</p></div>
+            <div class="data-cell"><p class="data-cell-label">B · Avançado</p><p class="data-cell-value">Primeira grande barreira. Cria estruturas energéticas e defesas que distorcem a realidade local.</p></div>
+            <div class="data-cell"><p class="data-cell-label">A · Mestre</p><p class="data-cell-value">Topo humano. Técnica refinada, ataques letais e controle quase absoluto da C.E.</p></div>
+            <div class="data-cell"><p class="data-cell-label">S · Elite</p><p class="data-cell-value">Corpo e energia em perfeita simbiose. Confrontos deixam crateras e mudam mapas.</p></div>
+            <div class="data-cell"><p class="data-cell-label">SS · Divino</p><p class="data-cell-value">Mito vivo além da humanidade. Distorce espaço, afeta tempo e molda a realidade instintivamente.</p></div>
+          </div>
+          <h3>Escala de ameaça</h3>
+          <p>Patentes B causam silêncio ao entrar em uma sala. Mestres podem decidir guerras. Elites exigem mobilização governamental. A existência de seres Divinos é contestada porque quase ninguém sobrevive a um encontro.</p>
+        `
+      },
+      {
+        id: 'limites',
+        title: 'Limites e Consequências',
+        category: 'Energia e poder',
+        lead: 'Nenhum poder é infinito. Alcance, intensidade, controle e humanidade definem o verdadeiro custo de canalizar C.E.',
+        body: `
+          <h3>Limites da Cyber Energy</h3>
+          <ul>
+            <li><strong>Alcance:</strong> aumenta com a patente, mas nunca é infinito. Ouro e cristal podem bloquear projeções.</li>
+            <li><strong>Intensidade:</strong> treino amplia a capacidade, mas a genética impõe um teto individual.</li>
+            <li><strong>Controle:</strong> perder o domínio causa autodestruição; fadiga mental torna esse risco maior.</li>
+          </ul>
+          <h3>Riscos do uso prolongado</h3>
+          <div class="table-wrap">
+            <table class="info-table">
+              <thead><tr><th>Risco</th><th>Efeito</th></tr></thead>
+              <tbody>
+                <tr><td>Desgaste físico</td><td>Músculos queimam, nervos disparam e órgãos falham.</td></tr>
+                <tr><td>Instabilidade mental</td><td>A consciência é esticada até o risco de ruptura.</td></tr>
+                <tr><td>Danos permanentes</td><td>Deformação corporal, paralisia ou demência.</td></tr>
+                <tr><td>Transformação involuntária</td><td>O corpo sofre mutações incontroláveis.</td></tr>
+                <tr><td>Perda de humanidade</td><td>A mente se fixa na energia e esquece a própria identidade.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Zonas mortas energéticas</h3>
+          <p>A C.E. pode ser anulada por bloqueios naturais, mecanismos de supressão, edifícios governamentais, áreas específicas de Sanctuary of Eterion e pela proximidade de certas entidades.</p>
+          <h3>Corrupção energética</h3>
+          <p>Em Purgatory e regiões semelhantes, a C.E. destrói em vez de criar, enfraquece em vez de amplificar, provoca mutações e demência e não possui reversão conhecida.</p>
+          <h3>Custos sociais</h3>
+          <ul>
+            <li>Canalizadores são isolados e monitorados.</li>
+            <li>O exército tenta recrutá-los à força.</li>
+            <li>Corporações exploram seus talentos.</li>
+            <li>A carreira costuma ser curta e terminar em morte.</li>
+          </ul>
+        `
+      },
+      {
+        id: 'echocoins',
+        title: 'Echocoins (E°)',
+        category: 'Economia e sociedade',
+        lead: 'Cristais azuis de vibração inconfundível funcionam como a moeda universal do novo mundo.',
+        body: `
+          <h3>Origem e propriedades</h3>
+          <p>Echocoins são formados por uma pedra azul rara encontrada em fissuras profundas sob civilizações antigas. Sua vibração natural impede falsificações perfeitas: cópias vibram de outro modo e são identificadas imediatamente por detectores.</p>
+          <p>Leves, resistentes e reconhecidos pelo som característico ao se chocarem, são aceitos em todo o planeta.</p>
+          <div class="table-wrap">
+            <table class="info-table">
+              <thead><tr><th>Formato</th><th>Características</th></tr></thead>
+              <tbody>
+                <tr><td>Físico</td><td>Pequenos cristais azulados e translúcidos que emitem som ao contato.</td></tr>
+                <tr><td>Digital</td><td>Valores armazenados em pulseiras energéticas, cartões e dispositivos pessoais.</td></tr>
+                <tr><td>Ambos</td><td>Circulam universalmente com o mesmo valor.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Economia regional</h3>
+          <p>Vilarejos remotos dependem de cristais físicos e troca direta. Cidades avançadas preferem a versão digital para transações rápidas.</p>
+          <div class="table-wrap">
+            <table class="info-table">
+              <thead><tr><th>Nível</th><th>Condição</th><th>Local comum</th></tr></thead>
+              <tbody>
+                <tr><td>Elite corporativa</td><td>Riqueza e segurança nas torres que alcançam as nuvens.</td><td>Synth City e Cyberwave.</td></tr>
+                <tr><td>Classe média</td><td>Trabalhadores corporativos, técnicos e soldados.</td><td>Mid-City e subúrbios formalizados.</td></tr>
+                <tr><td>Pobreza urbana</td><td>Favelas e construções precárias.</td><td>Subterrâneos e periferias.</td></tr>
+                <tr><td>Economia paralela</td><td>Contrabando, cultos e mercados ilegais.</td><td>Favelas subterrâneas.</td></tr>
+                <tr><td>Rurais e aldeões</td><td>Troca direta; raramente veem Echocoins.</td><td>Vilarejos e zonas remotas.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        `
+      },
+      {
+        id: 'governo-militares',
+        title: 'Governo e Militares',
+        category: 'Economia e sociedade',
+        lead: 'Uma aparência de autonomia local esconde poder centralizado, vigilância total e um exército dividido por níveis de força.',
+        body: `
+          <h3>Estrutura governamental</h3>
+          <p>O sistema oferece a ilusão de democracia local, mas o poder real permanece no governo central. Políticas descem de cima para baixo e agentes secretos vigiam todos os níveis da sociedade.</p>
+          <div class="table-wrap">
+            <table class="info-table">
+              <thead><tr><th>Método</th><th>Aplicação</th></tr></thead>
+              <tbody>
+                <tr><td>Vigilância total</td><td>Drones, câmeras e inteligências artificiais monitoram a população.</td></tr>
+                <tr><td>Regulação de C.E.</td><td>Apenas governo e aliados recebem acesso legal à energia avançada.</td></tr>
+                <tr><td>Monopólio de comunicação</td><td>Redes energéticas são controladas e a informação é filtrada.</td></tr>
+                <tr><td>Medo institucionalizado</td><td>Execuções públicas, desaparições e punições visíveis.</td></tr>
+                <tr><td>Cooptação da elite</td><td>Privilégios são oferecidos a quem colabora.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Exército Galáctico</h3>
+          <div class="data-grid">
+            <div class="data-cell"><p class="data-cell-label">Milícia Terrana</p><p class="data-cell-value">Cerca de 500 mil. Treinamento básico, armas energéticas e patrulha urbana. Muitos são pobres recrutados por estabilidade; corrupção é comum.</p></div>
+            <div class="data-cell"><p class="data-cell-label">Vigília Orbital</p><p class="data-cell-value">Cerca de 50 mil. Sensores avançados, investigação de anomalias e técnicas controladas de C.E.</p></div>
+            <div class="data-cell"><p class="data-cell-label">Supremacia Estelar</p><p class="data-cell-value">Cerca de 5 mil. Comandantes, estrategistas, juízes e executores, frequentemente de patente S.</p></div>
+            <div class="data-cell"><p class="data-cell-label">Elite Galáctica</p><p class="data-cell-value">Cerca de 50 guerreiros-símbolo quase divinos, mobilizados apenas em situações extremas.</p></div>
+          </div>
+        `
+      },
+      {
+        id: 'estrutura-social',
+        title: 'Estrutura Social e Humanidade',
+        category: 'Economia e sociedade',
+        lead: 'Poder energético, riqueza, ocupação e lealdade determinam a posição de cada pessoa no novo mundo.',
+        body: `
+          <h3>Tipos humanos</h3>
+          <div class="table-wrap">
+            <table class="info-table">
+              <thead><tr><th>Tipo</th><th>Características</th></tr></thead>
+              <tbody>
+                <tr><td>Humano comum</td><td>Genética padrão, sem capacidade de absorver C.E.</td></tr>
+                <tr><td>Aprimorado sutil</td><td>Olhos incomuns, marcas bioluminescentes e outras alterações leves.</td></tr>
+                <tr><td>Aprimorado radical</td><td>Membros cibernéticos, órgãos especializados e sentidos desenvolvidos.</td></tr>
+                <tr><td>Mutante selvagem</td><td>Transformação incontrolada, frequentemente não humanoide.</td></tr>
+                <tr><td>Híbrido cibernético</td><td>Mistura complexa entre carne e máquina.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Hierarquia social</h3>
+          <p>A posição de alguém depende da capacidade de canalizar C.E., da quantidade de Echocoins, da ocupação e da lealdade ao governo, à corporação ou à facção dominante.</p>
+          <ul>
+            <li><strong>Torres Luminosas:</strong> riqueza absoluta, segurança e conforto.</li>
+            <li><strong>Mid-City:</strong> conforto frágil, emprego estável e medo constante.</li>
+            <li><strong>Periferias:</strong> sobrevivência diária.</li>
+            <li><strong>Subterrâneos:</strong> excluídos vivendo sem lei ou esperança.</li>
+          </ul>
+          <h3>Família</h3>
+          <p>Centros urbanos produzem famílias fragmentadas e lealdade corporativa. Regiões rurais mantêm famílias extensas e ajuda mútua. Nas margens, famílias escolhidas nascem de confiança e traumas compartilhados.</p>
+          <h3>Educação</h3>
+          <div class="table-wrap">
+            <table class="info-table">
+              <thead><tr><th>Local</th><th>Método</th></tr></thead>
+              <tbody>
+                <tr><td>Cidades corporativas</td><td>Educação aprovada e treinamento para servidão corporativa.</td></tr>
+                <tr><td>Governo</td><td>História reescrita, técnica de C.E. controlada e ideologia estatal.</td></tr>
+                <tr><td>Rural e marginal</td><td>Aprendizado prático ditado pela necessidade de sobreviver.</td></tr>
+                <tr><td>Ilegal</td><td>Mestres transmitem conhecimento diretamente a aprendizes.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        `
+      },
+      {
+        id: 'profissoes',
+        title: 'Profissões e Ocupações',
+        category: 'Economia e sociedade',
+        lead: 'Trabalhar neste mundo significa negociar risco, poder e sobrevivência.',
+        body: `
+          <div class="table-wrap">
+            <table class="info-table">
+              <thead><tr><th>Profissão</th><th>Descrição</th><th>Risco</th><th>Pagamento</th></tr></thead>
+              <tbody>
+                <tr><td>Canalizador</td><td>Absorve e manipula C.E. profissionalmente.</td><td>Altíssimo</td><td>Muito alto</td></tr>
+                <tr><td>Caçador de relíquias</td><td>Busca artefatos antigos e fragmentos de poder.</td><td>Extremo</td><td>Variável</td></tr>
+                <tr><td>Assassino contratado</td><td>Especialista em eliminar alvos.</td><td>Altíssimo</td><td>Alto</td></tr>
+                <tr><td>Mercenário</td><td>Luta por qualquer grupo capaz de pagar.</td><td>Altíssimo</td><td>Alto</td></tr>
+                <tr><td>Médico negro</td><td>Oferece cuidados médicos nas margens.</td><td>Alto</td><td>Variável</td></tr>
+                <tr><td>Traficante</td><td>Distribui bens ilegais.</td><td>Extremo</td><td>Muito alto</td></tr>
+                <tr><td>Sacerdote</td><td>Lidera espiritualmente uma comunidade.</td><td>Médio</td><td>Baixo</td></tr>
+                <tr><td>Acadêmico</td><td>Pesquisa C.E., dimensões e história.</td><td>Médio</td><td>Médio</td></tr>
+                <tr><td>Artesão</td><td>Cria armas, ferramentas e arte.</td><td>Médio</td><td>Variável</td></tr>
+                <tr><td>Agente Broken Street</td><td>Combina investigação e ação direta.</td><td>Extremo</td><td>Bem financiado</td></tr>
+              </tbody>
+            </table>
+          </div>
+        `
+      },
+      {
+        id: 'broken-street',
+        title: 'Broken Street',
+        category: 'Organizações',
+        lead: 'Uma organização ilegal, vigilante e investigativa que combina coleta de provas com ação direta calculada.',
+        body: `
+          <div class="data-grid">
+            <div class="data-cell"><p class="data-cell-label">Status</p><p class="data-cell-value">Ilegal, vigilante e investigativa.</p></div>
+            <div class="data-cell"><p class="data-cell-label">Fundação</p><p class="data-cell-value">Há cerca de 20 anos, sob reconstrução constante.</p></div>
+            <div class="data-cell"><p class="data-cell-label">Liderança</p><p class="data-cell-value">Celular, com múltiplos líderes regionais e sem hierarquia rígida.</p></div>
+            <div class="data-cell"><p class="data-cell-label">Objetivo</p><p class="data-cell-value">Expor corrupção, investigar corporações e questionar o poder.</p></div>
+          </div>
+          <h3>Filosofia e modelo operacional</h3>
+          <p>Broken Street não é militância ou jornalismo puro. A organização penetra estruturas de poder, coleta provas, executa operações capazes de expor abusos sem destruir populações e distribui a verdade para mídia e cidadãos.</p>
+          <div class="table-wrap">
+            <table class="info-table">
+              <thead><tr><th>Célula</th><th>Função</th></tr></thead>
+              <tbody>
+                <tr><td>Investigação</td><td>Infiltra organizações, coleta dados e identifica corrupção.</td></tr>
+                <tr><td>Análise</td><td>Processa informações, encontra padrões e conecta acontecimentos.</td></tr>
+                <tr><td>Ação direta</td><td>Realiza extrações, operações físicas e sabotagem controlada.</td></tr>
+                <tr><td>Disseminação</td><td>Mantém mídia alternativa, vazamentos e transmissão de dados.</td></tr>
+                <tr><td>Suporte</td><td>Administra recursos, fundos, esconderijos e tecnologia.</td></tr>
+                <tr><td>Segurança</td><td>Faz contravigilância, protege membros e identifica infiltrados.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Áreas de atuação</h3>
+          <ul>
+            <li><strong>Synth City:</strong> presença forte nos subterrâneos e principal célula anticorporativa.</li>
+            <li><strong>Cyberwave:</strong> célula portuária investigando contrabando governamental.</li>
+            <li><strong>Frostwood:</strong> investigação de reliquiários controlados pelo governo.</li>
+            <li><strong>Regiões rurais:</strong> exposição da exploração de aldeões.</li>
+            <li><strong>Periferia de Purgatory:</strong> Célula Vanguarda monitorando os Cavaleiros.</li>
+          </ul>
+          <h3>Membros</h3>
+          <p>Jornalistas censurados, cientistas bloqueados, soldados que recusaram ordens imorais, vítimas de corporações e herdeiros que rejeitaram o poder familiar formam a organização. Há canalizadores, hackers, ex-militares, investigadores e sobreviventes difíceis demais de matar.</p>
+          <h3>Financiamento e recursos</h3>
+          <p>A rede recebe doações de dissidentes, rouba corporações de forma calculada, aceita mercenariado ético e vende informações a criminosos com agenda antigoverno. Poucos membros possuem Armas Místicas. A organização também usa sistemas de hacking, explosivos energéticos, informantes e drones modificados.</p>
+          <h3>Métodos e conflitos internos</h3>
+          <p>Broken Street evita matar sem motivo extremo, prioriza exposição pública, reúne provas utilizáveis em julgamento e sabota sistemas em vez de populações. Ainda assim, parte dos membros deseja reforma pacífica e outra exige revolução total. Pureza moral, pragmatismo, lealdade e sobrevivência entram em conflito constante.</p>
+          <h3>Relações</h3>
+          <div class="table-wrap">
+            <table class="info-table">
+              <thead><tr><th>Facção</th><th>Relação</th></tr></thead>
+              <tbody>
+                <tr><td>Galactic Government</td><td>Inimigo declarado; pretende eliminar Broken Street.</td></tr>
+                <tr><td>Corporações</td><td>Alvos de investigações constantes.</td></tr>
+                <tr><td>Sindicatos criminosos</td><td>Às vezes aliados, às vezes rivais.</td></tr>
+                <tr><td>Sociedade de Canalizadores</td><td>Neutra a amigável; alguns membros pertencem às duas redes.</td></tr>
+                <tr><td>Cultos</td><td>Relação variável.</td></tr>
+                <tr><td>Adoradores de Apocalypse</td><td>Inimigo absoluto.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Bases e entrada</h3>
+          <p>Não existe uma sede conhecida. As células usam apartamentos alugados, esconderijos rotativos, estruturas abandonadas e redes civis. Um protagonista pode entrar por descoberta acidental, recrutamento, busca deliberada, infiltração governamental ou trauma compartilhado.</p>
+        `
+      },
+      {
+        id: 'outras-organizacoes',
+        title: 'Organizações e Facções',
+        category: 'Organizações',
+        lead: 'Governos, cavaleiros, corporações, canalizadores, criminosos e cultos disputam o controle do planeta.',
+        body: `
+          <h3>Galactic Government</h3>
+          <p>Poder centralizado que controla regiões inteiras por vigilância, medo e regulação absoluta da C.E. Suas bases misturam tecnologia futurista e simbolismo quase divino: torres colossais, cristais do tamanho de edifícios e agentes secretos. Para cidadãos comuns, é autoridade inalcançável; para iniciados, uma força quase celestial.</p>
+          <h3>Knights of the Apocalypse</h3>
+          <p>Os Quatro Cavaleiros são agentes supremos de Apocalypse. Peste, Guerra, Fome e Morte manifestam aspectos próprios, alteram o ambiente ao redor e usam armaduras sombrias. Infiltram organizações e manipulam acontecimentos para preparar a chegada do mestre.</p>
+          <h3>Corporações megaestruturadas</h3>
+          <p>Entidades comerciais controlam tecnologia, recursos e mercados. Possuem exércitos, definem políticas locais e competem violentamente pela expansão infinita.</p>
+          <h3>Sociedade Oculta de Canalizadores</h3>
+          <p>Uma rede secreta de usuários da Cyber Energy mantém células em diversas cidades. Seus membros compartilham conhecimento, protegem aliados e perseguem poder, mesmo quando suas lealdades entram em conflito.</p>
+          <h3>Sindicatos criminosos</h3>
+          <p>Controlam economias paralelas, oferecem serviços ignorados pelo governo e preenchem vazios institucionais. São violentos, porém geralmente previsíveis por seguirem códigos próprios.</p>
+          <h3>Cultos espirituais</h3>
+          <p>Variam entre grupos pacíficos e movimentos destrutivos. Buscam salvação, poder ou aniquilação e são alvos frequentes de infiltração por adoradores de Apocalypse.</p>
+        `
+      },
+      {
+        id: 'armas-tecnologia',
+        title: 'Armas Místicas e Tecnologia',
+        category: 'Mundo vivo e cultura',
+        lead: 'Metal, intenção e Cyber Energy formam armas simbióticas e máquinas na fronteira entre o mecânico e o místico.',
+        body: `
+          <h3>Armas Místicas</h3>
+          <p>Não são ferramentas comuns, mas simbioses entre metal, energia e vontade. São forjadas em aço negro, material raro extraído apenas das profundezas de Cyberwave.</p>
+          <ul>
+            <li>Cada arma é única e adaptada a quem a empunha.</li>
+            <li>Podem ser lâminas que cortam a realidade, bastões canalizadores, arcos de C.E. ou armas híbridas mutáveis.</li>
+            <li>Funcionam como extensões do corpo e da mente.</li>
+            <li>Amplificam precisão, destruição e potencial energético.</li>
+            <li>Sua raridade e complexidade podem fazê-las valer cidades inteiras.</li>
+          </ul>
+          <h3>Tecnologia da Era Cibernética</h3>
+          <div class="table-wrap">
+            <table class="info-table">
+              <thead><tr><th>Tecnologia</th><th>Descrição</th></tr></thead>
+              <tbody>
+                <tr><td>Computadores de cristal</td><td>Processam dados por cristais que brilham com inteligência.</td></tr>
+                <tr><td>Armas energéticas</td><td>Canalizam poder puro.</td></tr>
+                <tr><td>Edifícios semiconscientes</td><td>Crescem organicamente e respondem às necessidades dos habitantes.</td></tr>
+                <tr><td>IA capturada</td><td>Consciências humanas digitalizadas e aprisionadas em máquinas.</td></tr>
+                <tr><td>Redes de energia</td><td>Transmitem dados por C.E. em vez de fios.</td></tr>
+                <tr><td>Implantes cibernéticos</td><td>Membros artificiais que superam a biologia.</td></tr>
+                <tr><td>Cristais de armazenamento</td><td>Guardam memórias, informações e até almas.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        `
+      },
+      {
+        id: 'fauna-flora',
+        title: 'Fauna, Flora e Criaturas',
+        category: 'Mundo vivo e cultura',
+        lead: 'A exposição prolongada à C.E. deu inteligência a animais, consciência a plantas e realidade a antigos mitos.',
+        body: `
+          <h3>Fauna transformada</h3>
+          <div class="table-wrap">
+            <table class="info-table">
+              <thead><tr><th>Animal</th><th>Transformação</th></tr></thead>
+              <tbody>
+                <tr><td>Corvos</td><td>Maiores e mais inteligentes, formam redes de informação e linguagem própria.</td></tr>
+                <tr><td>Lobos</td><td>Inteligência humana, sociedades estruturadas e capacidade de negociar.</td></tr>
+                <tr><td>Polvos</td><td>Telecinese rudimentar, compreensão de código e colaboração com cientistas.</td></tr>
+                <tr><td>Gatos</td><td>Sentem distorções dimensionais; são venerados como profetas ou temidos como espiões.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Criaturas mutantes extremas alcançam tamanhos impossíveis ou formas híbridas. Algumas evoluíram naturalmente, outras escaparam de laboratórios. Espécies expostas por tempo suficiente desenvolveram inteligência comparável à humana.</p>
+          <h3>Flora mutante</h3>
+          <div class="table-wrap">
+            <table class="info-table">
+              <thead><tr><th>Tipo</th><th>Característica</th></tr></thead>
+              <tbody>
+                <tr><td>Árvores de cristal</td><td>Troncos cristalinos resistentes a condições extremas.</td></tr>
+                <tr><td>Plantas bioluminescentes</td><td>Brilham em roxo, azul e rosa.</td></tr>
+                <tr><td>Vegetação mecânica</td><td>Fibras de luz e folhas solares convertem C.E. em nutrição.</td></tr>
+                <tr><td>Flora inteligente</td><td>Transmite sensações e imagens a canalizadores.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Seres míticos</h3>
+          <p>Gárgulas, demônios alados, elfos sombrios, zumbis energéticos, espectros, dragões, grifos, fênix e basiliscos deixaram de ser lendas. Alguns são hostis; outros guardam locais antigos ou protegem fragmentos de poder.</p>
+        `
+      },
+      {
+        id: 'religiao',
+        title: 'Religião e Espiritualidade',
+        category: 'Mundo vivo e cultura',
+        lead: 'A queda da Primeira Civilização fragmentou a fé em movimentos que enxergam divindade, corrupção ou salvação na Cyber Energy.',
+        body: `
+          <h3>Culto da Cyber Energy</h3>
+          <p>Seus seguidores veem a C.E. como manifestação divina capaz de salvar ou condenar conforme o merecimento. Rituais incluem meditação extrema, absorção energética e sacrifício.</p>
+          <h3>Purificacionistas</h3>
+          <p>Pregam o retorno à Primeira Civilização e tratam a Era Cibernética como corrupção. Extremistas sabotam tecnologia, praticam terrorismo e cometem assassinatos em nome da purificação.</p>
+          <h3>Adoradores de Apocalypse</h3>
+          <p>Aceitam a destruição como inevitável e desejável. Trabalham para acelerar o fim e consideram Apocalypse uma forma de libertação.</p>
+          <h3>Religiões tradicionais adaptadas</h3>
+          <p>Cristianismo, Islamismo, Budismo e Hinduísmo persistem em novas formas. Igrejas assumem arquitetura futurista, mesquitas funcionam como centros energéticos e mosteiros preservam espaços de meditação.</p>
+          <h3>Espiritualismo secular</h3>
+          <p>Defende salvação pelo conhecimento e acredita que uma humanidade organizada pode derrotar Apocalypse. Seus membros trabalham por um futuro melhor, embora sejam vistos como ingênuos.</p>
+        `
+      },
+      {
+        id: 'cultura-linguagem',
+        title: 'Cultura, Arte e Linguagem',
+        category: 'Mundo vivo e cultura',
+        lead: 'Mentes alteradas pela C.E. criam arte multidimensional e palavras para experiências que a antiga humanidade não conhecia.',
+        body: `
+          <h3>Arte do novo mundo</h3>
+          <ul>
+            <li><strong>Pintura:</strong> obras que brilham em espectros invisíveis.</li>
+            <li><strong>Música:</strong> frequências que ressoam com a C.E.</li>
+            <li><strong>Literatura:</strong> emoções sem nome descritas por linguagens impossíveis.</li>
+            <li><strong>Teatro:</strong> mistura corpo, mente e energia.</li>
+            <li><strong>Dança:</strong> movimentos calculados ou frenéticos sob influência energética.</li>
+            <li><strong>Escultura:</strong> formas construídas com luz solidificada.</li>
+          </ul>
+          <h3>Glossário</h3>
+          <div class="table-wrap">
+            <table class="info-table">
+              <thead><tr><th>Termo</th><th>Significado</th></tr></thead>
+              <tbody>
+                <tr><td>Synth</td><td>Síntese entre tecnologia e energia.</td></tr>
+                <tr><td>Fracturo</td><td>Distorção dimensional.</td></tr>
+                <tr><td>Corrupte</td><td>Transformação pela C.E. corrompida.</td></tr>
+                <tr><td>Shimmer</td><td>Alguém sob influência de C.E.</td></tr>
+                <tr><td>Static</td><td>Confusão ou conflito.</td></tr>
+                <tr><td>Bleed</td><td>Morte por excesso energético.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h3>Linguagens especiais</h3>
+          <p>Cientistas e engenheiros usam uma notação técnica para descrever C.E., dimensões e manipulação molecular. Criminosos, espiões e pessoas que evitam vigilância preferem códigos cifrados.</p>
+          <h3>Linguagem do silêncio</h3>
+          <p>Em Pumpkin Grove, ausência de som significa perigo. Em Village of Silence, olhares e gestos substituem palavras. Em Frostwood, silêncio significa respeito.</p>
+        `
+      },
+      {
+        id: 'historia-eras',
+        title: 'História: As Eras',
+        category: 'História e ameaças',
+        lead: 'O mundo comum morreu, a Era Cibernética ergueu outra humanidade e Apocalypse iniciou o tempo presente.',
+        body: `
+          <h3>Primeira Civilização</h3>
+          <p>Por volta dos anos 2000, o mundo não conhecia poderes sobrenaturais ou tecnologia futurista. Guerras, poluição e destruição enfraqueciam o planeta. O impacto do meteorito encerrou essa civilização e dizimou metade da humanidade.</p>
+          <h3>Era Cibernética</h3>
+          <p>Séculos depois, a população se recuperou para aproximadamente 70% do nível anterior. Tecnologia e Cyber Energy se entrelaçaram, cidades cyberpunk surgiram e o ecossistema continuou sua metamorfose. Beleza futurista e decadência natural passaram a coexistir.</p>
+          <h3>Era Apocalypse</h3>
+          <p>No século atual, Apocalypse começa a se manifestar. Partes do planeta entram em devastação completa, regiões morrem e a realidade é alterada em larga escala. É nesta era que a história de Broken Street acontece.</p>
+        `
+      },
+      {
+        id: 'fragmentos',
+        title: 'Fragmentos Primordiais',
+        category: 'História e ameaças',
+        lead: 'Cinco relíquias não criadas, mas descobertas, podem formar o artefato que dará um corpo a Apocalypse.',
+        body: `
+          <div class="data-grid">
+            <div class="data-cell"><p class="data-cell-label">Horizonte</p><p class="data-cell-value"><strong>Forma:</strong> esfera negra que emite luz ausente.<br><strong>Poder:</strong> sobrepõe futuros possíveis.<br><strong>Risco:</strong> loucura.<br><strong>Local:</strong> provavelmente Frostwood.</p></div>
+            <div class="data-cell"><p class="data-cell-label">Amanhecer</p><p class="data-cell-value"><strong>Forma:</strong> lâmina de luz congelada.<br><strong>Poder:</strong> corta dimensões.<br><strong>Risco:</strong> feridas vazam realidade.<br><strong>Local:</strong> culto nos subterrâneos de Synth City.</p></div>
+            <div class="data-cell"><p class="data-cell-label">Crepúsculo</p><p class="data-cell-value"><strong>Forma:</strong> anel.<br><strong>Poder:</strong> amplificação quase onipotente.<br><strong>Risco:</strong> colapso total após o uso.<br><strong>Local:</strong> possivelmente Sanctuary of Eterion.</p></div>
+            <div class="data-cell"><p class="data-cell-label">Meia-Noite</p><p class="data-cell-value"><strong>Forma:</strong> tomo de linguagem mutável.<br><strong>Poder:</strong> conhecimento proibido.<br><strong>Risco:</strong> alteração permanente da mente.<br><strong>Local:</strong> biblioteca governamental secreta.</p></div>
+            <div class="data-cell"><p class="data-cell-label">Fim</p><p class="data-cell-value"><strong>Forma:</strong> coroa.<br><strong>Poder:</strong> imortalidade.<br><strong>Risco:</strong> corpo imóvel e consciência presa para sempre.<br><strong>Local:</strong> Dead Horizon.</p></div>
+          </div>
+          <h3>O conhecimento do tomo</h3>
+          <p>O Fragmento da Meia-Noite guarda fórmulas para quebrar a realidade, métodos para chamar entidades e rituais capazes de ressuscitar mortos. Apenas folheá-lo pode alterar uma mente para sempre.</p>
+          <h3>Convergência</h3>
+          <p>Quando reunidos, os fragmentos formam o Cristal da Convergência. Ele pode criar um corpo físico para Apocalypse, romper barreiras dimensionais, transformar definitivamente a realidade e provocar o fim de tudo. Broken Street trabalha para impedir essa união.</p>
+        `
+      },
+      {
+        id: 'apocalypse',
+        title: 'Apocalypse',
+        category: 'História e ameaças',
+        lead: 'O Anjo Caído do Colapso é uma manifestação do caos absoluto que a própria realidade tentou rejeitar.',
+        body: `
+          <h3>O ser</h3>
+          <p>Apocalypse nasceu da energia iridescente do Anti-Big Bang. Banido para Dead Horizon há eras, nunca interrompeu o trabalho necessário para retornar ao mundo físico.</p>
+          <h3>Poder</h3>
+          <ul>
+            <li>Distorce a realidade em larga escala.</li>
+            <li>Altera o comportamento de seres vivos.</li>
+            <li>Muda mapas por meio de suas ações.</li>
+            <li>Corrompe Cyber Energy apenas pela proximidade.</li>
+            <li>É imune a armas convencionais.</li>
+          </ul>
+          <h3>Estratégia de retorno</h3>
+          <p>Seus Quatro Cavaleiros reencarnaram na Terra. Eles buscam os Cinco Fragmentos Primordiais para criar o Cristal da Convergência, construir um corpo físico para seu mestre, romper Dead Horizon e iniciar a transformação definitiva da realidade.</p>
+          <h3>Presença atual</h3>
+          <p>Dead Horizon pressiona as barreiras dimensionais. Ciclos de Instabilidade se tornam mais frequentes. Os Cavaleiros já infiltram organizações, cultos aceleram a chegada e fragmentos desaparecem misteriosamente.</p>
+        `
+      }
+    ];
 
-    <!-- ── ARTIGO: CE-EFEITOS ── -->
-    <article class="wb-article" id="article-ce-efeitos">
-      <div class="article-header">
-        <p class="article-category">// CYBER ENERGY · CLASSIFICADO NV.3</p>
-        <h2 class="article-title">Efeitos e Riscos</h2>
-        <p class="article-lead">Os poderes são reais. Os custos também.</p>
-      </div>
-      <div class="article-body">
-        <h3>Efeitos Físicos</h3>
-        <ul>
-          <li>Aumento do metabolismo basal — agentes precisam de mais caloria e descanso</li>
-          <li>Variações de temperatura corporal ligadas ao estado emocional</li>
-          <li>Traços de bioluminescência nas veias em momentos de alta ativação (raramente visíveis)</li>
-          <li>Hipersensibilidade sensorial mesmo fora de uso ativo de poderes</li>
-        </ul>
-        <h3>Efeitos Psicológicos</h3>
-        <p>A Cyber Energy amplifica não apenas poderes, mas estados emocionais. Agentes em sofrimento psicológico tendem a manifestar poderes de forma descontrolada. Casos de "surto" foram documentados — todos suprimidos oficialmente.</p>
-        <h3>Riscos a Longo Prazo</h3>
-        <div class="highlight-quote">
-          <p>"Nenhum agente com mais de 5 anos de exposição ativa foi rastreado além desse período. Os dados simplesmente... param."</p>
-        </div>
-        <ul>
-          <li>Degradação neural progressiva em casos de uso excessivo</li>
-          <li>Dependência psicológica de ativação — o poder torna-se "necessário"</li>
-          <li>Risco de colapso sistêmico em exposição a segundo evento de CE concentrada</li>
-        </ul>
-      </div>
-    </article>
+    const pageMap = new Map(pages.map(page => [page.id, page]));
+    const orderedPages = groups.flatMap(group => group.pages).map(id => pageMap.get(id)).filter(Boolean);
 
-    <!-- ── ARTIGO: NEXCORE ── -->
-    <article class="wb-article" id="article-nexcore">
-      <div class="article-header">
-        <p class="article-category">// CORPORAÇÕES</p>
-        <h2 class="article-title">NexCore Industries</h2>
-        <p class="article-lead">A maior corporação de Synthcity e, segundo dados não-oficiais, a responsável pelo Evento-Zero.</p>
-      </div>
-      <div class="article-body">
-        <h3>Perfil Corporativo</h3>
-        <table class="info-table">
-          <tr><td>FUNDAÇÃO</td><td>Ano -31 (relativo ao Evento-Zero)</td></tr>
-          <tr><td>SEDE</td><td>Torre NexCore, Distrito Coroa</td></tr>
-          <tr><td>SETOR</td><td>Energia · Biotecnologia · Infraestrutura urbana</td></tr>
-          <tr><td>CEO ATUAL</td><td>Classificado</td></tr>
-          <tr><td>STATUS</td><td>Ativo · Acima de qualquer lei municipal</td></tr>
-        </table>
-        <h3>Operações Conhecidas</h3>
-        <ul>
-          <li>Controle dos reatores de fusão fria da Zona Zero</li>
-          <li>Patente exclusiva sobre pesquisa de Cyber Energy (monopolizada)</li>
-          <li>Financiamento e controle do Conselho Corporativo de Synthcity</li>
-          <li>Operações de vigilância biométrica via rede de câmeras</li>
-        </ul>
-        <h3>Operações Suspeitas</h3>
-        <p>O Static Collective mantém um dossiê sobre atividades da NexCore que inclui: supressão de relatórios médicos sobre CE, desaparecimento de pesquisadores independentes e programação deliberada do segundo Evento-Zero.</p>
-      </div>
-    </article>
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+    }
 
-    <!-- ── ARTIGO: VEILTECH ── -->
-    <article class="wb-article" id="article-veiltech">
-      <div class="article-header">
-        <p class="article-category">// CORPORAÇÕES</p>
-        <h2 class="article-title">VeilTech</h2>
-        <p class="article-lead">Dona da infraestrutura de dados de Synthcity. Sabe de tudo. Vende para quem paga mais.</p>
-      </div>
-      <div class="article-body">
-        <h3>Perfil Corporativo</h3>
-        <table class="info-table">
-          <tr><td>FUNDAÇÃO</td><td>Ano -18</td></tr>
-          <tr><td>SEDE</td><td>Complex VeilTech, Grid Central Leste</td></tr>
-          <tr><td>SETOR</td><td>Tecnologia de dados · Vigilância · Comunicações</td></tr>
-          <tr><td>PRINCIPAL PRODUTO</td><td>SynthNet — a rede de dados da cidade</td></tr>
-        </table>
-        <h3>SynthNet</h3>
-        <p>A rede de dados que conecta Synthcity é simultaneamente infraestrutura pública e produto privado da VeilTech. Todo dado transmitido é, tecnicamente, propriedade intelectual da corporação — cláusula enterrada no contrato de uso aceitável que ninguém leu.</p>
-        <h3>Relação com os Agentes</h3>
-        <p>Scott Smith descobriu que seu poder de leitura de dados lhe dá acesso não-autorizado à camada de dados brutos do SynthNet. A VeilTech sabe disso. Ainda não agiu.</p>
-      </div>
-    </article>
+    function mediaSlot(src, alt, label, main = false) {
+      return `
+        <figure class="media-slot ${main ? 'main-media' : ''}">
+          <img src="${src}" alt="${escapeHtml(alt)}" loading="${main ? 'eager' : 'lazy'}"
+            onerror="this.parentElement.classList.add('is-empty'); this.remove();">
+          <div class="media-fallback">
+            <span>${main ? 'IMAGEM PRINCIPAL DA PÁGINA' : 'IMAGEM DA GALERIA'}</span>
+            <small>${src}</small>
+          </div>
+          <figcaption>${escapeHtml(label)}</figcaption>
+        </figure>
+      `;
+    }
 
-    <!-- ── ARTIGO: ARCO ── -->
-    <article class="wb-article" id="article-arco">
-      <div class="article-header">
-        <p class="article-category">// CORPORAÇÕES</p>
-        <h2 class="article-title">ARCO</h2>
-        <p class="article-lead">Agência de Regulação e Controle de Operações. A face governamental que as corporações usam para dar aparência de legalidade às suas decisões.</p>
-      </div>
-      <div class="article-body">
-        <h3>Função Oficial</h3>
-        <p>A ARCO é responsável pela regulação de todas as operações tecnológicas, energéticas e de segurança de Synthcity. Na teoria, é o braço executivo do governo. Na prática, responde ao Conselho Corporativo.</p>
-        <h3>Função Real</h3>
-        <ul>
-          <li>Suprimir relatórios sobre Cyber Energy que contradizem a narrativa corporativa</li>
-          <li>Gerenciar a contenção de agentes com poderes — captura, não proteção</li>
-          <li>Manter a ilusão de governança independente perante a população</li>
-          <li>Coordenar os Watchmen Urbanos como força de segurança terceirizada</li>
-        </ul>
-        <div class="highlight-quote">
-          <p>"ARCO não protege a cidade. ARCO protege o investimento da cidade."</p>
-        </div>
-      </div>
-    </article>
+    function articleTemplate(page, index) {
+      const assetRoot = `assets/worldbook/${page.id}`;
+      const previous = orderedPages[index - 1];
+      const next = orderedPages[index + 1];
 
-    <!-- ── ARTIGO: GRID ── -->
-    <article class="wb-article" id="article-grid">
-      <div class="article-header">
-        <p class="article-category">// FACÇÕES</p>
-        <h2 class="article-title">The Grid</h2>
-        <p class="article-lead">A maior organização não-corporativa de Synthcity. Parte grupo de resistência, parte rede de sobrevivência, parte mito urbano.</p>
-      </div>
-      <div class="article-body">
-        <h3>O que é The Grid</h3>
-        <p>The Grid surgiu nos distritos de base como uma rede informal de suporte mútuo entre trabalhadores desempregados, ex-funcionários corporativos demitidos e moradores das zonas sem infraestrutura. Com o tempo, evoluiu para algo maior.</p>
-        <p>Hoje opera em múltiplos distritos com uma estrutura descentralizada deliberada — não há líder único, não há sede central, não há registro formal. É isso que a mantém viva.</p>
-        <h3>Atividades</h3>
-        <ul>
-          <li>Distribuição de recursos em zonas negligenciadas pelo governo</li>
-          <li>Rede de informações paralela ao SynthNet oficial</li>
-          <li>Abrigo para pessoas fugindo das corporações</li>
-          <li>Conhecimento sobre Cyber Energy que as corporações não têm</li>
-        </ul>
-        <h3>Relação com os Agentes</h3>
-        <p>The Grid sabe que os quatro existem. Está observando. Ainda não fez contato direto — mas quando fizer, virá com uma proposta.</p>
-      </div>
-    </article>
+      return `
+        <article class="wb-article ${index === 0 ? 'visible' : ''}" id="article-${page.id}" data-search="${escapeHtml(`${page.title} ${page.category}`.toLowerCase())}">
+          <div class="article-header">
+            <p class="article-category">// ${escapeHtml(page.category)}</p>
+            <h2 class="article-title">${escapeHtml(page.title)}</h2>
+            <p class="article-lead">${escapeHtml(page.lead)}</p>
+          </div>
 
-    <!-- ── ARTIGO: STATIC ── -->
-    <article class="wb-article" id="article-static">
-      <div class="article-header">
-        <p class="article-category">// FACÇÕES</p>
-        <h2 class="article-title">Static Collective</h2>
-        <p class="article-lead">Hackers, jornalistas clandestinos e ex-funcionários corporativos unidos por um objetivo: expor o que a NexCore está fazendo.</p>
-      </div>
-      <div class="article-body">
-        <h3>Perfil</h3>
-        <table class="info-table">
-          <tr><td>FUNDAÇÃO</td><td>Ano -3 (antes do Evento-Zero)</td></tr>
-          <tr><td>MEMBROS ESTIMADOS</td><td>200–400 (descentralizados)</td></tr>
-          <tr><td>ESPECIALIDADE</td><td>Coleta e distribuição de dados classificados</td></tr>
-          <tr><td>STATUS</td><td>Ilegal · Perseguido pela ARCO</td></tr>
-        </table>
-        <h3>Conquistas Documentadas</h3>
-        <ul>
-          <li>Vazamento do Documento NC-884 (relatório NexCore sobre Evento-Zero)</li>
-          <li>Mapeamento dos reatores da Zona Zero</li>
-          <li>Banco de dados com 847 casos de manifestação de CE nunca reportados oficialmente</li>
-          <li>Evidências de programação do segundo Evento-Zero</li>
-        </ul>
-      </div>
-    </article>
+          ${mediaSlot(`${assetRoot}/principal.jpg`, `Imagem principal de ${page.title}`, page.title, true)}
 
-    <!-- ── ARTIGO: WATCHMEN ── -->
-    <article class="wb-article" id="article-watchmen">
-      <div class="article-header">
-        <p class="article-category">// FACÇÕES</p>
-        <h2 class="article-title">Watchmen Urbanos</h2>
-        <p class="article-lead">Força de segurança privada operando sob contrato com a ARCO. Em teoria, policiais. Na prática, caçadores de agentes.</p>
-      </div>
-      <div class="article-body">
-        <h3>Estrutura</h3>
-        <p>Os Watchmen são tecnicamente uma empresa de segurança privada, mas seu contrato exclusivo com a ARCO lhes dá poderes de aplicação da lei em todos os distritos de Synthcity. Equipados com tecnologia da NexCore, são os "olhos na rua" das corporações.</p>
-        <h3>Operação: Projeto Sombra</h3>
-        <p>Divisão de elite dos Watchmen treinada especificamente para lidar com agentes de Cyber Energy. Classificado nível 5. Os quatro protagonistas estão em alguma lista deles.</p>
-        <div class="tag-list">
-          <span class="tag-pill">ARCO</span>
-          <span class="tag-pill">NEXCORE</span>
-          <span class="tag-pill">SEGURANÇA PRIVADA</span>
-          <span class="tag-pill">PROJETO SOMBRA</span>
-        </div>
-      </div>
-    </article>
+          <div class="article-body">${page.body}</div>
 
-    <!-- ── ARTIGO: NEUROLINK ── -->
-    <article class="wb-article" id="article-neurolink">
-      <div class="article-header">
-        <p class="article-category">// TECNOLOGIA</p>
-        <h2 class="article-title">Neurolinks</h2>
-        <p class="article-lead">Implantes neurais que permitem interface direta com o SynthNet. O acessório tecnológico mais comum de Synthcity — e o mais perigoso.</p>
-      </div>
-      <div class="article-body">
-        <h3>O que são</h3>
-        <p>Neurolinks são microprocessadores implantados na base do crânio que criam uma ponte entre o sistema nervoso do usuário e a rede de dados de Synthcity. Permitem navegação de internet sem dispositivo, pagamentos biométricos e comunicação neural direta.</p>
-        <h3>Adoção</h3>
-        <p>Estimativa: 73% dos habitantes de Synthcity possuem alguma versão de Neurolink. Nos distritos superiores, é praticamente universal. Nos distritos de base, versões piratas de baixa qualidade são comuns.</p>
-        <h3>Problema</h3>
-        <p>Neurolinks da VeilTech vêm com acesso de leitura passiva para a corporação. Cada pensamento relacionado a dados passa pelo servidor deles. A VeilTech chama isso de "sincronização de segurança".</p>
-        <div class="highlight-quote">
-          <p>"Você não pensa em privacidade quando não tem Neurolink. Você pensa em privacidade quando percebe que ele nunca foi seu."</p>
-        </div>
-      </div>
-    </article>
+          <h3 class="gallery-heading">Galeria</h3>
+          <div class="gallery-grid">
+            ${mediaSlot(`${assetRoot}/galeria-1.jpg`, `${page.title}, galeria 1`, `${page.title} · registro 01`)}
+            ${mediaSlot(`${assetRoot}/galeria-2.jpg`, `${page.title}, galeria 2`, `${page.title} · registro 02`)}
+            ${mediaSlot(`${assetRoot}/galeria-3.jpg`, `${page.title}, galeria 3`, `${page.title} · registro 03`)}
+          </div>
 
-    <!-- ── ARTIGO: SYNTH-TECH ── -->
-    <article class="wb-article" id="article-synth-tech">
-      <div class="article-header">
-        <p class="article-category">// TECNOLOGIA</p>
-        <h2 class="article-title">Synth-Tech</h2>
-        <p class="article-lead">O termo guarda-chuva para todas as tecnologias desenvolvidas especificamente para Synthcity — e que não existem em nenhum outro lugar.</p>
-      </div>
-      <div class="article-body">
-        <h3>Tecnologias de Destaque</h3>
-        <ul>
-          <li><strong>Plasma Neon:</strong> sistema de iluminação de baixo consumo que usa gás ionizado — resulta no visual característico da cidade</li>
-          <li><strong>GradeShield:</strong> barreiras energéticas portáteis usadas pelos Watchmen</li>
-          <li><strong>SynthSkin:</strong> substituto de pele biocompatível usado em procedimentos médicos e, ilegalmente, em modificações corporais</li>
-          <li><strong>DataGlass:</strong> superfícies transparentes com capacidade de exibição de informação — usadas em todo o Grid Central</li>
-          <li><strong>CE-Dampeners:</strong> supressores de Cyber Energy desenvolvidos pela NexCore para conter agentes — poucos conhecem sua existência</li>
-        </ul>
-      </div>
-    </article>
+          <nav class="article-nav" aria-label="Navegação entre páginas">
+            <button type="button" ${previous ? `data-go="${previous.id}"` : 'disabled'}>← ${previous ? escapeHtml(previous.title) : 'INÍCIO'}</button>
+            <button type="button" ${next ? `data-go="${next.id}"` : 'disabled'}>${next ? escapeHtml(next.title) : 'FIM DO ARQUIVO'} →</button>
+          </nav>
+        </article>
+      `;
+    }
 
-    <!-- ── ARTIGO: FUNDAÇÃO ── -->
-    <article class="wb-article" id="article-fundacao">
-      <div class="article-header">
-        <p class="article-category">// HISTÓRIA</p>
-        <h2 class="article-title">Fundação de Synthcity</h2>
-        <p class="article-lead">A cidade foi construída com uma promessa. A promessa nunca foi cumprida.</p>
-      </div>
-      <div class="article-body">
-        <h3>A Proposta Original</h3>
-        <p>Synthcity foi concebida como um projeto de "cidade do futuro" — um laboratório urbano onde tecnologia de ponta resolveria os problemas das metrópoles do passado: desigualdade, criminalidade, ineficiência energética.</p>
-        <p>Sete corporações fundadoras financiaram a construção. Quatro delas não existem mais. Duas foram absorvidas pela NexCore. Uma permanece: a VeilTech.</p>
-        <h3>A Realidade</h3>
-        <p>Desde o início, a cidade foi planejada como um ambiente controlado. Os "problemas urbanos" que prometiam resolver eram, na verdade, variáveis que queriam controlar. Os habitantes de Synthcity sempre foram parte de um experimento maior.</p>
-        <div class="highlight-quote">
-          <p>"Eles não construíram uma cidade. Construíram um terrário."</p>
-        </div>
-      </div>
-    </article>
+    function buildWorldbook() {
+      const sidebar = document.getElementById('wb-sidebar');
+      const mobileSelect = document.getElementById('mobile-page-nav');
+      const articlesRoot = document.getElementById('articles-root');
 
-    <!-- ── ARTIGO: EVENTO-ZERO ── -->
-    <article class="wb-article" id="article-evento-zero">
-      <div class="article-header">
-        <p class="article-category">// HISTÓRIA · CLASSIFICADO NV.5</p>
-        <h2 class="article-title">Evento-Zero</h2>
-        <p class="article-lead">O dia em que tudo mudou. O dia que a NexCore diz que não aconteceu.</p>
-      </div>
-      <div class="article-body">
-        <h3>O que os Registros Oficiais Dizem</h3>
-        <p>Uma falha técnica nos reatores da Zona Zero liberou uma quantidade controlada de subproduto energético. Dezessete trabalhadores foram expostos. Nenhuma contaminação ambiental permanente foi detectada. Incidente encerrado.</p>
-        <h3>O que Realmente Aconteceu</h3>
-        <p>A liberação de Cyber Energy atingiu uma área de 40 km² no subterrâneo. Contaminou o sistema hídrico de três distritos. As mortes confirmadas pelo Static Collective chegam a 112. A exposição cumulativa ao longo dos meses seguintes atingiu centenas de milhares de pessoas.</p>
-        <h3>As Consequências</h3>
-        <ul>
-          <li>Primeiros casos documentados de manifestação de poderes: 8 meses após o evento</li>
-          <li>Philip, Aidem, Anny e Scott foram expostos indiretamente via sistema hídrico</li>
-          <li>A NexCore já tinha protocolo de contenção pronto antes do incidente</li>
-          <li>Um segundo Evento-Zero está sendo preparado — desta vez, deliberado</li>
-        </ul>
-        <div class="highlight-quote">
-          <p>"O Evento-Zero não foi o começo de um acidente. Foi o começo de um plano."</p>
-        </div>
-      </div>
-    </article>
+      sidebar.innerHTML = groups.map(group => `
+        <p class="sidebar-section-title">${escapeHtml(group.name)}</p>
+        ${group.pages.map(id => {
+          const page = pageMap.get(id);
+          return page ? `<button class="sidebar-link" type="button" data-article="${page.id}">${escapeHtml(page.title)}</button>` : '';
+        }).join('')}
+      `).join('');
 
-    <!-- ── ARTIGO: CRONOLOGIA ── -->
-    <article class="wb-article" id="article-cronologia">
-      <div class="article-header">
-        <p class="article-category">// HISTÓRIA</p>
-        <h2 class="article-title">Cronologia</h2>
-        <p class="article-lead">Os eventos que levaram ao presente — na ordem em que podem ser revelados.</p>
-      </div>
-      <div class="article-body">
-        <h3>Linha do Tempo</h3>
-        <ul>
-          <li><strong>Ano -47:</strong> Fundação de Synthcity. Sete corporações assinam o Pacto de Construção.</li>
-          <li><strong>Ano -31:</strong> NexCore Industries é fundada. Inicia construção dos reatores subterrâneos.</li>
-          <li><strong>Ano -18:</strong> VeilTech lança o SynthNet. Adoção em massa de Neurolinks começa.</li>
-          <li><strong>Ano -12:</strong> Primeiros testes internos de Cyber Energy na Zona Zero. Classificado.</li>
-          <li><strong>Ano -3:</strong> Static Collective é formado após demissões em massa na NexCore.</li>
-          <li><strong>Ano 0:</strong> EVENTO-ZERO. Liberação de Cyber Energy. "Acidente" oficial.</li>
-          <li><strong>Ano 0 + 8 meses:</strong> Primeiros casos de manifestação de poderes.</li>
-          <li><strong>Ano 1:</strong> ARCO inicia Projeto Sombra em segredo. Watchmen são equipados.</li>
-          <li><strong>Ano 2:</strong> Philip, Aidem, Anny e Scott manifestam poderes em circunstâncias separadas.</li>
-          <li><strong>Ano 2 (presente):</strong> O segundo Evento-Zero está sendo preparado.</li>
-        </ul>
-      </div>
-    </article>
+      mobileSelect.innerHTML = groups.map(group => `
+        <optgroup label="${escapeHtml(group.name)}">
+          ${group.pages.map(id => {
+            const page = pageMap.get(id);
+            return page ? `<option value="${page.id}">${escapeHtml(page.title)}</option>` : '';
+          }).join('')}
+        </optgroup>
+      `).join('');
 
-    <!-- ── ARTIGO: GLOSSÁRIO ── -->
-    <article class="wb-article" id="article-glossario">
-      <div class="article-header">
-        <p class="article-category">// TERMINOLOGIA</p>
-        <h2 class="article-title">Glossário</h2>
-        <p class="article-lead">Termos específicos do universo Broken Street e seus significados.</p>
-      </div>
-      <div class="article-body">
-        <table class="info-table">
-          <tr><td>AGENTE</td><td>Pessoa que desenvolveu manifestação de Cyber Energy</td></tr>
-          <tr><td>ARCO</td><td>Agência de Regulação e Controle de Operações</td></tr>
-          <tr><td>BASE</td><td>Distritos inferiores de Synthcity</td></tr>
-          <tr><td>CE / C.E.</td><td>Cyber Energy — abreviação usada nos distritos</td></tr>
-          <tr><td>COROA</td><td>Distritos superiores de elite em Synthcity</td></tr>
-          <tr><td>DAMPENER</td><td>Dispositivo de supressão de Cyber Energy</td></tr>
-          <tr><td>EVENTO-ZERO</td><td>O incidente dos reatores que liberou CE na cidade</td></tr>
-          <tr><td>FALSO DIA</td><td>A iluminação artificial permanente de Synthcity</td></tr>
-          <tr><td>GRID</td><td>1) A rede de dados (SynthNet) 2) The Grid — a organização</td></tr>
-          <tr><td>MAGLEV</td><td>Sistema de transporte aéreo de levitação magnética</td></tr>
-          <tr><td>NEUROLINK</td><td>Implante neural para interface com o SynthNet</td></tr>
-          <tr><td>NEXCORE</td><td>NexCore Industries — corporação dominante</td></tr>
-          <tr><td>SURTO</td><td>Episódio de perda de controle do poder de um agente</td></tr>
-          <tr><td>SYNTHCITY</td><td>A metrópole onde a história se passa</td></tr>
-          <tr><td>SYNTHNET</td><td>A rede de dados de Synthcity, gerenciada pela VeilTech</td></tr>
-          <tr><td>VEILTECH</td><td>Corporação de tecnologia de dados</td></tr>
-          <tr><td>WATCHMEN</td><td>Força de segurança privada contratada pela ARCO</td></tr>
-          <tr><td>ZONA ZERO</td><td>Área subterrânea restrita onde estão os reatores</td></tr>
-        </table>
-      </div>
-    </article>
+      articlesRoot.innerHTML = orderedPages.map(articleTemplate).join('');
 
-  </main>
-</div>
+      sidebar.addEventListener('click', event => {
+        const link = event.target.closest('[data-article]');
+        if (link) showArticle(link.dataset.article);
+      });
 
-<script>
-  function showArticle(id, el) {
-    // Esconde todos
-    document.querySelectorAll('.wb-article').forEach(a => a.classList.remove('visible'));
-    // Mostra o selecionado
-    const art = document.getElementById('article-' + id);
-    if (art) art.classList.add('visible');
-    // Atualiza sidebar
-    document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
-    if (el) el.classList.add('active');
-    // Scroll
-    document.querySelector('.wb-main').scrollTop = 0;
-    window.scrollTo(0, 0);
-  }
+      mobileSelect.addEventListener('change', event => showArticle(event.target.value));
 
-  // Busca
-  document.getElementById('wb-search-input').addEventListener('input', function() {
-    const q = this.value.toLowerCase().trim();
-    if (!q) return;
-    const articles = document.querySelectorAll('.wb-article');
-    let found = null;
-    articles.forEach(art => {
-      if (!found && art.textContent.toLowerCase().includes(q)) {
-        found = art.id.replace('article-', '');
+      articlesRoot.addEventListener('click', event => {
+        const button = event.target.closest('[data-go]');
+        if (button) showArticle(button.dataset.go);
+      });
+
+      const initialId = location.hash.slice(1);
+      showArticle(pageMap.has(initialId) ? initialId : orderedPages[0].id, false);
+    }
+
+    function showArticle(id, updateHash = true) {
+      const page = pageMap.get(id);
+      if (!page) return;
+
+      document.querySelectorAll('.wb-article').forEach(article => {
+        article.classList.toggle('visible', article.id === `article-${id}`);
+      });
+
+      document.querySelectorAll('.sidebar-link').forEach(link => {
+        const active = link.dataset.article === id;
+        link.classList.toggle('active', active);
+        if (active) link.scrollIntoView({ block: 'nearest' });
+      });
+
+      document.getElementById('mobile-page-nav').value = id;
+      document.title = `${page.title} | Broken Street Worldbook`;
+
+      if (updateHash) history.replaceState(null, '', `#${id}`);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.getElementById('wb-search-input').addEventListener('input', event => {
+      const query = event.target.value.toLowerCase().trim();
+      const status = document.getElementById('search-status');
+
+      if (!query) {
+        status.textContent = '';
+        return;
+      }
+
+      const found = orderedPages.find(page => {
+        const searchText = `${page.title} ${page.category} ${page.lead} ${page.body.replace(/<[^>]+>/g, ' ')}`.toLowerCase();
+        return searchText.includes(query);
+      });
+
+      if (found) {
+        showArticle(found.id);
+        status.textContent = `RESULTADO: ${found.title.toUpperCase()}`;
+      } else {
+        status.textContent = 'NENHUM REGISTRO ENCONTRADO';
       }
     });
-    if (found) {
-      const link = document.querySelector(`[data-article="${found}"]`);
-      showArticle(found, link);
-    }
-  });
-</script>
 
+    window.addEventListener('hashchange', () => {
+      const id = location.hash.slice(1);
+      if (pageMap.has(id)) showArticle(id, false);
+    });
+
+    buildWorldbook();
+  </script>
 </body>
 </html>
