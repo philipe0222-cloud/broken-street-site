@@ -722,76 +722,150 @@ body {
       line-height: 1.5;
     }
 
-    /* ── TRILHA (em breve) ── */
-    #trilha-section {
-      position: relative;
-      z-index: 1;
-      padding: 80px 60px 120px;
-      background: rgba(0,0,0,0.15);
-    }
+    /* ===== TRILHA SONORA — CONTAINER ===== */
+.trilha-inner {
+  max-width: 1100px;      /* mesmo padrão do resto do body */
+  margin: 0 auto;
+  padding: 60px 24px;
+  box-sizing: border-box;
+}
 
-    .trilha-inner { max-width: 1100px; margin: 0 auto; }
+/* ===== BLOCO DE INTRO (OST OFICIAL) ===== */
+.trilha-soon {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  max-width: 900px;
+  padding: 22px 24px;
+  margin: 20px auto 28px;
+  background: linear-gradient(135deg, rgba(20, 8, 40, 0.78), rgba(10, 4, 20, 0.6));
+  border: 1px solid rgba(168, 85, 247, 0.7);
+  border-radius: 10px;
+  box-shadow: inset 0 0 20px rgba(168, 85, 247, 0.08), 0 0 16px rgba(0, 0, 0, 0.25);
+}
 
-    .trilha-soon {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      padding: 32px;
-      border: 1px dashed rgba(176,38,255,0.3);
-      background: rgba(176,38,255,0.03);
-      margin-top: 48px;
-      flex-wrap: wrap;
-    }
+.trilha-soon-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(168, 85, 247, 0.15);
+  border: 1px solid #a855f7;
+  color: #d8b4fe;
+  font-size: 18px;
+  flex-shrink: 0;
+  box-shadow: 0 0 14px rgba(168, 85, 247, 0.35);
+}
 
-    .trilha-soon-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(176,38,255,0.08);
-      border: 1px solid rgba(176,38,255,0.35);
-      color: var(--neon-purple);
-      font-size: 1.4rem;
-      flex-shrink: 0;
-    }
+.trilha-soon-text h3 {
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  color: #f0abfc;
+  letter-spacing: 2px;
+  margin: 0 0 4px;
+  font-size: 14px;
+  text-shadow: 0 0 6px rgba(240, 171, 252, 0.4);
+}
 
-    .trilha-soon-text h3 {
-      font-family: 'Orbitron', monospace;
-      font-size: 0.95rem;
-      color: #fff;
-      letter-spacing: 0.08em;
-      margin-bottom: 8px;
-    }
-    .trilha-soon-text p {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 0.95rem;
-      color: var(--text-silver);
-      opacity: 0.7;
-      max-width: 560px;
-      line-height: 1.6;
-    }
+.trilha-soon-text p {
+  color: #b8a5db;
+  font-size: 13px;
+  line-height: 1.55;
+  margin: 0;
+}
 
-    .playlist-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 16px;
-      margin-top: 28px;
-    }
+/* ===== LISTA DE FAIXAS ===== */
+.playlist-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 900px;
+  margin: 4px auto 0;
+}
 
-    .track-item-empty {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 14px 16px;
-      border: 1px dashed rgba(176,38,255,0.18);
-      background: rgba(176,38,255,0.02);
-      color: var(--text-dim);
-      font-size: 0.68rem;
-      letter-spacing: 0.12em;
-    }
-    .track-item-empty i { color: var(--neon-purple); opacity: 0.6; }
+.track-item-empty {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  align-items: center;
+  gap: 18px;
+  padding: 12px 18px;
+  background: linear-gradient(90deg, rgba(30, 15, 50, 0.55), rgba(20, 10, 35, 0.4));
+  border: 1px solid rgba(168, 85, 247, 0.28);
+  border-left: 3px solid #a855f7;
+  border-radius: 6px;
+  transition: all 0.25s ease;
+  height: auto;
+  min-height: 0;
+}
+
+.track-item-empty:hover {
+  border-color: rgba(168, 85, 247, 0.75);
+  border-left-color: #a855f7;
+  background: linear-gradient(90deg, rgba(40, 18, 65, 0.75), rgba(25, 12, 45, 0.55));
+  box-shadow: 0 4px 18px rgba(168, 85, 247, 0.18);
+}
+
+.track-line {
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  color: #d8b4fe;
+  font-size: 12px;
+  letter-spacing: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track-line i {
+  color: #a855f7;
+  margin-right: 8px;
+  font-size: 10px;
+  text-shadow: 0 0 6px rgba(168, 85, 247, 0.8);
+}
+
+/* ===== PLAYER DE ÁUDIO — PRETO + ROXO ===== */
+.track-audio {
+  width: 100%;
+  height: 34px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #040106 0%, #14061f 100%);
+  border: 1px solid rgba(168, 85, 247, 0.45);
+  box-shadow: inset 0 0 12px rgba(168, 85, 247, 0.16), 0 0 10px rgba(0, 0, 0, 0.35);
+  filter: invert(0.86) hue-rotate(220deg) saturate(1.4) brightness(0.9);
+  outline: none;
+  color-scheme: dark;
+}
+
+/* Chromium — customização mais fina do player */
+.track-audio::-webkit-media-controls-panel {
+  background: linear-gradient(135deg, #050208 0%, #180721 100%);
+  border-radius: 6px;
+}
+
+.track-audio::-webkit-media-controls-play-button,
+.track-audio::-webkit-media-controls-mute-button,
+.track-audio::-webkit-media-controls-current-time-display,
+.track-audio::-webkit-media-controls-time-remaining-display,
+.track-audio::-webkit-media-controls-timeline,
+.track-audio::-webkit-media-controls-volume-slider,
+.track-audio::-webkit-media-controls-volume-slider-container {
+  filter: hue-rotate(-40deg) saturate(1.1);
+}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 720px) {
+  .track-item-empty {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 10px 14px;
+  }
+  .track-line {
+    font-size: 11px;
+  }
+}
+
 
     /* ── APOCALYPSE / ARQUIVO Ω ── */
     #apocalypse-section {
@@ -1275,7 +1349,7 @@ body {
   </div>
 </section>
 
-<!-- TRILHA — EM BREVE (área reservada para o autor adicionar depois) -->
+<!-- TRILHA — BROKEN STREET OST -->
 <section id="trilha-section">
   <div class="trilha-inner">
     <p class="section-label">04 · SOUNDTRACK</p>
@@ -1284,19 +1358,45 @@ body {
     <div class="trilha-soon">
       <span class="trilha-soon-icon"><i class="fa-solid fa-music"></i></span>
       <div class="trilha-soon-text">
-        <h3>EM BREVE</h3>
-        <p>A trilha sonora oficial de Broken Street ainda está sendo composta. Em breve, cada agente e cada momento da história terão sua própria faixa.</p>
+        <h3>OST OFICIAL</h3>
+        <p>A trilha sonora de Broken Street. Cada agente e cada momento da história com sua própria faixa. Aperte play e mergulhe no submundo neon.</p>
       </div>
     </div>
 
     <div class="playlist-grid">
-      <div class="track-item-empty"><i class="fa-solid fa-lock"></i> FAIXA 01 · A DEFINIR</div>
-      <div class="track-item-empty"><i class="fa-solid fa-lock"></i> FAIXA 02 · A DEFINIR</div>
-      <div class="track-item-empty"><i class="fa-solid fa-lock"></i> FAIXA 03 · A DEFINIR</div>
-      <div class="track-item-empty"><i class="fa-solid fa-lock"></i> FAIXA 04 · A DEFINIR</div>
+
+      <div class="track-item-empty">
+        <div class="track-line"><i class="fa-solid fa-play"></i> FAIXA 01 · BATTLE</div>
+        <audio controls preload="metadata" class="track-audio">
+          <source src="assets/soundtrack/Battle.mp4" type="video/mp4">
+        </audio>
+      </div>
+
+      <div class="track-item-empty">
+        <div class="track-line"><i class="fa-solid fa-play"></i> FAIXA 02 · ORINIC WORLD</div>
+        <audio controls preload="metadata" class="track-audio">
+          <source src="assets/soundtrack/Orinic-world.mp4" type="video/mp4">
+        </audio>
+      </div>
+
+      <div class="track-item-empty">
+        <div class="track-line"><i class="fa-solid fa-play"></i> FAIXA 03 · SHINING DESERT</div>
+        <audio controls preload="metadata" class="track-audio">
+          <source src="assets/soundtrack/Shining-Desert.mp4" type="video/mp4">
+        </audio>
+      </div>
+
+      <div class="track-item-empty">
+        <div class="track-line"><i class="fa-solid fa-play"></i> FAIXA 04 · SYNTHCITY</div>
+        <audio controls preload="metadata" class="track-audio">
+          <source src="assets/soundtrack/SynthCity.mp4" type="video/mp4">
+        </audio>
+      </div>
+
     </div>
   </div>
 </section>
+
 
 <!-- ARQUIVO Ω — teaser sem spoilers -->
 <section id="apocalypse-section">
