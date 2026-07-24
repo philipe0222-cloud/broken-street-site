@@ -131,52 +131,71 @@
       font-size: 1rem;
     }
 
-    /* ── ANIMATED GRID BG (efeito mínimo, cyberpunk) ── */
-    .grid-bg {
-      position: fixed;
-      inset: -80px 0 0 -80px;
-      background-image:
-        linear-gradient(rgba(176,38,255,0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(176,38,255,0.035) 1px, transparent 1px);
-      background-size: 80px 80px;
-      pointer-events: none;
-      z-index: 0;
-      animation: gridDrift 55s linear infinite;
-      will-change: background-position;
-    }
-    @keyframes gridDrift {
-      0%   { background-position: 0 0, 0 0; }
-      100% { background-position: 80px 80px, 80px 80px; }
-    }
+/* ── BACKGROUND ESCURO (preto-arroxeado) ── */
+body {
+  background: #0a0410; /* preto puxado pro roxo profundo */
+  /* ou, se quiser um gradiente sutil:
+  background: radial-gradient(ellipse at center, #12081c 0%, #050208 100%);
+  */
+}
 
-    /* Linhas de scan diagonais bem sutis atravessando a tela */
-    .grid-lines {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
-      opacity: 0.5;
-    }
-    .grid-lines::before,
-    .grid-lines::after {
-      content: '';
-      position: absolute;
-      left: -10%;
-      width: 120%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(176,38,255,0.35), transparent);
-      animation: lineSweep 14s ease-in-out infinite;
-    }
-    .grid-lines::before { top: 22%; animation-delay: 0s; }
-    .grid-lines::after { top: 68%; animation-delay: 7s; }
-    @keyframes lineSweep {
-      0%   { transform: translateX(-100%); opacity: 0; }
-      10%  { opacity: 0.6; }
-      50%  { transform: translateX(0%); opacity: 0.6; }
-      90%  { opacity: 0; }
-      100% { transform: translateX(100%); opacity: 0; }
-    }
+/* ── ANIMATED GRID BG (grade cyberpunk, sutil) ── */
+.grid-bg {
+  position: fixed;
+  inset: -80px 0 0 -80px;
+  background-image:
+    linear-gradient(rgba(176,38,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(176,38,255,0.03) 1px, transparent 1px);
+  background-size: 80px 80px;
+  pointer-events: none;
+  z-index: 0;
+  animation: gridDrift 55s linear infinite;
+  will-change: background-position;
+}
+@keyframes gridDrift {
+  0%   { background-position: 0 0, 0 0; }
+  100% { background-position: 80px 80px, 80px 80px; }
+}
+
+/* ── VHS SCANLINES (mais rápidas, vibe Y2K) ── */
+.grid-lines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+  opacity: 0.1;
+}
+
+.grid-lines::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 0;
+  width: 100%;
+  height: calc(100% + 24px);
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.08) 0px,
+    rgba(255, 255, 255, 0.08) 2px,
+    transparent 2px,
+    transparent 12px
+  );
+  animation: vhsScroll 3s linear infinite;
+  will-change: transform;
+}
+
+@keyframes vhsScroll {
+  0%   { transform: translateY(-12px); }
+  100% { transform: translateY(12px); }
+}
+
+/* ── FILTRO Y2K "WASHED OUT" (aplicar no wrapper principal do site) ── */
+/* Coloca isso no elemento que envolve TODO o conteúdo, tipo <main> ou <body> */
+body {
+  filter: saturate(0.85) contrast(0.95) brightness(0.92);
+}
+
 
     /* ── HERO ── */
     #hero-section {
