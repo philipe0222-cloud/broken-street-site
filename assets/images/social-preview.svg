@@ -1,0 +1,35 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" rx="28" fill="#050208"/>
+  <rect x="24" y="24" width="1152" height="582" rx="24" stroke="#B026FF" stroke-opacity="0.35" stroke-width="2"/>
+  <rect x="40" y="40" width="1120" height="550" rx="20" fill="url(#bg)"/>
+  <g opacity="0.22">
+    <path d="M110 170H1090" stroke="#B026FF" stroke-width="1"/>
+    <path d="M110 250H1090" stroke="#B026FF" stroke-width="1"/>
+    <path d="M110 330H1090" stroke="#B026FF" stroke-width="1"/>
+    <path d="M110 410H1090" stroke="#B026FF" stroke-width="1"/>
+    <path d="M110 490H1090" stroke="#B026FF" stroke-width="1"/>
+  </g>
+  <circle cx="900" cy="210" r="140" fill="url(#glow)"/>
+  <rect x="182" y="176" width="248" height="248" rx="18" fill="#0C0714" stroke="#B026FF" stroke-opacity="0.45" stroke-width="2"/>
+  <path d="M260 300C260 261.026 291.026 230 330 230H332C370.974 230 402 261.026 402 300V322C402 360.974 370.974 392 332 392H330C291.026 392 260 360.974 260 322V300Z" fill="#B026FF" fill-opacity="0.16"/>
+  <path d="M296 276H366" stroke="#B026FF" stroke-width="8" stroke-linecap="round"/>
+  <path d="M296 304H366" stroke="#B026FF" stroke-width="8" stroke-linecap="round"/>
+  <path d="M296 332H350" stroke="#B026FF" stroke-width="8" stroke-linecap="round"/>
+  <path d="M220 160L260 130" stroke="#B026FF" stroke-width="3" stroke-linecap="round"/>
+  <path d="M440 160L400 130" stroke="#B026FF" stroke-width="3" stroke-linecap="round"/>
+  <text x="520" y="275" fill="#F2E8FF" font-family="Orbitron, Arial, sans-serif" font-size="54" font-weight="700" letter-spacing="5">BROKEN STREET</text>
+  <text x="520" y="325" fill="#B026FF" font-family="Share Tech Mono, monospace" font-size="24" letter-spacing="6">ARQUIVO OFICIAL</text>
+  <text x="520" y="378" fill="#C6B4E6" font-family="Rajdhani, Arial, sans-serif" font-size="28">SynthCity • Cyber Energy • Destino da cidade</text>
+  <rect x="520" y="420" width="228" height="4" rx="2" fill="#B026FF"/>
+  <rect x="520" y="432" width="172" height="4" rx="2" fill="#B026FF" fill-opacity="0.6"/>
+  <defs>
+    <linearGradient id="bg" x1="148" y1="72" x2="1090" y2="552" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#17061F"/>
+      <stop offset="1" stop-color="#050208"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(900 210) rotate(90) scale(140)">
+      <stop stop-color="#B026FF" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#B026FF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>
