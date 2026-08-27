@@ -459,7 +459,7 @@ body {
       position: relative;
       background: #0a0510;
       border: 1px solid var(--border);
-      overflow: hidden;
+      overflow: visible;
       text-decoration: none;
       display: block;
       aspect-ratio: 4/5;
@@ -474,7 +474,15 @@ body {
         0 0 0 1px rgba(var(--accent-rgb), 0.4),
         0 20px 50px -10px rgba(var(--accent-rgb), 0.35),
         0 0 80px -20px rgba(var(--accent-rgb), 0.5);
-      z-index: 2;
+      z-index: 3;
+      outline: none;
+    }
+
+    .agent-card:hover::after {
+      bottom: 8px;
+      right: 8px;
+      border-left: none;
+      border-top: none;
     }
 
     .agent-card::before,
@@ -484,14 +492,19 @@ body {
       width: 14px;
       height: 14px;
       border: 1px solid var(--accent);
-      opacity: 0.6;
-      transition: opacity 0.3s, width 0.3s, height 0.3s;
+      opacity: 0.55;
+      transition: opacity 0.25s ease, width 0.25s ease, height 0.25s ease;
       z-index: 5;
       pointer-events: none;
     }
     .agent-card::before { top: 8px; left: 8px; border-right: none; border-bottom: none; }
     .agent-card::after { bottom: 8px; right: 8px; border-left: none; border-top: none; }
-    .agent-card:hover::before, .agent-card:hover::after { opacity: 1; width: 22px; height: 22px; }
+    .agent-card:hover::before,
+    .agent-card:hover::after {
+      opacity: 1;
+      width: 22px;
+      height: 22px;
+    }
 
     .agent-card-image {
       position: absolute;
@@ -617,6 +630,120 @@ body {
       bottom: 0; left: 0; right: 0;
       padding: 22px 20px 24px;
       z-index: 4;
+    }
+
+    .agent-card-preview {
+      position: absolute;
+      left: calc(100% + 12px);
+      top: 18px;
+      width: min(260px, 42vw);
+      padding: 14px 14px 16px;
+      background: rgba(5, 2, 8, 0.95);
+      border: 1px solid rgba(var(--accent-rgb), 0.35);
+      backdrop-filter: blur(12px);
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: opacity 0.25s ease, transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+      z-index: 6;
+      pointer-events: none;
+      box-shadow: 0 0 24px rgba(var(--accent-rgb), 0.16);
+    }
+
+    .agent-card:hover .agent-card-image,
+    .agent-card:hover .agent-card-placeholder {
+      box-shadow: inset 0 0 0 1px rgba(var(--accent-rgb), 0.4);
+    }
+
+    .agent-card:hover .agent-card-preview {
+      opacity: 1;
+      transform: translateX(0);
+      border-color: rgba(var(--accent-rgb), 0.7);
+      box-shadow: 0 0 32px rgba(var(--accent-rgb), 0.22);
+    }
+
+    .agent-card.is-playing {
+      box-shadow:
+        0 0 0 1px rgba(var(--accent-rgb), 0.45),
+        0 0 40px rgba(var(--accent-rgb), 0.2);
+    }
+
+    .agent-card-preview::before,
+    .agent-card-preview::after {
+      content: '';
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border: 1px solid var(--accent);
+      opacity: 0.6;
+      transition: opacity 0.25s ease, width 0.25s ease, height 0.25s ease;
+      pointer-events: none;
+    }
+
+    .agent-card-preview::before {
+      top: 8px;
+      left: 8px;
+      border-right: none;
+      border-bottom: none;
+    }
+
+    .agent-card-preview::after {
+      bottom: 8px;
+      right: 8px;
+      border-left: none;
+      border-top: none;
+    }
+
+    .agent-card:hover .agent-card-preview::before,
+    .agent-card:hover .agent-card-preview::after {
+      opacity: 1;
+      width: 22px;
+      height: 22px;
+    }
+
+    .agent-card-preview-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .agent-card-preview-name {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.95rem;
+      letter-spacing: 0.12em;
+      color: #f5ebff;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .agent-card-preview-text {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.92rem;
+      line-height: 1.35;
+      color: var(--text-silver);
+      opacity: 0.95;
+      margin-bottom: 8px;
+    }
+
+    .agent-card-preview-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .agent-card-preview-pill {
+      display: inline-block;
+      padding: 4px 8px;
+      border: 1px solid rgba(var(--accent-rgb), 0.34);
+      background: rgba(var(--accent-rgb), 0.08);
+      color: var(--accent);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.56rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
     }
 
     .agent-card-content::before {
@@ -1246,6 +1373,16 @@ body {
       <div class="agent-card-overlay"></div>
       <div class="agent-card-glow"></div>
       <div class="agent-card-scan"></div>
+      <div class="agent-card-preview">
+        <div class="agent-card-preview-title">Prévia</div>
+        <div class="agent-card-preview-name">Philip Stills</div>
+        <div class="agent-card-preview-text">Protagonista da trama, com percepção ampliada, reflexos rápidos e papel central na luta contra a ameaça urbana.</div>
+        <div class="agent-card-preview-meta">
+          <span class="agent-card-preview-pill">Poder</span>
+          <span class="agent-card-preview-pill">Visão</span>
+          <span class="agent-card-preview-pill">Ativo</span>
+        </div>
+      </div>
       <span class="agent-card-badge">AGENTE-01</span>      
       <span class="agent-arrow">↗</span>
       <div class="agent-card-content">
@@ -1265,6 +1402,16 @@ body {
       <div class="agent-card-overlay"></div>
       <div class="agent-card-glow"></div>
       <div class="agent-card-scan"></div>
+      <div class="agent-card-preview">
+        <div class="agent-card-preview-title">Prévia</div>
+        <div class="agent-card-preview-name">Aidem Stewart</div>
+        <div class="agent-card-preview-text">Infiltrador de alta precisão, com cinética emocional, calor e um estilo furtivo feito para o caos.</div>
+        <div class="agent-card-preview-meta">
+          <span class="agent-card-preview-pill">Poder</span>
+          <span class="agent-card-preview-pill">Calor</span>
+          <span class="agent-card-preview-pill">Furtivo</span>
+        </div>
+      </div>
       <span class="agent-card-badge">AGENTE-02</span>
       <span class="agent-arrow">↗</span>
       <div class="agent-card-content">
@@ -1284,6 +1431,16 @@ body {
       <div class="agent-card-overlay"></div>
       <div class="agent-card-glow"></div>
       <div class="agent-card-scan"></div>
+      <div class="agent-card-preview">
+        <div class="agent-card-preview-title">Prévia</div>
+        <div class="agent-card-preview-name">Anny Pewter</div>
+        <div class="agent-card-preview-text">Estrategista ligada à interface neural, com visão tática da cidade e análise de dados em tempo real.</div>
+        <div class="agent-card-preview-meta">
+          <span class="agent-card-preview-pill">Poder</span>
+          <span class="agent-card-preview-pill">Rede</span>
+          <span class="agent-card-preview-pill">Estratégia</span>
+        </div>
+      </div>
       <span class="agent-card-badge">AGENTE-03</span>
       <span class="agent-arrow">↗</span>
       <div class="agent-card-content">
@@ -1303,6 +1460,16 @@ body {
       <div class="agent-card-overlay"></div>
       <div class="agent-card-glow"></div>
       <div class="agent-card-scan"></div>
+      <div class="agent-card-preview">
+        <div class="agent-card-preview-title">Prévia</div>
+        <div class="agent-card-preview-name">Scott Smith</div>
+        <div class="agent-card-preview-text">Defensor de grande resistência, com presença imponente e força bruta para suportar o impacto do conflito.</div>
+        <div class="agent-card-preview-meta">
+          <span class="agent-card-preview-pill">Poder</span>
+          <span class="agent-card-preview-pill">Força</span>
+          <span class="agent-card-preview-pill">Resistência</span>
+        </div>
+      </div>
       <span class="agent-card-badge">AGENTE-04</span>
       <span class="agent-arrow">↗</span>
       <div class="agent-card-content">
@@ -1524,6 +1691,16 @@ body {
   const navLinks = document.getElementById('nav-links');
   navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
   navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  const cards = document.querySelectorAll('.agent-card');
+
+  cards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      card.classList.add('is-playing');
+      clearTimeout(card._holoTimeout);
+      card._holoTimeout = setTimeout(() => card.classList.remove('is-playing'), 220);
+    });
+  });
 </script>
 
 </body>

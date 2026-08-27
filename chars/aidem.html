@@ -348,5 +348,46 @@
   </div>
 </footer>
 
+<!-- Image Zoom Modal -->
+<div class="image-zoom-modal">
+  <div class="image-zoom-content">
+    <img id="zoom-image" src="" alt="Zoomed image">
+    <button class="image-zoom-close" onclick="closeImageZoom()">✕</button>
+  </div>
+</div>
+
+<script>
+  // Image Zoom Functionality
+  function openImageZoom(src) {
+    document.getElementById('zoom-image').src = src;
+    document.querySelector('.image-zoom-modal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeImageZoom() {
+    document.querySelector('.image-zoom-modal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  const imageZoomModal = document.querySelector('.image-zoom-modal');
+  imageZoomModal.addEventListener('click', function(e) {
+    if (e.target === imageZoomModal) closeImageZoom();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeImageZoom();
+  });
+
+  // Add click listeners to hero image and gallery images
+  document.querySelectorAll('img').forEach(img => {
+    if (img.id !== 'zoom-image') {
+      img.classList.add('clickable-image');
+      img.addEventListener('click', function() {
+        if (this.src && !this.src.includes('data:')) openImageZoom(this.src);
+      });
+    }
+  });
+</script>
+
 </body>
 </html>

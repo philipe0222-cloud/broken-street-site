@@ -614,6 +614,87 @@
         animation-iteration-count: 1 !important;
       }
     }
+
+    /* Image Zoom Modal */
+    .image-zoom-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 2, 8, 0.95);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      animation: fadeIn 0.2s ease;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .image-zoom-modal.active {
+      display: flex;
+    }
+
+    .image-zoom-content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .image-zoom-content img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      animation: zoomIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      border: 1px solid rgba(176, 38, 255, 0.3);
+      box-shadow: 0 0 40px rgba(176, 38, 255, 0.2);
+    }
+
+    @keyframes zoomIn {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .image-zoom-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      background: rgba(176, 38, 255, 0.1);
+      border: 1px solid rgba(176, 38, 255, 0.3);
+      color: var(--text-main);
+      font-size: 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      font-family: 'Orbitron', monospace;
+    }
+
+    .image-zoom-close:hover {
+      background: rgba(176, 38, 255, 0.2);
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: scale(1.1);
+    }
+
+    .clickable-image {
+      cursor: zoom-in;
+      transition: filter 0.2s;
+    }
+
+    .clickable-image:hover {
+      filter: brightness(1.1);
+    }
   </style>
 </head>
 <body>
@@ -623,7 +704,6 @@
     <div class="top-nav-left">
       <a href="index.html" class="nav-back">← BROKEN STREET</a>
       <div class="nav-sep"></div>
-      <span class="nav-title-wk">WORLDBOOK</span>
     </div>
     <label class="nav-search">
       <span class="nav-search-icon">⌕</span>
@@ -637,8 +717,8 @@
     <main class="wb-main">
       <header class="wb-hero">
         <p class="wb-hero-tag">WRDBK.001 · CLASSIFIED LVL 07</p>
-        <h1 class="wb-hero-title">WORLDBOOK</h1>
-        <p class="wb-hero-desc">O arquivo completo do mundo de Broken Street: uma Terra remodelada pela Cyber Energy, dividida entre cidades impossíveis, poderes fatais e a ameaça crescente de Apocalypse.</p>
+        <h1 class="wb-hero-title" id="wb-hero-title">WORLDBOOK</h1>
+        <p class="wb-hero-desc" id="wb-hero-desc">O arquivo completo do mundo de Broken Street: uma Terra remodelada pela Cyber Energy, dividida entre cidades impossíveis, poderes fatais e a ameaça crescente de Apocalypse.</p>
         <select class="mobile-page-nav" id="mobile-page-nav" aria-label="Escolha uma página do worldbook"></select>
         <p class="search-status" id="search-status" aria-live="polite"></p>
       </header>
@@ -1581,6 +1661,15 @@
 
       document.getElementById('mobile-page-nav').value = id;
       document.title = `${page.title} | Broken Street Worldbook`;
+      document.getElementById('wb-hero-title').textContent = page.title.toUpperCase();
+      document.getElementById('wb-hero-desc').textContent = page.lead;
+
+      const hero = document.querySelector('.wb-hero');
+      if (id === 'visao-geral') {
+        hero.style.display = 'block';
+      } else {
+        hero.style.display = 'none';
+      }
 
       if (updateHash) history.replaceState(null, '', `#${id}`);
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1614,6 +1703,52 @@
     });
 
     buildWorldbook();
+
+    // Image Zoom Functionality
+    const imageZoomModal = document.createElement('div');
+    imageZoomModal.className = 'image-zoom-modal';
+    imageZoomModal.innerHTML = `
+      <div class="image-zoom-content">
+        <img id="zoom-image" src="" alt="Zoomed image">
+        <button class="image-zoom-close" onclick="closeImageZoom()">✕</button>
+      </div>
+    `;
+    document.body.appendChild(imageZoomModal);
+
+    function openImageZoom(src) {
+      document.getElementById('zoom-image').src = src;
+      imageZoomModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeImageZoom() {
+      imageZoomModal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    imageZoomModal.addEventListener('click', function(e) {
+      if (e.target === imageZoomModal) closeImageZoom();
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeImageZoom();
+    });
+
+    // Add click listeners to all images in the articles
+    const observer = new MutationObserver(function() {
+      document.querySelectorAll('.wb-article img:not(.image-listener)').forEach(img => {
+        img.classList.add('image-listener');
+        img.classList.add('clickable-image');
+        img.addEventListener('click', function() {
+          if (this.src) openImageZoom(this.src);
+        });
+      });
+    });
+
+    observer.observe(document.getElementById('articles-root'), {
+      childList: true,
+      subtree: true
+    });
   </script>
 </body>
 </html>
