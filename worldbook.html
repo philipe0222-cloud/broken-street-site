@@ -1614,7 +1614,7 @@
         <p class="sidebar-section-title">${escapeHtml(group.name)}</p>
         ${group.pages.map(id => {
           const page = pageMap.get(id);
-          return page ? `<button class="sidebar-link" type="button" data-article="${page.id}">${escapeHtml(page.title)}</button>` : '';
+          return page ? `<a class="sidebar-link" href="worldbook.html#${page.id}" data-article="${page.id}">${escapeHtml(page.title)}</a>` : '';
         }).join('')}
       `).join('');
 
@@ -1631,7 +1631,10 @@
 
       sidebar.addEventListener('click', event => {
         const link = event.target.closest('[data-article]');
-        if (link) showArticle(link.dataset.article);
+        if (link) {
+          event.preventDefault();
+          showArticle(link.dataset.article);
+        }
       });
 
       mobileSelect.addEventListener('change', event => showArticle(event.target.value));

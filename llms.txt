@@ -1,0 +1,45 @@
+# Broken Street
+
+> Arquivo oficial do universo ficticio Broken Street, incluindo personagens, capitulos e worldbook.
+
+## Paginas principais
+
+- [Inicio](https://philipe0222-cloud.github.io/broken-street-site/): sinopse, universo e personagens.
+- [Capitulos](https://philipe0222-cloud.github.io/broken-street-site/chapters.html): status da narrativa.
+- [Worldbook](https://philipe0222-cloud.github.io/broken-street-site/worldbook.html): enciclopedia do universo. Cada link abaixo abre diretamente um topico.
+- [Philip Stills](https://philipe0222-cloud.github.io/broken-street-site/chars/philip.html)
+- [Aidem Stewart](https://philipe0222-cloud.github.io/broken-street-site/chars/aidem.html)
+- [Anny Pewter](https://philipe0222-cloud.github.io/broken-street-site/chars/anny.html)
+- [Scott Smith](https://philipe0222-cloud.github.io/broken-street-site/chars/scott.html)
+
+## Topicos do Worldbook
+
+- [O Mundo de Broken Street](https://philipe0222-cloud.github.io/broken-street-site/worldbook.html#visao-geral)
+- [Cosmologia e Origem](https://philipe0222-cloud.github.io/broken-street-site/worldbook.html#cosmologia)
+- [Geografia do Mundo Transformado](https://philipe0222-cloud.github.io/broken-street-site/worldbook.html#geografia)
+- [Synth City](https://philipe0222-cloud.github.io/broken-street-site/worldbook.html#synth-city)
+- [Cyberwave](https://philipe0222-cloud.github.io/broken-street-site/worldbook.html#cyberwave)
+- [Shining Desert](https://philipe0222-cloud.github.io/broken-street-site/worldbook.html#shining-desert)
+- [Pumpkin Grove](https://philipe0222-cloud.github.io/broken-street-site/worldbook.html#pumpkin-grove)
+- [Frostwood](https://philipe0222-cloud.github.io/broken-street-site/worldbook.html#frostwood)
+- [Crimson Plateau](https://philipe0222-cloud.github.io/broken-street-site/worldbook.html#crimson-plateau)
+- [Village of Silence](https://philipe0222-cloud.github.io/broken-street-site/worldbook.html#village-of-silence)
+- [Sanctuary of Eterion](https://philipe0222-cloud.github.io/broken-street-site/worldbook.html#sanctuary-of-eterion)
+- [Purgatory](https://philipe0222-cloud.github.io/broken-street-site/worldbook.html#purgatory)
+- [Dream World](https://philipe0222-cloud.github.io/broken-street-site/worldbook.html#dream-world)
+- [Cyber Energy](https://philipe0222-cloud.github.io/broken-street-site/worldbook.html#cyber-energy)
+- [Sistema de Patentes](https://philipe0222-cloud.github.io/broken-street-site/worldbook.html#patentes)
+- [Limites e Consequencias](https://philipe0222-cloud.github.io/broken-street-site/worldbook.html#limites)
+- [Echocoins](https://philipe0222-cloud.github.io/broken-street-site/worldbook.html#echocoins)
+- [Governo e Militares](https://philipe0222-cloud.github.io/broken-street-site/worldbook.html#governo-militares)
+- [Estrutura Social e Humanidade](https://philipe0222-cloud.github.io/broken-street-site/worldbook.html#estrutura-social)
+- [Profissoes e Ocupacoes](https://philipe0222-cloud.github.io/broken-street-site/worldbook.html#profissoes)
+- [Broken Street](https://philipe0222-cloud.github.io/broken-street-site/worldbook.html#broken-street)
+- [Organizacoes e Faccoes](https://philipe0222-cloud.github.io/broken-street-site/worldbook.html#outras-organizacoes)
+- [Armas Misticas e Tecnologia](https://philipe0222-cloud.github.io/broken-street-site/worldbook.html#armas-tecnologia)
+- [Fauna, Flora e Criaturas](https://philipe0222-cloud.github.io/broken-street-site/worldbook.html#fauna-flora)
+- [Religiao e Espiritualidade](https://philipe0222-cloud.github.io/broken-street-site/worldbook.html#religiao)
+- [Cultura, Arte e Linguagem](https://philipe0222-cloud.github.io/broken-street-site/worldbook.html#cultura-linguagem)
+- [Historia: As Eras](https://philipe0222-cloud.github.io/broken-street-site/worldbook.html#historia-eras)
+- [Fragmentos Primordiais](https://philipe0222-cloud.github.io/broken-street-site/worldbook.html#fragmentos)
+- [Apocalypse](https://philipe0222-cloud.github.io/broken-street-site/worldbook.html#apocalypse)
