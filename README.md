@@ -7,6 +7,7 @@ Site fictício de universo cyberpunk para a série **Broken Street**, com estét
 | Arquivo | Descrição |
 |---|---|
 | `index.html` | Página principal (hero, sinopse, agentes, cyber energy, trilha, apocalypse, worldbook) |
+| `personagens.html` | Galeria geral de personagens com imagem, nome e descrição básica |
 | `worldbook.html` | Enciclopédia do universo com sidebar de navegação e busca |
 | `chars/philip.html` | Arquivo do personagem Philip Stills (Tipo-P / Percepção) |
 | `chars/aidem.html` | Arquivo do personagem Aidem Stewart (Tipo-K / Cinética) |

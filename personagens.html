@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Galeria de personagens do universo Broken Street.">
+  <title>Personagens | Broken Street</title>
+  <link rel="icon" type="image/png" href="assets/images/icon site.png">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050208;
+      --accent: #b026ff;
+      --accent-rgb: 176, 38, 255;
+      --text: #e8e0f4;
+      --muted: #a99db5;
+      --line: rgba(176, 38, 255, 0.24);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { min-height: 100%; background: var(--bg); }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      color: var(--text);
+      font-family: 'Share Tech Mono', monospace;
+      background:
+        radial-gradient(circle at 78% 10%, rgba(var(--accent-rgb), 0.13), transparent 32%),
+        radial-gradient(circle at 12% 55%, rgba(var(--accent-rgb), 0.06), transparent 35%),
+        linear-gradient(180deg, #0a0410 0%, #020104 70%);
+    }
+
+    a { color: inherit; }
+
+    .scanlines {
+      position: fixed;
+      inset: 0;
+      z-index: 5;
+      pointer-events: none;
+      opacity: 0.32;
+      background: repeating-linear-gradient(0deg, transparent 0 2px, rgba(0, 0, 0, 0.1) 2px 4px);
+    }
+
+    .topbar {
+      position: relative;
+      z-index: 6;
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 12px clamp(20px, 6vw, 80px);
+      border-bottom: 1px solid var(--line);
+      background: rgba(5, 2, 8, 0.86);
+    }
+
+    .brand, .back-link {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .brand { color: var(--text); font-family: 'Orbitron', monospace; font-weight: 700; }
+    .back-link:hover { color: var(--accent); }
+
+    main {
+      position: relative;
+      z-index: 1;
+      width: min(1180px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: clamp(64px, 10vw, 112px) 0 88px;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--accent);
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+    }
+
+    h1 {
+      margin: 0;
+      color: #fff;
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(2rem, 6vw, 4.2rem);
+      line-height: 1.1;
+      font-weight: 900;
+    }
+
+    .title-rule {
+      width: min(100%, 480px);
+      height: 1px;
+      margin: 24px 0 42px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+
+    .character-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .character-card {
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: rgba(12, 8, 18, 0.82);
+      transition: border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .character-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(var(--accent-rgb), 0.72);
+      box-shadow: 0 12px 34px rgba(var(--accent-rgb), 0.12);
+    }
+
+    .character-image {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: center top;
+      border-bottom: 1px solid var(--line);
+      background:
+        linear-gradient(145deg, rgba(var(--accent-rgb), 0.13), transparent 65%),
+        #09060d;
+    }
+
+    .character-image-trigger {
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      cursor: zoom-in;
+      background: #09060d;
+    }
+
+    .character-image-trigger:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: -3px;
+    }
+
+    .character-info { padding: 18px; }
+
+    .character-index {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+    }
+
+    .character-name {
+      margin: 0 0 9px;
+      color: #fff;
+      font-family: 'Orbitron', monospace;
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+
+    .character-description {
+      margin: 0;
+      color: var(--muted);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .character-dialog {
+      position: fixed;
+      width: min(960px, calc(100% - 32px));
+      max-width: none;
+      max-height: calc(100dvh - 32px);
+      padding: 0;
+      overflow: auto;
+      color: var(--text);
+      border: 1px solid rgba(var(--accent-rgb), 0.55);
+      background: #08050d;
+      box-shadow: 0 0 64px rgba(0, 0, 0, 0.75), 0 0 34px rgba(var(--accent-rgb), 0.14);
+    }
+
+    .character-dialog::backdrop { background: rgba(0, 0, 0, 0.82); backdrop-filter: blur(5px); }
+
+    .dialog-close {
+      position: sticky;
+      z-index: 2;
+      float: right;
+      top: 12px;
+      width: 40px;
+      height: 40px;
+      margin: 12px 12px -52px 0;
+      border: 1px solid var(--line);
+      color: #fff;
+      background: rgba(5, 2, 8, 0.9);
+      font: inherit;
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    .dialog-close:hover { border-color: var(--accent); color: var(--accent); }
+
+    .dialog-layout {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
+      min-height: 560px;
+    }
+
+    .dialog-image {
+      width: 100%;
+      height: 100%;
+      min-height: 560px;
+      max-height: 78vh;
+      object-fit: contain;
+      background: radial-gradient(circle at center, rgba(var(--accent-rgb), 0.14), #09060d 70%);
+    }
+
+    .dialog-content { align-self: center; padding: 52px 36px 36px; }
+
+    .dialog-eyebrow {
+      margin: 0 0 12px;
+      color: var(--accent);
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .dialog-name {
+      margin: 0 0 26px;
+      color: #fff;
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(1.5rem, 4vw, 2.3rem);
+      line-height: 1.2;
+      overflow-wrap: anywhere;
+    }
+
+    .character-details {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0 18px;
+      margin: 0;
+    }
+
+    .detail-item {
+      min-width: 0;
+      padding: 13px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .detail-item:last-child { grid-column: 1 / -1; }
+
+    .detail-item dt {
+      margin-bottom: 6px;
+      color: var(--accent);
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .detail-item dd {
+      margin: 0;
+      color: var(--text);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1rem;
+      line-height: 1.45;
+      overflow-wrap: anywhere;
+    }
+
+    @media (max-width: 900px) {
+      .character-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 520px) {
+      .topbar { align-items: flex-start; flex-direction: column; gap: 9px; }
+      main { width: min(100% - 32px, 420px); padding-top: 56px; }
+      .character-grid { grid-template-columns: 1fr; gap: 16px; }
+      .character-image { aspect-ratio: 5 / 4; }
+      .character-dialog { width: calc(100% - 20px); max-height: calc(100dvh - 20px); }
+      .dialog-layout { grid-template-columns: 1fr; }
+      .dialog-image { height: min(48vh, 380px); min-height: 0; max-height: none; }
+      .dialog-content { padding: 26px 22px 24px; }
+      .dialog-name { margin-bottom: 18px; }
+      .character-details { gap: 0 14px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="scanlines" aria-hidden="true"></div>
+  <header class="topbar">
+    <a class="brand" href="index.html">Broken Street</a>
+    <a class="back-link" href="index.html">← Página inicial</a>
+  </header>
+
+  <main>
+    <p class="eyebrow">// DATABASE · REGISTRO DE INDIVÍDUOS</p>
+    <h1>PERSONAGENS</h1>
+    <div class="title-rule" aria-hidden="true"></div>
+
+    <section class="character-grid" aria-label="Galeria de personagens">
+      <article class="character-card">
+        <button class="character-image-trigger" type="button" aria-label="Ver ficha de Philip Stills" data-name="Philip Stills" data-title="Agente-01 · Protagonista" data-age="17 anos" data-height="1,73 m" data-species="Humano" data-level="E → S" data-aspect="Ego" data-ability="Fogo Fantasma: chamas violetas que queimam matéria e energia, ficando mais intensas conforme as emoções de Philip." data-image="assets/images/characters/Ph-png.png" data-alt="Philip Stills">
+          <img class="character-image" src="assets/images/characters/Ph-png.png" alt="" loading="lazy">
+        </button>
+        <div class="character-info">
+          <p class="character-index">REGISTRO 001</p>
+          <h2 class="character-name">Philip Stills</h2>
+          <p class="character-description">Protagonista resiliente que transforma determinação e emoção em chamas violetas.</p>
+        </div>
+      </article>
+
+      <article class="character-card">
+        <button class="character-image-trigger" type="button" aria-label="Ver ficha de Aidem Stewart" data-name="Aidem Stewart" data-title="Agente-02 · Deuteragonista" data-age="16 anos" data-height="1,74 m" data-species="Humano" data-level="D → S" data-aspect="Angústia" data-ability="Shadow Abyss: controla sombras vivas envoltas em névoa escura, capazes de consumir luz, presença e percepção." data-image="assets/images/characters/Aidem-png.png" data-alt="Aidem Stewart">
+          <img class="character-image" src="assets/images/characters/Aidem-png.png" alt="" loading="lazy">
+        </button>
+        <div class="character-info">
+          <p class="character-index">REGISTRO 002</p>
+          <h2 class="character-name">Aidem Stewart</h2>
+          <p class="character-description">Agente habilidoso que combina furtividade e energia cinética em combate.</p>
+        </div>
+      </article>
+
+      <article class="character-card">
+        <button class="character-image-trigger" type="button" aria-label="Ver ficha de Anny Pewter" data-name="Anny Pewter" data-title="Agente-03 · Tritagonista" data-age="18 anos" data-height="1,69 m" data-species="Humano" data-level="D → S" data-aspect="Orgulho" data-ability="Raciocínio Absoluto: amplia análise, memória, lógica e processamento para decifrar códigos, padrões e sistemas em segundos." data-image="assets/images/characters/Anny-png.png" data-alt="Anny Pewter">
+          <img class="character-image" src="assets/images/characters/Anny-png.png" alt="" loading="lazy">
+        </button>
+        <div class="character-info">
+          <p class="character-index">REGISTRO 003</p>
+          <h2 class="character-name">Anny Pewter</h2>
+          <p class="character-description">Estrategista observadora, conectada à tecnologia e à análise tática.</p>
+        </div>
+      </article>
+
+      <article class="character-card">
+        <button class="character-image-trigger" type="button" aria-label="Ver ficha de Scott Smith" data-name="Scott Smith" data-title="Agente-04 · Anti-herói" data-age="19 anos" data-height="1,72 m" data-species="Humano" data-level="B → S" data-aspect="Resiliência" data-ability="Absorção Adaptativa: absorve matéria, impacto e energia para revestir o corpo, elevando sua resistência e força física." data-image="assets/images/characters/Scott-png.png" data-alt="Scott Smith">
+          <img class="character-image" src="assets/images/characters/Scott-png.png" alt="" loading="lazy">
+        </button>
+        <div class="character-info">
+          <p class="character-index">REGISTRO 004</p>
+          <h2 class="character-name">Scott Smith</h2>
+          <p class="character-description">Defensor de grande resistência, conhecido por sua força e presença imponente.</p>
+        </div>
+      </article>
+
+      <!-- Para adicionar um personagem, duplique este article e edite imagem, nome e descrição.
+      <article class="character-card">
+        <button class="character-image-trigger" type="button" aria-label="Ver ficha de Nome do personagem" data-name="Nome do personagem" data-title="Título" data-age="Idade" data-height="Altura" data-species="Espécie" data-level="Nível" data-aspect="Aspecto" data-ability="Descreva a habilidade principal." data-image="assets/images/characters/nome-da-imagem.png" data-alt="Nome do personagem">
+          <img class="character-image" src="assets/images/characters/nome-da-imagem.png" alt="" loading="lazy">
+        </button>
+        <div class="character-info">
+          <p class="character-index">REGISTRO 005</p>
+          <h2 class="character-name">Nome do personagem</h2>
+          <p class="character-description">Escreva aqui uma descrição básica do personagem.</p>
+        </div>
+      </article>
+      -->
+    </section>
+  </main>
+
+  <dialog class="character-dialog" id="character-dialog" aria-labelledby="dialog-name">
+    <button class="dialog-close" type="button" aria-label="Fechar ficha">×</button>
+    <div class="dialog-layout">
+      <img class="dialog-image" id="dialog-image" alt="">
+      <div class="dialog-content">
+        <p class="dialog-eyebrow" id="dialog-title"></p>
+        <h2 class="dialog-name" id="dialog-name"></h2>
+        <dl class="character-details">
+          <div class="detail-item"><dt>Nome</dt><dd id="detail-name"></dd></div>
+          <div class="detail-item"><dt>Título</dt><dd id="detail-title"></dd></div>
+          <div class="detail-item"><dt>Idade</dt><dd id="detail-age"></dd></div>
+          <div class="detail-item"><dt>Altura</dt><dd id="detail-height"></dd></div>
+          <div class="detail-item"><dt>Espécie</dt><dd id="detail-species"></dd></div>
+          <div class="detail-item"><dt>Nível</dt><dd id="detail-level"></dd></div>
+          <div class="detail-item"><dt>Aspecto</dt><dd id="detail-aspect"></dd></div>
+          <div class="detail-item"><dt>Habilidade</dt><dd id="detail-ability"></dd></div>
+        </dl>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    const characterDialog = document.getElementById('character-dialog');
+    const dialogImage = document.getElementById('dialog-image');
+    const dialogTitle = document.getElementById('dialog-title');
+    const dialogName = document.getElementById('dialog-name');
+    const detailFields = ['name', 'title', 'age', 'height', 'species', 'level', 'aspect', 'ability'];
+
+    document.querySelectorAll('.character-image-trigger').forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        dialogImage.src = trigger.dataset.image;
+        dialogImage.alt = trigger.dataset.alt;
+        dialogTitle.textContent = trigger.dataset.title;
+        dialogName.textContent = trigger.dataset.name;
+        detailFields.forEach((field) => {
+          document.getElementById(`detail-${field}`).textContent = trigger.dataset[field];
+        });
+        characterDialog.showModal();
+      });
+    });
+
+    document.querySelector('.dialog-close').addEventListener('click', () => characterDialog.close());
+    characterDialog.addEventListener('click', (event) => {
+      if (event.target === characterDialog) characterDialog.close();
+    });
+  </script>
+</body>
+</html>
