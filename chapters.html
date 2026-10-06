@@ -136,6 +136,12 @@
       background: linear-gradient(110deg, rgba(176, 38, 255, 0.045), rgba(16, 14, 20, 0.85) 44%);
       transition: border-color 180ms ease, background 180ms ease;
     }
+    .chapter-card.is-current {
+      border-color: rgba(176, 38, 255, 0.78);
+      background:
+        linear-gradient(110deg, rgba(176, 38, 255, 0.16), rgba(16, 14, 20, 0.92) 58%);
+      box-shadow: 0 0 22px rgba(176, 38, 255, 0.2), inset 0 0 18px rgba(176, 38, 255, 0.06);
+    }
     a.chapter-card { text-decoration: none; }
     a.chapter-card:hover {
       border-color: rgba(176, 38, 255, 0.48);
@@ -172,12 +178,21 @@
       font-size: 0.72rem;
       white-space: nowrap;
     }
+    .chapter-card.is-current .chapter-status {
+      color: #efd5ff;
+      font-weight: 700;
+      text-shadow: 0 0 12px rgba(176, 38, 255, 0.72);
+    }
     .chapter-status::before {
       width: 6px;
       height: 6px;
       border-radius: 50%;
       background: #716b78;
       content: '';
+    }
+    .chapter-card.is-current .chapter-status::before {
+      background: #d99aff;
+      box-shadow: 0 0 7px #b026ff, 0 0 15px rgba(176, 38, 255, 0.85);
     }
     a.chapter-card .chapter-status { color: #d1a2e8; }
     a.chapter-card .chapter-status::before {
@@ -288,5 +303,6 @@
     <span>BROKEN STREET</span>
     <a href="worldbook.html">Explorar o worldbook</a>
   </footer>
+  <script src="js/reading-progress.js" defer></script>
 </body>
 </html>

@@ -945,68 +945,6 @@
     font-size: 11px;
   }
 }
-
-
-    /* ── APOCALYPSE / ARQUIVO Ω ── */
-    #apocalypse-section {
-      position: relative;
-      z-index: 1;
-      padding: 120px 60px;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .apoc-timeline { margin-top: 60px; position: relative; padding-left: 40px; }
-
-    .apoc-timeline::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 1px;
-      background: linear-gradient(to bottom, var(--neon-purple), transparent);
-      opacity: 0.25;
-    }
-
-    .apoc-event { position: relative; padding-bottom: 48px; }
-
-    .apoc-event::before {
-      content: '';
-      position: absolute;
-      left: -44px;
-      top: 8px;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--neon-purple);
-      box-shadow: 0 0 10px var(--neon-purple);
-    }
-
-    .apoc-year {
-      font-family: 'Orbitron', monospace;
-      font-size: 0.65rem;
-      color: var(--neon-purple);
-      letter-spacing: 0.2em;
-      margin-bottom: 8px;
-      opacity: 0.6;
-    }
-
-    .apoc-title {
-      font-family: 'Orbitron', monospace;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 12px;
-      letter-spacing: 0.04em;
-    }
-
-    .apoc-text {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 1rem;
-      line-height: 1.7;
-      opacity: 0.75;
-      max-width: 680px;
-    }
-
     /* ── CAPÍTULOS TEASER ── */
     #chapters-section {
       position: relative;
@@ -1225,7 +1163,7 @@
       }
       .nav-links.open { display: flex; }
       .nav-toggle { display: flex; }
-      #sinopse-section, #cyber-section, #apocalypse-section, #arquivo-section { padding: 80px 28px; }
+      #sinopse-section, #cyber-section, #arquivo-section { padding: 80px 28px; }
       .sinopse-body, .cyber-grid { grid-template-columns: 1fr; gap: 40px; }
       #agentes-section, #trilha-section, #worldbook-section, #chapters-section { padding: 60px 28px; }
       .worldbook-inner { flex-direction: column; }
@@ -1559,59 +1497,11 @@
 </section>
 
 
-<!-- ARQUIVO Ω — teaser sem spoilers -->
-<section id="apocalypse-section">
-  <p class="section-label">06 · OMEGA FILE · NÍVEL 5</p>
-  <h2 class="section-title-large">ARQUIVO Ω</h2>
-
-  <div class="apoc-timeline">
-
-    <div class="apoc-event">
-      <p class="apoc-year">REGISTRO PRIMÁRIO</p>
-      <h3 class="apoc-title">O Sinal Ω</h3>
-      <p class="apoc-text">
-        Antes de grandes colapsos registrados, uma frequência desconhecida foi detectada em diferentes regiões do mundo. 
-        O fenômeno recebeu o codinome Sinal Ω. Onde ele surge, a realidade começa a apresentar falhas.
-      </p>
-    </div>
-
-    <div class="apoc-event">
-      <p class="apoc-year">OCORRÊNCIA GLOBAL</p>
-      <h3 class="apoc-title">Anomalias Crescentes</h3>
-      <p class="apoc-text">
-        Com o aumento da atividade da Cyber Energy, eventos impossíveis passaram a ocorrer: distorções espaciais, 
-        apagões sem causa aparente, mutações energéticas e surtos de violência inexplicável.
-      </p>
-    </div>
-
-    <div class="apoc-event">
-      <p class="apoc-year">REGISTRO RESTRITO</p>
-      <h3 class="apoc-title">Os Fragmentos</h3>
-      <p class="apoc-text">
-        Arquivos antigos mencionam fragmentos de origem desconhecida ligados ao despertar dos Cavaleiros do Apocalipse. 
-        Cada fragmento parece carregar parte de uma força maior associada à entidade conhecida como Apocalypse.
-      </p>
-    </div>
-
-    <div class="apoc-event">
-      <p class="apoc-year">STATUS ATUAL</p>
-      <h3 class="apoc-title">Arquivo Incompleto</h3>
-      <p class="apoc-text">
-        Grande parte dos dados foi apagada, corrompida ou selada por organizações desconhecidas. 
-        As informações restantes indicam uma ameaça de extinção global.
-        <br>
-        <strong>Prioridade:</strong> impedir a reunião dos fragmentos.
-      </p>
-    </div>
-
-  </div>
-</section>
-
 <!-- WORLDBOOK TEASER -->
 <section id="worldbook-section">
   <div class="worldbook-inner">
     <div class="worldbook-text">
-      <p class="section-label">07 · LORE DATABASE</p>
+      <p class="section-label">06 · LORE DATABASE</p>
       <h2 class="section-title-large">WORLDBOOK</h2>
       <p>O banco de dados completo de Synthcity. História, geografia, facções, tecnologia, terminologia e os segredos que as corporações não querem que você saiba.</p>
       <a href="worldbook.html" class="btn-primary">ACESSAR WORLDBOOK →</a>
