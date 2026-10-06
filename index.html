@@ -40,30 +40,14 @@
       overflow-x: hidden;
       position: relative;
       background:
-        radial-gradient(circle at 78% 8%, rgba(176,38,255,0.12), transparent 32%),
-        radial-gradient(circle at 12% 42%, rgba(176,38,255,0.06), transparent 36%),
-        radial-gradient(circle at 60% 90%, rgba(176,38,255,0.05), transparent 40%),
-        linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-deeper) 50%, var(--bg-deep) 100%);
+        radial-gradient(ellipse at 78% 8%, rgba(95,38,120,0.035), transparent 34%),
+        radial-gradient(ellipse at 12% 42%, rgba(70,32,92,0.022), transparent 38%),
+        linear-gradient(180deg, #030206 0%, #050408 52%, #030206 100%);
     }
 
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: #050208; }
     ::-webkit-scrollbar-thumb { background: rgba(176,38,255,0.4); }
-
-    /* ── SCANLINES ── */
-    .scanlines {
-      position: fixed;
-      inset: 0;
-      background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(0,0,0,0.07) 2px,
-        rgba(0,0,0,0.07) 4px
-      );
-      pointer-events: none;
-      z-index: 9999;
-    }
 
     /* ── NAV ── */
     nav {
@@ -140,69 +124,22 @@
       font-size: 1rem;
     }
 
-/* ── BACKGROUND ESCURO (preto-arroxeado) ── */
-body {
-  background: #0a0410; /* preto puxado pro roxo profundo */
-  /* ou, se quiser um gradiente sutil:
-  background: radial-gradient(ellipse at center, #12081c 0%, #050208 100%);
-  */
-}
-
-/* ── ANIMATED GRID BG (grade cyberpunk, sutil) ── */
+/* ── ATMOSFERA ESCURA ── */
 .grid-bg {
-  position: fixed;
-  inset: -80px 0 0 -80px;
-  background-image:
-    linear-gradient(rgba(176,38,255,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(176,38,255,0.03) 1px, transparent 1px);
-  background-size: 80px 80px;
-  pointer-events: none;
-  z-index: 0;
-  animation: gridDrift 55s linear infinite;
-  will-change: background-position;
-}
-@keyframes gridDrift {
-  0%   { background-position: 0 0, 0 0; }
-  100% { background-position: 80px 80px, 80px 80px; }
-}
-
-/* ── VHS SCANLINES (mais rápidas, vibe Y2K) ── */
-.grid-lines {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 9999;
-  overflow: hidden;
-  opacity: 0.1;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse at 50% 38%, rgba(72,34,91,0.035), transparent 58%),
+    linear-gradient(180deg, rgba(3,2,6,0.08), rgba(0,0,0,0.16));
 }
-
-.grid-lines::before {
-  content: '';
-  position: absolute;
-  top: -12px;
-  left: 0;
-  width: 100%;
-  height: calc(100% + 24px);
-  background-image: repeating-linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.08) 0px,
-    rgba(255, 255, 255, 0.08) 2px,
-    transparent 2px,
-    transparent 12px
-  );
-  animation: vhsScroll 3s linear infinite;
-  will-change: transform;
-}
-
-@keyframes vhsScroll {
-  0%   { transform: translateY(-12px); }
-  100% { transform: translateY(12px); }
-}
-
-/* ── FILTRO Y2K "WASHED OUT" (aplicar no wrapper principal do site) ── */
-/* Coloca isso no elemento que envolve TODO o conteúdo, tipo <main> ou <body> */
-body {
-  filter: saturate(0.85) contrast(0.95) brightness(0.92);
+.digital-softness {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  backdrop-filter: blur(0.35px);
 }
 
 
@@ -225,7 +162,7 @@ body {
       width: 900px;
       height: 900px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(176,38,255,0.1) 0%, transparent 65%);
+      background: radial-gradient(circle, rgba(176,38,255,0.045) 0%, transparent 65%);
       pointer-events: none;
       z-index: 0;
     }
@@ -1088,9 +1025,10 @@ body {
       margin: 44px auto 0;
       max-width: 720px;
       padding: 46px 40px;
-      border: 1px dashed rgba(176,38,255,0.32);
+      border: 1px solid rgba(176,38,255,0.24);
+      border-left: 2px solid rgba(176,38,255,0.55);
       background:
-        linear-gradient(180deg, rgba(176,38,255,0.06), rgba(176,38,255,0.015));
+        linear-gradient(135deg, rgba(176,38,255,0.055), rgba(176,38,255,0.012) 58%, rgba(0,0,0,0.16));
       position: relative;
       overflow: hidden;
     }
@@ -1098,30 +1036,49 @@ body {
       content: '';
       position: absolute;
       inset: 0;
-      background: repeating-linear-gradient(135deg, rgba(176,38,255,0.03) 0 12px, transparent 12px 24px);
+      background: repeating-linear-gradient(135deg, rgba(176,38,255,0.018) 0 12px, transparent 12px 24px);
       pointer-events: none;
     }
-    .chapters-card-icon {
-      font-size: 2rem;
+    .chapters-card > * {
+      position: relative;
+      z-index: 1;
+    }
+    .chapters-card-kicker {
+      display: inline-block;
+      margin-bottom: 16px;
       color: var(--neon-purple);
-      margin-bottom: 18px;
-      opacity: 0.85;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.24em;
+      opacity: 0.82;
+    }
+    .chapters-card-icon {
+      font-size: 1.65rem;
+      color: var(--neon-purple);
+      margin-bottom: 16px;
+      opacity: 0.68;
     }
     .chapters-card h3 {
       font-family: 'Orbitron', monospace;
-      font-size: 1.3rem;
-      color: #fff;
-      letter-spacing: 0.05em;
+      font-size: clamp(1.05rem, 2.4vw, 1.3rem);
+      color: var(--text-main);
+      letter-spacing: 0.045em;
+      line-height: 1.5;
       margin-bottom: 14px;
     }
     .chapters-card p {
       font-family: 'Rajdhani', sans-serif;
-      font-size: 1.02rem;
+      font-size: 1.08rem;
       color: var(--text-silver);
-      opacity: 0.75;
+      opacity: 0.84;
       line-height: 1.7;
       max-width: 480px;
       margin: 0 auto 26px;
+    }
+    .chapters-card .btn-secondary {
+      display: inline-block;
+      min-height: 46px;
+      padding: 14px 26px;
     }
 
     /* ── WORLDBOOK TEASER ── */
@@ -1280,15 +1237,17 @@ body {
       .playlist-grid { grid-template-columns: 1fr; }
       .agent-name { font-size: 1.05rem; }
       .trilha-soon { flex-direction: column; text-align: center; }
+      .chapters-card { padding: 34px 22px; }
+      .chapters-card h3 { letter-spacing: 0.02em; }
+      .chapters-card .btn-secondary { padding: 14px 18px; letter-spacing: 0.12em; }
     }
 
   </style>
 </head>
 <body>
 
-<div class="scanlines"></div>
 <div class="grid-bg"></div>
-<div class="grid-lines"></div>
+<div class="digital-softness" aria-hidden="true"></div>
 
 <!-- NAV -->
 <nav>
@@ -1633,16 +1592,17 @@ body {
   </div>
 </section>
 
-<!-- CAPÍTULOS — EM BREVE -->
+<!-- CAPÍTULOS -->
 <section id="chapters-section">
   <div class="chapters-inner">
-    <p class="section-label" style="justify-content:center">06 · NARRATIVA OFICIAL</p>
+    <p class="section-label" style="justify-content:center">06 · PORTAL NARRATIVO</p>
     <h2 class="section-title-large">CAPÍTULOS</h2>
     <div class="chapters-card">
-      <div class="chapters-card-icon"><i class="fa-solid fa-book-skull"></i></div>
-      <h3>OS CAPÍTULOS DE BROKEN STREET CHEGAM EM BREVE</h3>
-      <p>A história oficial ainda está sendo escrita. Assim que os primeiros capítulos forem publicados, eles aparecerão aqui — sem spoilers, na ordem certa.</p>
-      <a href="chapters.html" class="btn-secondary">VER PÁGINA DE CAPÍTULOS</a>
+      <div class="chapters-card-icon"><i class="fa-solid fa-book-open"></i></div>
+      <span class="chapters-card-kicker">NARRATIVA OFICIAL</span>
+      <h3>A HISTÓRIA COMEÇA AQUI</h3>
+      <p>SynthCity nunca foi apenas uma cidade.<br><br>Entre luzes, noites intermináveis e ruas que escondem mais do que parecem, Philip começa uma nova vida — sem saber o que o espera.</p>
+      <a href="chapters.html" class="btn-secondary">COMEÇAR A HISTÓRIA</a>
     </div>
   </div>
 </section>
