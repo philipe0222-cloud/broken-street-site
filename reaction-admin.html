@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Reader reactions | Broken Street</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/chapter-reader.css">
+</head>
+<body>
+  <nav class="site-nav" aria-label="Navegação principal">
+    <a class="brand" href="index.html">BROKEN STREET</a>
+    <a class="nav-link" href="chapters.html">Capítulos</a>
+  </nav>
+  <main>
+    <section class="reaction-admin-shell" aria-labelledby="admin-heading">
+      <p class="series-name">CREATOR ACCESS</p>
+      <h1 id="admin-heading">Reader reactions</h1>
+      <p class="reaction-admin-intro">A quiet count of what readers chose, chapter by chapter.</p>
+
+      <form class="reaction-admin-form" data-admin-login>
+        <label>
+          Email
+          <input name="email" type="email" autocomplete="username" required>
+        </label>
+        <label>
+          Password
+          <input name="password" type="password" autocomplete="current-password" required>
+        </label>
+        <button class="reaction-admin-button" type="submit">SIGN IN</button>
+      </form>
+
+      <section data-admin-dashboard hidden>
+        <div class="reaction-admin-toolbar">
+          <h2>REACTIONS BY CHAPTER</h2>
+          <button class="reaction-admin-button" data-admin-logout type="button">SIGN OUT</button>
+        </div>
+        <div class="reaction-admin-table-wrap">
+          <table class="reaction-admin-table">
+            <thead>
+              <tr>
+                <th scope="col">CHAPTER</th>
+                <th scope="col">REACTION</th>
+                <th scope="col">COUNT</th>
+              </tr>
+            </thead>
+            <tbody data-admin-counts></tbody>
+          </table>
+        </div>
+      </section>
+
+      <p class="reaction-admin-status" data-admin-status aria-live="polite"></p>
+      <p class="reaction-admin-setup">This page is private only when Supabase sign-ups are disabled and your creator account is the only account.</p>
+    </section>
+  </main>
+  <footer>
+    <span>BROKEN STREET</span>
+    <a href="chapters.html">Voltar aos capítulos</a>
+  </footer>
+  <script src="js/supabase-config.js" defer></script>
+  <script src="js/chapter-reactions.js" defer></script>
+  <script src="js/reaction-admin.js" defer></script>
+</body>
+</html>

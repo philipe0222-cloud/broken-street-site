@@ -1543,7 +1543,335 @@
     <a href="chapters.html">CAPÍTULOS</a>
     <a href="worldbook.html">WORLDBOOK</a>
   </div>
-  <span class="footer-copy">BROKEN STREET DATABASE • BUILD 2.0.0</span>
+  <span class="footer-copy">BROKEN STREET DATABAQuero adicionar uma nova interação ao FINAL de cada capítulo de Broken Street.
+
+A ideia é criar uma pequena seção de reação do leitor, mas ela NÃO deve funcionar como avaliação, nota, comentário ou sistema de estrelas.
+
+Quero que pareça uma pequena interação narrativa do próprio site.
+
+## CONCEITO
+
+Depois que o leitor terminar um capítulo, antes da navegação para o próximo capítulo, deve aparecer uma pequena seção:
+
+HOW WAS YOUR NIGHT?
+
+E abaixo algumas opções clicáveis, por exemplo:
+
+☾ gostei
+
+✦ interessante
+
+⚠ alguma coisa está errada
+
+??? preciso do próximo
+
+O leitor pode clicar em qualquer uma delas.
+
+Não precisa salvar a resposta em banco de dados, não precisa de login e não precisa armazenar nada.
+
+É apenas uma interação visual.
+
+---
+
+## O QUE ACONTECE AO CLICAR
+
+Quando o leitor clicar em uma opção:
+
+1. A opção selecionada deve ficar destacada.
+2. As outras opções podem desaparecer ou ficar discretamente apagadas.
+3. Deve surgir uma pequena resposta textual.
+4. A resposta deve aparecer com uma animação suave.
+5. Depois disso, deve continuar disponível o botão para ir ao próximo capítulo.
+
+Exemplo:
+
+O leitor clica:
+
+⚠ alguma coisa está errada
+
+A interface responde:
+
+"We thought so too."
+
+Outro exemplo:
+
+O leitor clica:
+
+??? preciso do próximo
+
+Resposta:
+
+"Then keep reading."
+
+---
+
+## MUITO IMPORTANTE: PERSONALIDADE
+
+Não quero respostas genéricas como:
+
+"Obrigado pelo feedback!"
+
+"Que bom que você gostou!"
+
+"Sua avaliação foi registrada."
+
+Isso NÃO combina com Broken Street.
+
+As respostas devem parecer pequenas mensagens do próprio universo/site.
+
+Elas podem ser misteriosas, irônicas, estranhas ou descontraídas.
+
+Exemplos:
+
+☾ gostei
+→ "Good."
+
+✦ interessante
+→ "We'll take that."
+
+⚠ alguma coisa está errada
+→ "We thought so too."
+
+??? preciso do próximo
+→ "Then you better keep reading."
+
+---
+
+## AS RESPOSTAS DEVEM VARIAR POR CAPÍTULO
+
+Não quero necessariamente as mesmas respostas em todos os capítulos.
+
+A estrutura deve ser reutilizável, mas cada capítulo deve poder ter suas próprias opções e respostas.
+
+Isso é importante porque quero que essa interação acompanhe a evolução da história.
+
+Por exemplo:
+
+### CAPÍTULO 1
+
+HOW WAS YOUR NIGHT?
+
+☾ gostei
+✦ interessante
+⚠ alguma coisa está errada
+??? preciso do próximo
+
+Se clicar em:
+
+⚠ alguma coisa está errada
+
+pode aparecer:
+
+"We thought so too."
+
+---
+
+### CAPÍTULO 5
+
+Como esse capítulo envolve uma festa e os primeiros acontecimentos sobrenaturais, as opções podem ser diferentes:
+
+HOW WAS YOUR NIGHT?
+
+☾ foi uma boa festa
+✦ gostei dessa noite
+⚠ eu vi alguma coisa
+??? o que aconteceu lá fora?
+
+Respostas possíveis:
+
+☾ foi uma boa festa
+→ "For most people, it was."
+
+✦ gostei dessa noite
+→ "Some nights are worth remembering."
+
+⚠ eu vi alguma coisa
+→ "You weren't supposed to."
+
+??? o que aconteceu lá fora?
+→ "Nothing."
+
+Depois de um pequeno atraso:
+
+"...probably."
+
+Esses exemplos são apenas uma referência de estilo. Crie a estrutura para que eu possa alterar facilmente as opções e respostas de cada capítulo depois.
+
+---
+
+## ESTÉTICA
+
+A seção precisa combinar completamente com o visual atual de Broken Street.
+
+Use:
+
+- fundo preto;
+- branco/cinza para o texto;
+- roxo como cor de destaque;
+- pequenos glows;
+- linhas finas;
+- tipografia tecnológica/retro-digital;
+- animações suaves.
+
+Não quero uma caixa enorme chamativa.
+
+Ela deve parecer uma parte natural da página do capítulo.
+
+Quero bastante espaço vazio ao redor.
+
+A sensação deve ser:
+
+"o capítulo acabou, mas o site ainda está falando com você."
+
+---
+
+## ANIMAÇÃO
+
+Quando a seção aparecer:
+
+- fazer um fade-in suave;
+- as opções podem aparecer uma por uma com pequeno atraso;
+- ao passar o mouse, a opção pode ganhar um pequeno brilho roxo;
+- ao clicar, fazer uma transição curta;
+- mostrar a resposta suavemente.
+
+Nada exagerado.
+
+Não quero efeitos de glitch excessivos.
+
+Não quero sons automáticos.
+
+Não quero pop-ups.
+
+---
+
+## FRASES MISTERIOSAS
+
+Quero deixar a estrutura preparada para que, futuramente, as respostas possam ficar cada vez mais estranhas conforme a história avança.
+
+No começo:
+
+"Good."
+
+"We'll take that."
+
+"Keep reading."
+
+Mais tarde:
+
+"You noticed."
+
+"We thought so too."
+
+"Don't look too closely."
+
+E eventualmente, dependendo do capítulo:
+
+"They're watching."
+
+"That wasn't supposed to happen."
+
+"Forget what you saw."
+
+A interface pode começar como uma simples brincadeira e, aos poucos, parecer que existe algo por trás dela.
+
+MAS NÃO FAÇA ISSO EXAGERADAMENTE AGORA.
+
+Nos primeiros capítulos, mantenha as respostas simples.
+
+---
+
+## IMPORTANTE SOBRE A HISTÓRIA
+
+Não altere nenhum capítulo.
+
+Não altere nenhuma fala.
+
+Não altere nenhuma narração.
+
+Não invente acontecimentos.
+
+Não coloque essas mensagens dentro da história.
+
+Essa interação deve existir FORA do texto narrativo, depois do capítulo terminar.
+
+Ela é uma experiência complementar para o leitor.
+
+---
+
+## NAVEGAÇÃO
+
+Depois que o leitor selecionar uma reação e receber a resposta, deve continuar aparecendo a navegação:
+
+← CAPÍTULO ANTERIOR
+
+CAPÍTULOS
+
+PRÓXIMO CAPÍTULO →
+
+No último capítulo disponível, em vez de "PRÓXIMO CAPÍTULO", pode aparecer algo como:
+
+BACK TO CHAPTERS
+
+ou simplesmente:
+
+RETURN TO CHAPTERS
+
+---
+
+## RESPONSIVIDADE
+
+Faça funcionar perfeitamente no:
+
+- desktop;
+- celular;
+- tablet.
+
+As opções devem ser fáceis de clicar no celular.
+
+---
+
+## IMPLEMENTAÇÃO
+
+Antes de alterar, analise como os capítulos estão estruturados atualmente.
+
+Não crie cinco implementações completamente diferentes.
+
+Crie um componente/estrutura reutilizável para a reação do leitor, mas permita configurar:
+
+- pergunta;
+- opções;
+- resposta de cada opção;
+
+individualmente por capítulo.
+
+Se o projeto já tiver um sistema de dados para os capítulos, aproveite-o.
+
+Evite duplicação de CSS e JavaScript.
+
+Não altere outras partes do site que não sejam necessárias.
+
+---
+
+## OBJETIVO FINAL
+
+Quero que o leitor termine um capítulo, veja:
+
+HOW WAS YOUR NIGHT?
+
+e pense:
+
+"KKKK esse site respondeu pra mim."
+
+Mas conforme Broken Street ficar mais sombria, quero que essa mesma interação possa começar a causar uma sensação diferente:
+
+"Espera... por que o site está falando isso?"
+
+Essa interação deve ser pequena, elegante e opcional, mas com bastante personalidade.
+
+Não transforme isso em um sistema de comentários ou avaliação.
+
+É uma pequena assinatura interativa de Broken Street.SE • BUILD 2.0.0</span>
 </footer>
 
 <script>
