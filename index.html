@@ -609,12 +609,6 @@
       box-shadow: 0 0 32px rgba(var(--accent-rgb), 0.22);
     }
 
-    .agent-card.is-playing {
-      box-shadow:
-        0 0 0 1px rgba(var(--accent-rgb), 0.45),
-        0 0 40px rgba(var(--accent-rgb), 0.2);
-    }
-
     .agent-card-preview::before,
     .agent-card-preview::after {
       content: '';
@@ -1699,15 +1693,6 @@
     }
   });
 
-  const cards = document.querySelectorAll('.agent-card');
-
-  cards.forEach(card => {
-    card.addEventListener('mouseenter', () => {
-      card.classList.add('is-playing');
-      clearTimeout(card._holoTimeout);
-      card._holoTimeout = setTimeout(() => card.classList.remove('is-playing'), 220);
-    });
-  });
 </script>
 
 </body>
