@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conquistas | Broken Street</title>
+  <meta name="description" content="Acompanhe suas conquistas e seu progresso de leitura em Broken Street.">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/chapter-reader.css">
+  <link rel="stylesheet" href="css/reading-achievements.css">
+</head>
+<body>
+  <nav class="site-nav" aria-label="Navegação principal">
+    <a class="brand" href="index.html">BROKEN STREET</a>
+    <a class="nav-link" href="chapters.html">Capítulos</a>
+  </nav>
+
+  <main class="bs-achievements-page" data-achievements-page>
+    <header class="bs-achievements-header">
+      <p class="bs-achievements-eyebrow">PROGRESSO DO LEITOR · BROKEN STREET</p>
+      <h1>Conquistas</h1>
+      <p class="bs-achievements-intro">Explore Broken Street, conheça seus protagonistas e conclua capítulos para desbloquear emblemas de leitura. Seu progresso fica salvo neste navegador.</p>
+    </header>
+
+    <section class="bs-achievements-overview" aria-label="Progresso geral das conquistas">
+      <div class="bs-achievements-overview-top">
+        <strong>Conquistas desbloqueadas</strong>
+        <span data-achievement-count aria-live="polite">Carregando…</span>
+      </div>
+      <progress class="bs-achievements-progress" max="100" value="0" data-achievement-progress aria-label="Progresso geral"></progress>
+      <div class="bs-achievements-overview-top">
+        <p class="bs-achievements-stats" data-reading-stats></p>
+        <span data-achievement-progress-label>0%</span>
+      </div>
+      <p class="bs-achievements-storage" data-achievement-storage-status></p>
+    </section>
+
+    <section class="bs-achievement-grid" data-achievement-grid aria-label="Lista de conquistas"></section>
+    <p class="bs-achievements-fallback">As conquistas registram visitas e a chegada ao final dos capítulos. Elas não comprovam que cada palavra foi lida ou compreendida. Os dados são locais e não são sincronizados entre navegadores ou dispositivos.</p>
+  </main>
+
+  <footer>
+    <span>BROKEN STREET</span>
+    <a href="chapters.html">Voltar aos capítulos</a>
+  </footer>
+
+  <script src="js/site-settings.js" defer></script>
+  <script src="js/reading-achievements-ui.js" defer></script>
+  <script src="js/reading-achievements.js" defer></script>
+</body>
+</html>

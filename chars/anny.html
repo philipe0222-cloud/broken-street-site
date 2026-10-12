@@ -87,6 +87,7 @@
     <div class="dossier-row"><span>Aspecto C.E.</span><strong>Orgulho</strong></div>
     <div class="dossier-row"><span>Nacionalidade</span><strong>Astralis</strong></div>
     <div class="dossier-row"><span>Equipamento</span><strong>Ignis</strong></div>
+    <div class="dossier-row"><span>Manifestação C.E.</span><strong>Raciocínio Absoluto</strong></div>
   </div>
 </section>
 
@@ -305,6 +306,8 @@
     <div class="gallery-item"><img src="../assets/images/characters/anny2.png" alt="Anny Pewter"></div>
     <div class="gallery-item"><img src="../assets/images/characters/anny3.png" alt="Anny Pewter"></div>
     <div class="gallery-item"><img src="../assets/images/characters/anny4.png" alt="Anny Pewter"></div>
+    <div class="gallery-item"><img src="../assets/images/characters/annyhouse.png" alt="Anny Pewter"></div>
+    <div class="gallery-item"><img src="../assets/images/characters/annyroom.png" alt="Anny Pewter"></div>
   </div>
 </section>
 
@@ -336,45 +339,87 @@
 </footer>
 
 <!-- Image Zoom Modal -->
-<div class="image-zoom-modal">
+<div class="image-zoom-modal" role="dialog" aria-modal="true" aria-label="Visualizador de imagem">
   <div class="image-zoom-content">
-    <img id="zoom-image" src="" alt="Zoomed image">
-    <button class="image-zoom-close" onclick="closeImageZoom()">✕</button>
+    <img id="zoom-image" src="" alt="Imagem ampliada">
   </div>
+  <div class="image-zoom-controls" aria-label="Controles de zoom">
+    <button type="button" data-zoom-out aria-label="Diminuir zoom">−</button>
+    <button type="button" data-zoom-reset aria-label="Restaurar zoom">100%</button>
+    <button type="button" data-zoom-in aria-label="Aumentar zoom">+</button>
+  </div>
+  <button type="button" class="image-zoom-close" aria-label="Fechar imagem">✕</button>
 </div>
 
 <script>
-  // Image Zoom Functionality
-  function openImageZoom(src) {
-    document.getElementById('zoom-image').src = src;
+  const imageZoomModal = document.querySelector('.image-zoom-modal');
+  const zoomImage = document.getElementById('zoom-image');
+  const zoomResetButton = document.querySelector('[data-zoom-reset]');
+  let imageZoomScale = 1;
+  let previousBodyOverflow = '';
+
+  function setImageZoom(scale) {
+    imageZoomScale = Math.min(3, Math.max(1, Math.round(scale * 100) / 100));
+    zoomImage.style.transform = `scale(${imageZoomScale})`;
+    zoomResetButton.textContent = `${Math.round(imageZoomScale * 100)}%`;
+  }
+
+  function openImageZoom(src, alt) {
+    zoomImage.src = src;
+    zoomImage.alt = alt || 'Imagem ampliada';
+    setImageZoom(1);
+    previousBodyOverflow = document.body.style.overflow;
     document.querySelector('.image-zoom-modal').classList.add('active');
     document.body.style.overflow = 'hidden';
   }
 
   function closeImageZoom() {
-    document.querySelector('.image-zoom-modal').classList.remove('active');
-    document.body.style.overflow = '';
+    imageZoomModal.classList.remove('active');
+    document.body.style.overflow = previousBodyOverflow;
   }
 
-  const imageZoomModal = document.querySelector('.image-zoom-modal');
   imageZoomModal.addEventListener('click', function(e) {
     if (e.target === imageZoomModal) closeImageZoom();
   });
 
+  imageZoomModal.querySelector('.image-zoom-close').addEventListener('click', closeImageZoom);
+  imageZoomModal.querySelector('[data-zoom-in]').addEventListener('click', function() {
+    setImageZoom(imageZoomScale + 0.25);
+  });
+  imageZoomModal.querySelector('[data-zoom-out]').addEventListener('click', function() {
+    setImageZoom(imageZoomScale - 0.25);
+  });
+  zoomResetButton.addEventListener('click', function() {
+    setImageZoom(1);
+  });
+  zoomImage.addEventListener('dblclick', function() {
+    setImageZoom(imageZoomScale === 1 ? 2 : 1);
+  });
+  imageZoomModal.addEventListener('wheel', function(e) {
+    if (!imageZoomModal.classList.contains('active')) return;
+    e.preventDefault();
+    setImageZoom(imageZoomScale + (e.deltaY < 0 ? 0.15 : -0.15));
+  }, { passive: false });
+
   document.addEventListener('keydown', function(e) {
+    if (!imageZoomModal.classList.contains('active')) return;
     if (e.key === 'Escape') closeImageZoom();
+    if (e.key === '+' || e.key === '=') setImageZoom(imageZoomScale + 0.25);
+    if (e.key === '-') setImageZoom(imageZoomScale - 0.25);
+    if (e.key === '0') setImageZoom(1);
   });
 
-  // Add click listeners to hero image and gallery images
   document.querySelectorAll('img').forEach(img => {
     if (img.id !== 'zoom-image') {
       img.classList.add('clickable-image');
       img.addEventListener('click', function() {
-        if (this.src && !this.src.includes('data:')) openImageZoom(this.src);
+        if (this.src && !this.src.includes('data:')) openImageZoom(this.src, this.alt);
       });
     }
   });
 </script>
-
+<script src="../js/site-settings.js" defer></script>
+<script src="../js/reading-achievements-ui.js" defer></script>
+<script src="../js/reading-achievements.js" defer></script>
 </body>
 </html>
