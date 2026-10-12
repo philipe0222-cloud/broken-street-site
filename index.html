@@ -28,9 +28,10 @@
       --neon-purple: #b026ff;
       --neon-purple-soft: #8a1fd1;
       --neon-glow: rgba(176, 38, 255, 0.5);
+      --text-main: #f3effa;
       --text-silver: #d1d1d1;
-      --text-dim: #777;
-      --border: rgba(176, 38, 255, 0.18);
+      --text-dim: #a49aad;
+      --border: rgba(176, 38, 255, 0.24);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -1308,6 +1309,283 @@
       .agent-card-preview { display: none; }
     }
 
+    /* ── ACABAMENTO VISUAL ── */
+    body {
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(93, 30, 126, 0.16), transparent 38%),
+        radial-gradient(ellipse at 100% 54%, rgba(40, 20, 70, 0.12), transparent 35%),
+        linear-gradient(180deg, #07050b 0%, #09060e 48%, #050308 100%);
+    }
+
+    nav {
+      background: rgba(7, 5, 11, 0.92);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.28);
+    }
+
+    .nav-brand img {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      filter: none;
+      box-shadow: 0 0 18px rgba(176, 38, 255, 0.32);
+    }
+
+    .nav-links a {
+      transition: color 0.2s ease, text-shadow 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: #e3b4ff;
+      text-shadow: 0 0 14px rgba(176, 38, 255, 0.55);
+    }
+
+    #hero-section {
+      background:
+        radial-gradient(ellipse at 50% 44%, rgba(114, 28, 163, 0.1), transparent 34%),
+        linear-gradient(180deg, rgba(8, 5, 13, 0.08), rgba(5, 3, 8, 0.3));
+    }
+
+    .hero-logo {
+      width: min(680px, 88vw);
+      filter: drop-shadow(0 0 34px rgba(176, 38, 255, 0.34));
+      transition: filter 0.3s ease, transform 0.3s ease;
+    }
+
+    .hero-logo:hover {
+      filter: drop-shadow(0 0 46px rgba(176, 38, 255, 0.52));
+      transform: translateY(-3px);
+    }
+
+    .hero-subtitle,
+    .hero-desc,
+    .sinopse-text p,
+    .cyber-info p,
+    .worldbook-text p {
+      color: #d4cddd;
+    }
+
+    .hero-desc {
+      max-width: 600px;
+      opacity: 0.9;
+    }
+
+    .section-label {
+      color: #cf82ff;
+      opacity: 0.9;
+    }
+
+    .section-title-large {
+      letter-spacing: 0.045em;
+      text-shadow: 0 0 28px rgba(176, 38, 255, 0.13);
+    }
+
+    #sinopse-section,
+    #cyber-section,
+    #arquivo-section {
+      padding-top: clamp(76px, 9vw, 120px);
+      padding-bottom: clamp(76px, 9vw, 120px);
+    }
+
+    #sinopse-section {
+      max-width: 1160px;
+    }
+
+    .sinopse-body {
+      gap: clamp(32px, 6vw, 72px);
+    }
+
+    .aside-block,
+    .cyber-type-item,
+    .wc-item,
+    .arquivo-link {
+      background-color: rgba(17, 10, 24, 0.58);
+      border-color: rgba(176, 38, 255, 0.23);
+    }
+
+    .aside-block {
+      border-left-color: #b026ff;
+      padding: 18px 22px;
+    }
+
+    .aside-block-value,
+    .cyber-type-desc {
+      color: #e0d8e8;
+    }
+
+    #agentes-section {
+      padding-top: clamp(72px, 8vw, 104px);
+      padding-bottom: clamp(82px, 9vw, 120px);
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(80, 25, 112, 0.13), transparent 54%),
+        linear-gradient(180deg, rgba(14, 8, 19, 0.78), rgba(7, 4, 10, 0.72));
+      border-top: 1px solid rgba(176, 38, 255, 0.12);
+      border-bottom: 1px solid rgba(176, 38, 255, 0.12);
+    }
+
+    .agents-intro {
+      max-width: 1200px;
+      margin-bottom: 44px;
+    }
+
+    .agents-grid {
+      gap: clamp(16px, 2vw, 24px);
+    }
+
+    .agent-card {
+      aspect-ratio: 0.79;
+      border: 1px solid rgba(var(--accent-rgb), 0.38);
+      border-radius: 5px;
+      background:
+        radial-gradient(ellipse at 50% 20%, rgba(var(--accent-rgb), 0.13), transparent 62%),
+        #08060c;
+      box-shadow: 0 16px 44px rgba(0, 0, 0, 0.28);
+      overflow: hidden;
+    }
+
+    .agent-card-image {
+      object-position: center 18%;
+      filter: saturate(1.02) contrast(1.06) brightness(0.98);
+      transform: scale(1.015);
+    }
+
+    .agent-card:hover .agent-card-image,
+    .agent-card:focus-visible .agent-card-image {
+      transform: scale(1.07);
+      filter: saturate(1.13) contrast(1.08) brightness(1.04);
+    }
+
+    .agent-card-overlay {
+      background: linear-gradient(
+        to top,
+        rgba(5, 2, 8, 0.99) 0%,
+        rgba(5, 2, 8, 0.88) 25%,
+        rgba(5, 2, 8, 0.4) 52%,
+        rgba(5, 2, 8, 0.04) 78%,
+        transparent 100%
+      );
+    }
+
+    .agent-card-content {
+      padding: 24px 20px 26px;
+      background: linear-gradient(180deg, transparent, rgba(5, 2, 8, 0.22));
+    }
+
+    .agent-card-badge {
+      border-radius: 2px;
+      color: #f0e8f5;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
+    }
+
+    .agent-name {
+      font-size: clamp(1rem, 1.35vw, 1.2rem);
+      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.95);
+    }
+
+    .agent-role {
+      color: #ded7e4;
+      opacity: 0.9;
+    }
+
+    .agent-card:focus-visible,
+    .btn-primary:focus-visible,
+    .btn-secondary:focus-visible,
+    .arquivo-link:focus-visible,
+    .nav-toggle:focus-visible {
+      outline: 2px solid #e0aaff;
+      outline-offset: 4px;
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .arquivo-link {
+      border-radius: 3px;
+    }
+
+    .btn-primary {
+      box-shadow: 0 8px 28px rgba(176, 38, 255, 0.2);
+    }
+
+    .chapters-card,
+    .trilha-soon,
+    .track-item-empty {
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.2);
+    }
+
+    .wc-item {
+      min-height: 42px;
+      color: #c9bfd2;
+    }
+
+    .arquivo-link {
+      color: #c9bfd2;
+    }
+
+    footer {
+      background: rgba(4, 3, 7, 0.55);
+    }
+
+    .footer-brand,
+    .footer-copy,
+    .footer-nav a {
+      opacity: 0.68;
+    }
+
+    .footer-nav a:hover,
+    .arquivo-link:hover,
+    .wc-item:hover {
+      color: #e3b4ff;
+      border-color: rgba(176, 38, 255, 0.58);
+    }
+
+    @media (max-width: 900px) {
+      .agent-card {
+        aspect-ratio: 0.82;
+      }
+
+      .nav-brand img {
+        width: 36px;
+        height: 36px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .hero-logo {
+        width: min(620px, 94vw);
+      }
+
+      .agents-intro {
+        margin-bottom: 32px;
+      }
+
+      .agents-grid {
+        gap: 16px;
+      }
+
+      .agent-card {
+        aspect-ratio: 0.84;
+      }
+
+      .agent-card-content {
+        padding: 20px 18px 22px;
+      }
+
+      .agent-name {
+        font-size: 1.08rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -1318,7 +1596,7 @@
 <!-- NAV -->
 <nav>
   <a href="index.html" class="nav-brand">
-    <img src="assets/images/icon.png" alt="Logo">
+    <img src="assets/images/icon%20site.png" alt="Broken Street">
     <span class="nav-brand-name">BROKEN STREET</span>
   </a>
   <ul class="nav-links" id="nav-links">
@@ -1336,7 +1614,7 @@
 <section id="hero-section">
   <div class="hero-glow"></div>
   <p class="hero-eyebrow">ARQUIVO OFICIAL · BROKEN STREET DATABASE</p>
-  <img src="assets/images/Logo.png" alt="Logo" class="hero-logo">
+  <img src="assets/images/Logo.png" alt="Broken Street — Neon Nightmare" class="hero-logo">
   <p class="hero-subtitle">
     ネオンナイトメア — NEON NIGHTMARE // SYNTHCITY
   </p>
