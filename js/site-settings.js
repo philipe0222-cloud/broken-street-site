@@ -14,9 +14,11 @@
     highContrast: false,
     legibility: false,
     soundEnabled: true,
-    continueReading: true
+    continueReading: true,
+    chapterTitleLanguage: 'en'
   };
   const scriptUrl = document.currentScript.src;
+  const reactionAdminUrl = new URL('../reaction-admin.html', scriptUrl).href;
   const styleLink = document.createElement('link');
   styleLink.rel = 'stylesheet';
   styleLink.href = new URL('../css/site-settings.css', scriptUrl).href;
@@ -58,7 +60,41 @@
       media.muted = !settings.soundEnabled;
       if (!settings.soundEnabled) media.pause();
     });
+    applyChapterTitles();
     updateControls();
+  }
+
+  const chapterTitles = {
+    '01': { en: 'The Beginning of the End', pt: 'O Começo do Fim' },
+    '02': { en: 'A New Life', pt: 'Uma Nova Vida' },
+    '03': { en: 'The Beginning of Life', pt: 'O Início da Vida' },
+    '04': { en: 'The First Day', pt: 'O Primeiro Dia' },
+    '05': { en: 'The First Night', pt: 'A Primeira Noite' }
+  };
+
+  function applyChapterTitles() {
+    const language = settings.chapterTitleLanguage === 'pt' ? 'pt' : 'en';
+    document.querySelectorAll('[data-chapter-title], [data-chapter-title-meta], [data-chapter-title-aria]').forEach((element) => {
+      const chapterNumber = element.dataset.chapterTitle
+        || element.dataset.chapterTitleMeta
+        || element.dataset.chapterTitleAria;
+      const chapter = chapterTitles[chapterNumber];
+      if (!chapter) return;
+
+      const title = chapter[language];
+      if (element.hasAttribute('data-chapter-title')) {
+        element.textContent = title;
+        if (element.closest('.chapter-heading')) {
+          document.title = `Capítulo ${Number(chapterNumber)}: ${title} | Broken Street`;
+        }
+      }
+      if (element.hasAttribute('data-chapter-title-meta')) {
+        element.content = `Capítulo ${Number(chapterNumber)}: ${title} | Broken Street`;
+      }
+      if (element.hasAttribute('data-chapter-title-aria')) {
+        element.setAttribute('aria-label', `Capítulo ${Number(chapterNumber)}: ${title}`);
+      }
+    });
   }
 
   const readingFonts = {
@@ -94,6 +130,7 @@
           <button class="bs-settings-tab" type="button" role="tab" id="bs-tab-reading" aria-controls="bs-section-reading" aria-selected="false" data-settings-tab="reading" tabindex="-1">Leitura</button>
           <button class="bs-settings-tab" type="button" role="tab" id="bs-tab-accessibility" aria-controls="bs-section-accessibility" aria-selected="false" data-settings-tab="accessibility" tabindex="-1">Acessibilidade</button>
           <button class="bs-settings-tab" type="button" role="tab" id="bs-tab-preferences" aria-controls="bs-section-preferences" aria-selected="false" data-settings-tab="preferences" tabindex="-1">Preferências</button>
+          <button class="bs-settings-tab" type="button" role="tab" id="bs-tab-creator" aria-controls="bs-section-creator" aria-selected="false" data-settings-tab="creator" tabindex="-1">Criador</button>
           <button class="bs-settings-tab" type="button" role="tab" id="bs-tab-about" aria-controls="bs-section-about" aria-selected="false" data-settings-tab="about" tabindex="-1">Sobre</button>
         </nav>
         <div class="bs-settings-content">
@@ -158,6 +195,13 @@
               <span><strong>Melhorar legibilidade</strong><small>Usa texto mais espaçado e fácil de acompanhar.</small></span>
               <input type="checkbox" data-setting="legibility">
             </label>
+            <label class="bs-settings-field">
+              <span>Nomes dos capítulos</span>
+              <select data-setting="chapterTitleLanguage">
+                <option value="en">Inglês (padrão)</option>
+                <option value="pt">Português</option>
+              </select>
+            </label>
           </section>
 
           <section class="bs-settings-section" id="bs-section-preferences" role="tabpanel" aria-labelledby="bs-tab-preferences" data-settings-section="preferences" hidden>
@@ -172,6 +216,12 @@
               <input type="checkbox" data-setting="continueReading">
             </label>
             <button class="bs-settings-reset" type="button">Restaurar configurações padrão</button>
+          </section>
+
+          <section class="bs-settings-section" id="bs-section-creator" role="tabpanel" aria-labelledby="bs-tab-creator" data-settings-section="creator" hidden>
+            <h3>Resultados das reações</h3>
+            <p class="bs-settings-description">Acesse o painel privado para ver as reações dos leitores por capítulo.</p>
+            <a class="bs-settings-admin-link" href="${reactionAdminUrl}">Abrir resultados das reações</a>
           </section>
 
           <section class="bs-settings-section bs-settings-about" id="bs-section-about" role="tabpanel" aria-labelledby="bs-tab-about" data-settings-section="about" hidden>

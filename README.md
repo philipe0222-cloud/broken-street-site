@@ -72,3 +72,7 @@ O progresso é salvo em `localStorage` na chave `brokenStreet.readingAchievement
 A hospedagem estática não oferece uma API para listar arquivos publicados no navegador. Por isso, `publishedChapterIds` em `js/reading-achievements.js` é o manifesto explícito dos capítulos elegíveis e atualmente corresponde aos arquivos existentes `chapter-01.html` a `chapter-05.html`. Ao publicar um novo capítulo, atualize essa lista para habilitar sua conclusão e recalcular as conquistas de cinco, dez e todos os capítulos.
 
 As visitas usam a data local do navegador e só contam uma vez por dia. Páginas dos quatro protagonistas registram visitas aos perfis. Se o armazenamento local estiver bloqueado ou indisponível, o sistema avisa e mantém o progresso somente durante a sessão atual.
+
+## Configurações de acessibilidade
+
+Na seção **Acessibilidade** das configurações do site, é possível escolher os nomes dos capítulos em inglês (padrão) ou português. A preferência é salva no navegador e aplicada ao catálogo, às páginas dos capítulos e aos títulos usados por leitores de tela.

@@ -249,6 +249,28 @@
   color: #ffb0b0;
 }
 
+.bs-settings-admin-link {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  margin-top: 4px;
+  padding: 9px 14px;
+  border: 1px solid rgba(176,38,255,0.48);
+  border-radius: 4px;
+  background: rgba(176,38,255,0.12);
+  color: #e5c5f7;
+  font: 600 0.95rem 'Rajdhani', sans-serif;
+  text-decoration: none;
+}
+
+.bs-settings-admin-link:hover,
+.bs-settings-admin-link:focus-visible {
+  border-color: rgba(176,38,255,0.78);
+  background: rgba(176,38,255,0.2);
+  color: #fff;
+  outline: none;
+}
+
 .bs-settings-about {
   color: #e6e0e9;
   font-size: 0.97rem;
