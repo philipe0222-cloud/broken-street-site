@@ -1,3 +1,13 @@
+::selection {
+  color: #fff;
+  background: #7b2cbf;
+}
+
+::-moz-selection {
+  color: #fff;
+  background: #7b2cbf;
+}
+
 .bs-settings-launcher {
   position: absolute;
   top: 50%;
