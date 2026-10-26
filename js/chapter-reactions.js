@@ -55,6 +55,46 @@ window.BROKEN_STREET_REACTIONS = {
         followUpDelay: 1200
       }
     ]
+  },
+  6: {
+    title: 'The Morning After',
+    question: 'HOW DID THE MORNING FEEL?',
+    options: [
+      { id: 'moon', symbol: '☾', label: 'a cidade parece diferente', response: 'It does now.' },
+      { id: 'spark', symbol: '✦', label: 'quero entender a energia', response: 'So do they.' },
+      { id: 'uneasy', symbol: '⚠', label: 'a criatura ainda está lá', response: 'Somewhere.' },
+      { id: 'next', symbol: '???', label: 'preciso continuar', response: 'The pattern is waiting.' }
+    ]
+  },
+  7: {
+    title: 'The Tension',
+    question: 'WHAT WOULD YOU FOLLOW?',
+    options: [
+      { id: 'moon', symbol: '☾', label: 'os desaparecimentos', response: 'Start with the map.' },
+      { id: 'spark', symbol: '✦', label: 'as marcas no concreto', response: 'They were left recently.' },
+      { id: 'uneasy', symbol: '⚠', label: 'a equipe no beco', response: 'They are not alone.' },
+      { id: 'next', symbol: '???', label: 'quero ver o primeiro contato', response: 'Keep reading.' }
+    ]
+  },
+  8: {
+    title: 'First Contact',
+    question: 'WHO REACHED THE TRUTH FIRST?',
+    options: [
+      { id: 'moon', symbol: '☾', label: 'a equipe de contenção', response: 'They found the evidence.' },
+      { id: 'spark', symbol: '✦', label: 'Philip e Aidem', response: 'They followed the signs.' },
+      { id: 'uneasy', symbol: '⚠', label: 'alguém que observa', response: 'Someone is always watching.' },
+      { id: 'next', symbol: '???', label: 'quero continuar', response: 'There is more to uncover.' }
+    ]
+  },
+  9: {
+    title: 'School and Friendships',
+    question: 'WHAT SHOULD PHILIP HOLD ON TO?',
+    options: [
+      { id: 'moon', symbol: '☾', label: 'uma rotina normal', response: 'Some things are worth protecting.' },
+      { id: 'spark', symbol: '✦', label: 'as novas amizades', response: 'He does not have to face it alone.' },
+      { id: 'uneasy', symbol: '⚠', label: 'as respostas sobre a cidade', response: 'The city keeps its secrets.' },
+      { id: 'next', symbol: '???', label: 'quero mais um capítulo', response: 'The story continues.' }
+    ]
   }
 };
 

@@ -69,7 +69,11 @@
     '02': { en: 'A New Life', pt: 'Uma Nova Vida' },
     '03': { en: 'The Beginning of Life', pt: 'O Início da Vida' },
     '04': { en: 'The First Day', pt: 'O Primeiro Dia' },
-    '05': { en: 'The First Night', pt: 'A Primeira Noite' }
+    '05': { en: 'The First Night', pt: 'A Primeira Noite' },
+    '06': { en: 'The Morning After', pt: 'A Manhã Seguinte' },
+    '07': { en: 'The Tension', pt: 'A Tensão' },
+    '08': { en: 'First Contact', pt: 'Primeiro Contato' },
+    '09': { en: 'School and Friendships', pt: 'Escola e Amizades' }
   };
 
   function applyChapterTitles() {

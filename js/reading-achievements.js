@@ -8,7 +8,11 @@
     'chapter-02',
     'chapter-03',
     'chapter-04',
-    'chapter-05'
+    'chapter-05',
+    'chapter-06',
+    'chapter-07',
+    'chapter-08',
+    'chapter-09'
   ];
   const characters = ['philip', 'aidem', 'anny', 'scott'];
   const achievements = [
