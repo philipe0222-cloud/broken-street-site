@@ -30,7 +30,7 @@ window.BROKEN_STREET_REACTIONS = {
     ]
   },
   4: {
-    title: 'The First Day',
+    title: 'The First Night',
     question: 'HOW WAS YOUR NIGHT?',
     options: [
       { id: 'moon', symbol: '☾', label: 'gostei', response: 'Glad you stayed.' },
@@ -40,7 +40,7 @@ window.BROKEN_STREET_REACTIONS = {
     ]
   },
   5: {
-    title: 'The First Night',
+    title: 'The Morning After',
     question: 'HOW WAS YOUR NIGHT?',
     options: [
       { id: 'moon', symbol: '☾', label: 'foi uma boa festa', response: 'For most people, it was.' },
@@ -57,7 +57,7 @@ window.BROKEN_STREET_REACTIONS = {
     ]
   },
   6: {
-    title: 'The Morning After',
+    title: 'What Remains',
     question: 'HOW DID THE MORNING FEEL?',
     options: [
       { id: 'moon', symbol: '☾', label: 'a cidade parece diferente', response: 'It does now.' },
@@ -67,33 +67,13 @@ window.BROKEN_STREET_REACTIONS = {
     ]
   },
   7: {
-    title: 'The Tension',
+    title: 'First Contact',
     question: 'WHAT WOULD YOU FOLLOW?',
     options: [
       { id: 'moon', symbol: '☾', label: 'os desaparecimentos', response: 'Start with the map.' },
       { id: 'spark', symbol: '✦', label: 'as marcas no concreto', response: 'They were left recently.' },
       { id: 'uneasy', symbol: '⚠', label: 'a equipe no beco', response: 'They are not alone.' },
-      { id: 'next', symbol: '???', label: 'quero ver o primeiro contato', response: 'Keep reading.' }
-    ]
-  },
-  8: {
-    title: 'First Contact',
-    question: 'WHO REACHED THE TRUTH FIRST?',
-    options: [
-      { id: 'moon', symbol: '☾', label: 'a equipe de contenção', response: 'They found the evidence.' },
-      { id: 'spark', symbol: '✦', label: 'Philip e Aidem', response: 'They followed the signs.' },
-      { id: 'uneasy', symbol: '⚠', label: 'alguém que observa', response: 'Someone is always watching.' },
-      { id: 'next', symbol: '???', label: 'quero continuar', response: 'There is more to uncover.' }
-    ]
-  },
-  9: {
-    title: 'School and Friendships',
-    question: 'WHAT SHOULD PHILIP HOLD ON TO?',
-    options: [
-      { id: 'moon', symbol: '☾', label: 'uma rotina normal', response: 'Some things are worth protecting.' },
-      { id: 'spark', symbol: '✦', label: 'as novas amizades', response: 'He does not have to face it alone.' },
-      { id: 'uneasy', symbol: '⚠', label: 'as respostas sobre a cidade', response: 'The city keeps its secrets.' },
-      { id: 'next', symbol: '???', label: 'quero mais um capítulo', response: 'The story continues.' }
+      { id: 'next', symbol: '???', label: 'quero continuar', response: 'Keep reading.' }
     ]
   }
 };

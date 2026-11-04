@@ -71,7 +71,7 @@ main {
   position: relative;
   max-width: 820px;
   margin: 0 auto;
-  padding-bottom: 34px;
+  padding: 0 12px 34px;
   border-bottom: 1px solid var(--border);
   text-align: center;
 }
@@ -114,6 +114,7 @@ h1 {
   letter-spacing: 0.025em;
   line-height: 1.28;
   text-transform: uppercase;
+  text-wrap: balance;
   text-shadow: 0 0 36px rgba(176, 38, 255, 0.12);
 }
 .heading-rule {
@@ -139,8 +140,11 @@ h1 {
   color: #d4d0da;
 }
 .chapter-paragraph.dialogue {
-  padding-left: 18px;
-  border-left: 1px solid rgba(176, 38, 255, 0.45);
+  margin-left: 4px;
+  padding: 0.22em 0.8em;
+  border-left: 2px solid rgba(176, 38, 255, 0.5);
+  border-radius: 0 3px 3px 0;
+  background: linear-gradient(90deg, rgba(176, 38, 255, 0.055), transparent 78%);
   color: #e4d8ed;
   font-style: italic;
 }
@@ -159,11 +163,28 @@ h1 {
   font-style: italic;
 }
 .chapter-paragraph.quoted-message {
-  margin-left: 8px;
-  padding-left: 14px;
-  border-left: 1px solid rgba(176, 38, 255, 0.3);
+  margin: 1em 0 1.15em 8px;
+  padding: 0.48em 0.9em;
+  border: 1px solid rgba(176, 38, 255, 0.16);
+  border-left: 2px solid rgba(176, 38, 255, 0.42);
+  border-radius: 0 4px 4px 0;
+  background: rgba(176, 38, 255, 0.035);
   color: #c9c1d1;
   font-size: 0.94em;
+}
+.chapter-paragraph.thought {
+  padding-left: 1em;
+  border-left: 1px dashed rgba(207, 194, 220, 0.24);
+  color: #c9c3d0;
+  font-style: italic;
+}
+.message-text {
+  padding: 0.08em 0.3em;
+  border-radius: 2px;
+  background: rgba(176, 38, 255, 0.075);
+  color: #ecd8f7;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 .chapter-section-title {
   margin: 2.8em 0 1.2em;
@@ -206,6 +227,11 @@ h1 {
 .scene-divider::after { transform: rotate(180deg); }
 .scene-divider span { font-size: 0.72rem; line-height: 1; }
 .scene-illustration { margin: 40px 0; }
+.chapter-illustration {
+  margin: 48px 0 0;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+}
 .scene-illustration img {
   display: block;
   width: 100%;

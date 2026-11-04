@@ -10,9 +10,7 @@
     'chapter-04',
     'chapter-05',
     'chapter-06',
-    'chapter-07',
-    'chapter-08',
-    'chapter-09'
+    'chapter-07'
   ];
   const characters = ['philip', 'aidem', 'anny', 'scott'];
   const achievements = [
@@ -55,8 +53,8 @@
       id: 'beyond-first-pages',
       icon: 'book-marked',
       name: 'Além das primeiras páginas',
-      description: 'Você concluiu dez capítulos.',
-      condition: 'Conclua dez capítulos diferentes.'
+      description: 'Você concluiu seis capítulos.',
+      condition: 'Conclua seis capítulos diferentes.'
     },
     {
       id: 'story-scholar',
@@ -210,7 +208,7 @@
       'familiar-faces': characters.every((id) => state.visitedCharacters.includes(id)),
       'dedicated-reader': completedCount >= 3,
       'story-continues': completedCount >= 5,
-      'beyond-first-pages': completedCount >= 10,
+      'beyond-first-pages': completedCount >= 6,
       'story-scholar': allChaptersCompleted,
       'frequent-visitor': state.visitDates.length >= 2
     };
