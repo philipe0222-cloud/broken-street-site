@@ -2,6 +2,8 @@
   'use strict';
 
   const storageKey = 'brokenStreet.siteSettings';
+  const storyIdeasStorageKey = 'brokenStreet.storyIdeas';
+  const ideasPin = '0732';
   const defaults = {
     theme: 'dark',
     reduceEffects: false,
@@ -133,6 +135,7 @@
           <button class="bs-settings-tab" type="button" role="tab" id="bs-tab-accessibility" aria-controls="bs-section-accessibility" aria-selected="false" data-settings-tab="accessibility" tabindex="-1">Acessibilidade</button>
           <button class="bs-settings-tab" type="button" role="tab" id="bs-tab-preferences" aria-controls="bs-section-preferences" aria-selected="false" data-settings-tab="preferences" tabindex="-1">Preferências</button>
           <button class="bs-settings-tab" type="button" role="tab" id="bs-tab-creator" aria-controls="bs-section-creator" aria-selected="false" data-settings-tab="creator" tabindex="-1">Criador</button>
+          <button class="bs-settings-tab" type="button" role="tab" id="bs-tab-ideas" aria-controls="bs-section-ideas" aria-selected="false" data-settings-tab="ideas" tabindex="-1">Ideias</button>
           <button class="bs-settings-tab" type="button" role="tab" id="bs-tab-about" aria-controls="bs-section-about" aria-selected="false" data-settings-tab="about" tabindex="-1">Sobre</button>
         </nav>
         <div class="bs-settings-content">
@@ -226,6 +229,33 @@
             <a class="bs-settings-admin-link" href="${reactionAdminUrl}">Abrir resultados das reações</a>
           </section>
 
+          <section class="bs-settings-section" id="bs-section-ideas" role="tabpanel" aria-labelledby="bs-tab-ideas" data-settings-section="ideas" hidden>
+            <h3>Caderno de ideias</h3>
+            <p class="bs-settings-description">Guarde lembretes, cenas e detalhes para desenvolver a história depois.</p>
+            <form class="bs-ideas-gate" data-ideas-gate>
+              <label class="bs-ideas-pin-label" for="bs-ideas-pin">Digite seu PIN para abrir o caderno</label>
+              <div class="bs-ideas-pin-row">
+                <input id="bs-ideas-pin" name="pin" type="password" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" autocomplete="off" required aria-describedby="bs-ideas-gate-status">
+                <button class="bs-ideas-button" type="submit">Acessar</button>
+              </div>
+              <p class="bs-ideas-inline-status" id="bs-ideas-gate-status" data-ideas-gate-status aria-live="polite"></p>
+            </form>
+            <div class="bs-ideas-editor" data-ideas-editor hidden>
+              <p class="bs-ideas-local-note">As ideias são salvas somente neste navegador.</p>
+              <form class="bs-ideas-form" data-ideas-form>
+                <label class="bs-ideas-pin-label" for="bs-idea-text">Nova ideia</label>
+                <textarea id="bs-idea-text" name="idea" rows="4" maxlength="2000" placeholder="Anote uma cena, personagem, reviravolta ou detalhe do mundo..." required></textarea>
+                <div class="bs-ideas-form-footer">
+                  <small>Até 2.000 caracteres</small>
+                  <button class="bs-ideas-button" type="submit">Salvar ideia</button>
+                </div>
+              </form>
+              <p class="bs-ideas-inline-status" data-ideas-storage-status aria-live="polite"></p>
+              <div class="bs-ideas-list" data-ideas-list aria-live="polite"></div>
+            </div>
+            <p class="bs-ideas-security-note">O PIN é apenas um bloqueio simples nesta página; não protege contra quem inspecionar o código do site.</p>
+          </section>
+
           <section class="bs-settings-section bs-settings-about" id="bs-section-about" role="tabpanel" aria-labelledby="bs-tab-about" data-settings-section="about" hidden>
             <p class="bs-settings-eyebrow">BROKEN STREET · CRÉDITOS</p>
             <h3>Por trás da criação</h3>
@@ -260,6 +290,131 @@
   const panel = backdrop.querySelector('.bs-settings-panel');
   const closeButton = backdrop.querySelector('.bs-settings-close');
   const status = backdrop.querySelector('.bs-settings-status');
+  const ideasGate = backdrop.querySelector('[data-ideas-gate]');
+  const ideasGateStatus = backdrop.querySelector('[data-ideas-gate-status]');
+  const ideasEditor = backdrop.querySelector('[data-ideas-editor]');
+  const ideasForm = backdrop.querySelector('[data-ideas-form]');
+  const ideasText = ideasForm.querySelector('textarea');
+  const ideasStorageStatus = backdrop.querySelector('[data-ideas-storage-status]');
+  const ideasList = backdrop.querySelector('[data-ideas-list]');
+  let ideas = [];
+  let ideasLoadFailed = false;
+
+  function readIdeas() {
+    let stored;
+    try {
+      stored = localStorage.getItem(storyIdeasStorageKey);
+      if (!stored) return [];
+      const parsed = JSON.parse(stored);
+      if (!Array.isArray(parsed) || parsed.some((idea) => (
+        !idea || typeof idea.id !== 'string' || typeof idea.text !== 'string' || typeof idea.createdAt !== 'string'
+      ))) {
+        throw new TypeError('O formato salvo não corresponde a uma lista de ideias.');
+      }
+      return parsed;
+    } catch (error) {
+      console.error('As ideias salvas não puderam ser lidas.', error);
+      ideasLoadFailed = true;
+      return [];
+    }
+  }
+
+  function saveIdeas(nextIdeas) {
+    try {
+      localStorage.setItem(storyIdeasStorageKey, JSON.stringify(nextIdeas));
+      ideas = nextIdeas;
+      ideasStorageStatus.textContent = 'Ideias salvas neste navegador.';
+      return true;
+    } catch (error) {
+      console.error('As ideias não puderam ser salvas neste navegador.', error);
+      ideasStorageStatus.textContent = 'Não foi possível salvar. Verifique o espaço disponível e as permissões do navegador.';
+      return false;
+    }
+  }
+
+  function renderIdeas() {
+    ideasList.replaceChildren();
+    if (ideasLoadFailed) {
+      ideasStorageStatus.textContent = 'Não foi possível ler o caderno salvo. As anotações existentes foram preservadas.';
+      ideasForm.querySelector('button').disabled = true;
+      return;
+    }
+    ideasForm.querySelector('button').disabled = false;
+    if (ideas.length === 0) {
+      const emptyState = document.createElement('p');
+      emptyState.className = 'bs-ideas-empty';
+      emptyState.textContent = 'Seu caderno está vazio. Registre a primeira ideia quando quiser.';
+      ideasList.appendChild(emptyState);
+      return;
+    }
+
+    ideas.forEach((idea) => {
+      const card = document.createElement('article');
+      card.className = 'bs-idea-card';
+      const meta = document.createElement('div');
+      meta.className = 'bs-idea-meta';
+      const timestamp = document.createElement('time');
+      timestamp.dateTime = idea.createdAt;
+      const createdAt = new Date(idea.createdAt);
+      timestamp.textContent = Number.isNaN(createdAt.getTime())
+        ? 'Data indisponível'
+        : new Intl.DateTimeFormat('pt-BR', { dateStyle: 'short', timeStyle: 'short' }).format(createdAt);
+      const removeButton = document.createElement('button');
+      removeButton.className = 'bs-idea-delete';
+      removeButton.type = 'button';
+      removeButton.dataset.deleteIdea = idea.id;
+      removeButton.setAttribute('aria-label', 'Excluir ideia');
+      removeButton.textContent = 'Excluir';
+      meta.append(timestamp, removeButton);
+      const text = document.createElement('p');
+      text.className = 'bs-idea-text';
+      text.textContent = idea.text;
+      card.append(meta, text);
+      ideasList.appendChild(card);
+    });
+  }
+
+  ideasGate.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const pinInput = ideasGate.elements.pin;
+    if (pinInput.value !== ideasPin) {
+      ideasGateStatus.textContent = 'PIN incorreto. Tente novamente.';
+      pinInput.value = '';
+      pinInput.focus();
+      return;
+    }
+
+    ideas = readIdeas();
+    ideasGate.hidden = true;
+    ideasEditor.hidden = false;
+    ideasGateStatus.textContent = '';
+    renderIdeas();
+    ideasText.focus();
+  });
+
+  ideasForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const text = ideasText.value.trim();
+    if (!text || ideasLoadFailed) return;
+
+    const nextIdeas = [{
+      id: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
+      text,
+      createdAt: new Date().toISOString()
+    }, ...ideas];
+    if (saveIdeas(nextIdeas)) {
+      ideasText.value = '';
+      renderIdeas();
+      ideasText.focus();
+    }
+  });
+
+  ideasList.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-delete-idea]');
+    if (!button) return;
+    const nextIdeas = ideas.filter((idea) => idea.id !== button.dataset.deleteIdea);
+    if (saveIdeas(nextIdeas)) renderIdeas();
+  });
 
   function updateControls() {
     backdrop.querySelectorAll('[data-setting]').forEach((control) => {
@@ -341,7 +496,7 @@
   document.addEventListener('keydown', (event) => {
     if (!backdrop.hidden && event.key === 'Escape') closePanel();
     if (!backdrop.hidden && event.key === 'Tab') {
-      const focusable = [...panel.querySelectorAll('button:not([disabled]), input:not([disabled]), select:not([disabled])')];
+      const focusable = [...panel.querySelectorAll('button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled])')];
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
       if (event.shiftKey && document.activeElement === first) {

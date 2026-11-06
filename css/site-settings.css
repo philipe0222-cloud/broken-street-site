@@ -281,6 +281,160 @@
   outline: none;
 }
 
+.bs-ideas-gate,
+.bs-ideas-editor {
+  margin-top: 20px;
+}
+
+.bs-ideas-pin-label {
+  display: block;
+  margin-bottom: 8px;
+  color: #e4dee9;
+  font-size: 0.96rem;
+  font-weight: 600;
+}
+
+.bs-ideas-pin-row {
+  display: flex;
+  gap: 8px;
+}
+
+.bs-ideas-pin-row input,
+.bs-ideas-form textarea {
+  min-width: 0;
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 4px;
+  background: #1a171f;
+  color: #eee8f2;
+  font: inherit;
+}
+
+.bs-ideas-pin-row input {
+  width: 120px;
+  padding: 8px 10px;
+  letter-spacing: 0.22em;
+}
+
+.bs-ideas-button {
+  min-height: 40px;
+  padding: 8px 14px;
+  border: 1px solid rgba(176,38,255,0.48);
+  border-radius: 4px;
+  background: rgba(176,38,255,0.12);
+  color: #e5c5f7;
+  font: 600 0.95rem 'Rajdhani', sans-serif;
+  cursor: pointer;
+}
+
+.bs-ideas-button:hover,
+.bs-ideas-button:focus-visible {
+  border-color: rgba(176,38,255,0.78);
+  background: rgba(176,38,255,0.2);
+  color: #fff;
+}
+
+.bs-ideas-form textarea {
+  display: block;
+  width: 100%;
+  min-height: 112px;
+  padding: 10px 12px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.bs-ideas-form textarea::placeholder {
+  color: #8f8798;
+}
+
+.bs-ideas-form-footer,
+.bs-idea-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.bs-ideas-form-footer {
+  margin-top: 9px;
+}
+
+.bs-ideas-form-footer small,
+.bs-ideas-local-note,
+.bs-ideas-security-note,
+.bs-ideas-inline-status,
+.bs-idea-meta time {
+  color: #aaa2b1;
+  font-size: 0.82rem;
+}
+
+.bs-ideas-local-note {
+  margin: 0 0 16px;
+}
+
+.bs-ideas-inline-status {
+  min-height: 18px;
+  margin: 10px 0;
+  color: #bd91d7;
+}
+
+.bs-ideas-security-note {
+  margin: 22px 0 0;
+  line-height: 1.45;
+}
+
+.bs-ideas-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.bs-idea-card {
+  min-width: 0;
+  padding: 12px 14px;
+  border: 1px solid rgba(176,38,255,0.2);
+  border-left: 2px solid rgba(176,38,255,0.55);
+  border-radius: 3px;
+  background: rgba(176,38,255,0.045);
+}
+
+.bs-idea-meta {
+  margin-bottom: 8px;
+}
+
+.bs-idea-delete {
+  padding: 4px 7px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 3px;
+  background: transparent;
+  color: #c5b9ce;
+  font: 600 0.78rem 'Rajdhani', sans-serif;
+  cursor: pointer;
+}
+
+.bs-idea-delete:hover,
+.bs-idea-delete:focus-visible {
+  border-color: rgba(255,110,110,0.5);
+  color: #ffb0b0;
+}
+
+.bs-idea-text {
+  margin: 0;
+  color: #e4dee9;
+  font-size: 0.96rem;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.bs-ideas-empty {
+  margin: 0;
+  padding: 16px;
+  border: 1px dashed rgba(176,38,255,0.25);
+  color: #aaa2b1;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
 .bs-settings-about {
   color: #e6e0e9;
   font-size: 0.97rem;
@@ -981,10 +1135,41 @@ html[data-bs-theme="light"] .bs-settings-toggle {
 
 html[data-bs-theme="light"] .bs-settings-field select,
 html[data-bs-theme="light"] .bs-settings-close,
-html[data-bs-theme="light"] .bs-settings-reset {
+html[data-bs-theme="light"] .bs-settings-reset,
+html[data-bs-theme="light"] .bs-ideas-pin-row input,
+html[data-bs-theme="light"] .bs-ideas-form textarea {
   background: #f8f5fa;
   color: #34283c;
   border-color: rgba(73, 48, 86, 0.15);
+}
+
+html[data-bs-theme="light"] .bs-ideas-pin-label,
+html[data-bs-theme="light"] .bs-idea-text {
+  color: #34283c;
+}
+
+html[data-bs-theme="light"] .bs-ideas-form-footer small,
+html[data-bs-theme="light"] .bs-ideas-local-note,
+html[data-bs-theme="light"] .bs-ideas-security-note,
+html[data-bs-theme="light"] .bs-ideas-inline-status,
+html[data-bs-theme="light"] .bs-idea-meta time {
+  color: #766b7e;
+}
+
+html[data-bs-theme="light"] .bs-idea-card {
+  background: rgba(123, 57, 160, 0.045);
+  border-color: rgba(73, 48, 86, 0.14);
+  border-left-color: rgba(120, 64, 150, 0.55);
+}
+
+html[data-bs-theme="light"] .bs-idea-delete {
+  color: #62566a;
+  border-color: rgba(73, 48, 86, 0.15);
+}
+
+html[data-bs-theme="light"] .bs-ideas-empty {
+  color: #766b7e;
+  border-color: rgba(120, 64, 150, 0.25);
 }
 
 html[data-bs-theme="light"] .bs-settings-range output,

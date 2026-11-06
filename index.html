@@ -948,74 +948,167 @@
     #chapters-section {
       position: relative;
       z-index: 1;
-      padding: 90px 60px;
-      background: rgba(0,0,0,0.2);
+      padding: clamp(72px, 9vw, 112px) 60px;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 50% 50%, rgba(86, 24, 117, 0.1), transparent 60%),
+        linear-gradient(180deg, rgba(0,0,0,0.12), rgba(15,6,20,0.44), rgba(0,0,0,0.12));
     }
 
     .chapters-inner {
-      max-width: 1100px;
+      max-width: 1180px;
       margin: 0 auto;
       text-align: center;
     }
 
     .chapters-card {
-      margin: 44px auto 0;
-      max-width: 720px;
-      padding: 46px 40px;
-      border: 1px solid rgba(176,38,255,0.24);
-      border-left: 2px solid rgba(176,38,255,0.55);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 0.8fr);
+      align-items: stretch;
+      gap: clamp(28px, 5vw, 68px);
+      margin: 38px auto 0;
+      min-height: 430px;
+      border: 1px solid rgba(176,38,255,0.34);
       background:
-        linear-gradient(135deg, rgba(176,38,255,0.055), rgba(176,38,255,0.012) 58%, rgba(0,0,0,0.16));
+        linear-gradient(110deg, rgba(21,10,29,0.96), rgba(9,6,14,0.88) 65%),
+        #08050d;
       position: relative;
       overflow: hidden;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.3), inset 0 0 48px rgba(176,38,255,0.035);
     }
     .chapters-card::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: repeating-linear-gradient(135deg, rgba(176,38,255,0.018) 0 12px, transparent 12px 24px);
+      background:
+        linear-gradient(90deg, transparent 0 58%, rgba(176,38,255,0.045) 58.1%, transparent 58.2%),
+        repeating-linear-gradient(135deg, rgba(176,38,255,0.016) 0 1px, transparent 1px 18px);
       pointer-events: none;
     }
-    .chapters-card > * {
+    .chapters-card-copy {
       position: relative;
       z-index: 1;
+      align-self: center;
+      padding: clamp(30px, 5vw, 64px);
+      text-align: left;
+    }
+    .chapters-card-copy::before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 2px;
+      background: linear-gradient(180deg, transparent, var(--neon-purple), transparent);
+      content: '';
+      opacity: 0.8;
     }
     .chapters-card-kicker {
-      display: inline-block;
-      margin-bottom: 16px;
-      color: var(--neon-purple);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+      color: #ce8df0;
       font-family: 'Share Tech Mono', monospace;
       font-size: 0.62rem;
-      letter-spacing: 0.24em;
-      opacity: 0.82;
+      letter-spacing: 0.25em;
+      opacity: 0.9;
+    }
+    .chapters-card-kicker::before {
+      width: 22px;
+      height: 1px;
+      background: var(--neon-purple);
+      box-shadow: 0 0 10px var(--neon-purple);
+      content: '';
     }
     .chapters-card-icon {
-      font-size: 1.65rem;
-      color: var(--neon-purple);
-      margin-bottom: 16px;
-      opacity: 0.68;
+      display: grid;
+      width: 46px;
+      height: 46px;
+      place-items: center;
+      margin-bottom: 24px;
+      border: 1px solid rgba(176,38,255,0.38);
+      background: rgba(176,38,255,0.09);
+      color: #d184ff;
+      font-size: 1.1rem;
+      box-shadow: 0 0 24px rgba(176,38,255,0.1);
     }
     .chapters-card h3 {
       font-family: 'Orbitron', monospace;
-      font-size: clamp(1.05rem, 2.4vw, 1.3rem);
-      color: var(--text-main);
-      letter-spacing: 0.045em;
-      line-height: 1.5;
-      margin-bottom: 14px;
+      font-size: clamp(1.3rem, 2.6vw, 2rem);
+      color: #fff;
+      letter-spacing: 0.015em;
+      line-height: 1.28;
+      margin: 0 0 16px;
     }
     .chapters-card p {
       font-family: 'Rajdhani', sans-serif;
-      font-size: 1.08rem;
+      font-size: clamp(1rem, 1.5vw, 1.1rem);
       color: var(--text-silver);
-      opacity: 0.84;
+      opacity: 0.8;
       line-height: 1.7;
-      max-width: 480px;
-      margin: 0 auto 26px;
+      max-width: 510px;
+      margin: 0 0 28px;
     }
     .chapters-card .btn-secondary {
-      display: inline-block;
-      min-height: 46px;
-      padding: 14px 26px;
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 22px;
+    }
+    .chapters-card .btn-secondary::after { content: '→'; }
+    .chapters-art {
+      position: relative;
+      min-height: 100%;
+      margin: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(176,38,255,0.25);
+      background: #100817;
+    }
+    .chapters-art::before {
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(9,6,14,0.38), transparent 45%),
+        linear-gradient(0deg, rgba(9,6,14,0.78), transparent 38%),
+        linear-gradient(180deg, rgba(176,38,255,0.08), transparent 50%);
+      content: '';
+      pointer-events: none;
+    }
+    .chapters-art img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 406px;
+      object-fit: cover;
+      object-position: center 46%;
+      filter: saturate(0.9) contrast(1.06);
+      transition: transform 650ms cubic-bezier(.2,.8,.2,1), filter 450ms ease;
+    }
+    .chapters-card:hover .chapters-art img {
+      transform: scale(1.035);
+      filter: saturate(1.04) contrast(1.08);
+    }
+    .chapters-art figcaption {
+      position: absolute;
+      z-index: 2;
+      right: 18px;
+      bottom: 18px;
+      left: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      color: #f0d7ff;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.56rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .chapters-art figcaption span:last-child {
+      color: #d184ff;
+      text-align: right;
     }
 
     /* ── WORLDBOOK TEASER ── */
@@ -1175,9 +1268,12 @@
       .playlist-grid { grid-template-columns: 1fr; }
       .agent-name { font-size: 1.05rem; }
       .trilha-soon { flex-direction: column; text-align: center; }
-      .chapters-card { padding: 34px 22px; }
+      .chapters-card { grid-template-columns: minmax(0, 1fr); gap: 0; }
+      .chapters-card-copy { padding: 34px 26px; }
       .chapters-card h3 { letter-spacing: 0.02em; }
       .chapters-card .btn-secondary { padding: 14px 18px; letter-spacing: 0.12em; }
+      .chapters-art { min-height: 340px; margin: 0 12px 12px; }
+      .chapters-art img { min-height: 340px; max-height: 460px; }
     }
 
     @media (max-width: 720px) {
@@ -1296,6 +1392,9 @@
       #worldbook-section .btn-primary { display: inline-flex; min-height: 48px; align-items: center; }
       .chapters-card { margin-top: 28px; }
       .chapters-card p { font-size: 1rem; }
+      .chapters-card-copy { padding: 30px 22px; }
+      .chapters-art { min-height: 300px; }
+      .chapters-art img { min-height: 300px; }
       .arquivo-links { display: grid; grid-template-columns: 1fr; gap: 8px; }
       .arquivo-link { min-height: 44px; display: flex; align-items: center; justify-content: center; }
 
@@ -1801,11 +1900,24 @@
     <p class="section-label" style="justify-content:center">03 · PORTAL NARRATIVO</p>
     <h2 class="section-title-large">CAPÍTULOS</h2>
     <div class="chapters-card">
-      <div class="chapters-card-icon"><i class="fa-solid fa-book-open"></i></div>
-      <span class="chapters-card-kicker">NARRATIVA OFICIAL</span>
-      <h3>A HISTÓRIA COMEÇA AQUI</h3>
-      <p>SynthCity nunca foi apenas uma cidade.<br><br>Entre luzes, noites intermináveis e ruas que escondem mais do que parecem, Philip começa uma nova vida — sem saber o que o espera.</p>
-      <a href="chapters.html" class="btn-secondary">LER CAPÍTULOS</a>
+      <div class="chapters-card-copy">
+        <div class="chapters-card-icon" aria-hidden="true"><i class="fa-solid fa-book-open"></i></div>
+        <span class="chapters-card-kicker">NARRATIVA OFICIAL · 7 CAPÍTULOS</span>
+        <h3>A HISTÓRIA COMEÇA AQUI</h3>
+        <p>SynthCity nunca foi apenas uma cidade. Entre luzes, noites intermináveis e ruas que escondem mais do que parecem, Philip começa uma nova vida — sem saber o que o espera.</p>
+        <a href="chapters.html" class="btn-secondary">LER CAPÍTULOS</a>
+      </div>
+      <figure class="chapters-art">
+        <img
+          src="assets/images/worldbook-synth-city.png"
+          alt="As ruas noturnas de SynthCity, iluminadas por letreiros neon roxos sob uma lua imensa."
+          loading="lazy"
+          decoding="async">
+        <figcaption>
+          <span>Registro visual · SynthCity</span>
+          <span>Broken Street</span>
+        </figcaption>
+      </figure>
     </div>
   </div>
 </section>
